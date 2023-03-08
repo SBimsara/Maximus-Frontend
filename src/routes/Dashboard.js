@@ -1,13 +1,13 @@
 import React from "react";
 import { AiOutlineHome } from "react-icons/ai";
 
-function Home() {
+function Dashboard() {
   return (
     <div className="home">
-      <h1>Home</h1>
+      <h1>Dashboard</h1>
       <AiOutlineHome className="page-icon" />
     </div>
   );
 }
 
-export default Home;
+export default Dashboard;
