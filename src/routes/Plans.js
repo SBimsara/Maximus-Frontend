@@ -2,11 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { BsNewspaper } from "react-icons/bs";
 
-import "./styles/Plans.style.css"
+
 
 //Material UI imports
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Container from '@mui/material/Container';
+
+import {DataGrid} from '@mui/x-data-grid';
 
 //Bootstrap imports
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -17,9 +20,16 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import axios from "axios";
 
+import DeleteButton from "./styles/DeleteButton";
 
+import "./styles/Plans.style.css";
 
-
+//columns for the data grid
+const columns = [
+  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'name', headerName: 'Subject', width: 130 },
+  { field: 'address', headerName: 'Grade', width: 130 },
+]
 
 function Plans() {
 
@@ -30,6 +40,8 @@ function Plans() {
   const[pPrice,setpPrice] = useState("");
   const[pDiscount,setpDiscount] = useState("");
 
+  const [rows, setRows] = useState([]);
+
   const [isDisabled,setisDisabled]=useState(true);
 
   useEffect(() => {
@@ -38,25 +50,28 @@ function Plans() {
     fetchPlan();
   }, [])
 
+  //function to load all the data
   const loadPlans = async () => {
     const plResult = await axios.get("http://localhost:8080/api/v1/user/getUsers");
     setPlans(plResult.data);
   }
-
+  //function to load data to the dropdown
   const fetchPlan = async (planId) => {
     setisDisabled(false);
 
     const pidResult=await axios.get(`http://localhost:8080/api/v1/user/getUserById/${planId}`);
-    
+    // setSubs(pidResult)
     
     setpName(pidResult.data.name);
     setpPrice(pidResult.data.price);
     setpDiscount(pidResult.data.discount);
   }
   
+  // function to load data to the data grid
   const loadSubs = async () => {
     const subResult = await axios.get("http://localhost:8080/api/v1/user/getUsers");
-    setSubs(subResult.data);
+    setRows(subResult.data);
+    console.log(subResult.data);
   }
 
   return (
@@ -115,8 +130,8 @@ function Plans() {
         /><br/>
         </div>
         <Button
-          variant="contained"
-          color="success"
+          variant="outlined"
+          // color="success"
           startIcon={<AddCircleIcon/>}
           sx={{
             mt:1
@@ -125,7 +140,7 @@ function Plans() {
           Add Subject
         </Button>
         
-        <div className="table-container">
+        {/* <div className="table-container">
 
 
           <table className="table">
@@ -160,6 +175,20 @@ function Plans() {
               </tbody>
             )}
           </table>
+        </div> */}
+
+        <div>
+          <Container>
+          <div style={{ height: 400, width: '80%' }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              //pageSize={5}
+              //rowsPerPageOptions={[5]}
+              // checkboxSelection
+            />
+          </div>
+          </Container>
         </div>
       </div>
     </>

@@ -41,11 +41,13 @@ const DeleteButton = styled(IconButton)(({theme})=>({
     }
     
 }))
-export default function ButtonCustomization() {
-  return (
+
+
+export default function CustomDeleteButton({onClick}) { 
+  return (  
     <>
     
-    <DeleteButton>
+    <DeleteButton onClick={onClick}>
         {<DeleteIcon/>}
     </DeleteButton>
     </>
