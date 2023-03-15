@@ -1,11 +1,20 @@
 import React from "react";
-import { BsNewspaper } from "react-icons/bs";
+import DeleteIcon from '@mui/icons-material/Delete';
+import CloseIcon from '@mui/icons-material/Close';
+
+import CustomButton from "./styles/CustomButton";
+import DeleteButton from "./styles/DeleteButton";
+import CloseButton from "./styles/CloseButton";
 
 function Settings() {
   return (
     <div className="settings">
-      <h1>Settings</h1>
-      <BsNewspaper className="page-icon" />
+      
+      {/* <CustomButton>Click Me</CustomButton> */}
+      <DeleteButton/>
+      <CloseButton></CloseButton>
+      <CustomButton/>
+      
     </div>
   );
 }

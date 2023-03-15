@@ -17,6 +17,8 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import axios from "axios";
 
+import DeleteButton from "./styles/DeleteButton";
+
 
 
 
@@ -30,7 +32,7 @@ function Plans() {
   const[pPrice,setpPrice] = useState("");
   const[pDiscount,setpDiscount] = useState("");
 
-  const [isDisabled,setisDisabled]=useState(true);
+  const [isDisabled,setisDisabled]=React.useState(true);
 
   useEffect(() => {
     loadPlans();
@@ -115,12 +117,13 @@ function Plans() {
         /><br/>
         </div>
         <Button
-          variant="contained"
-          color="success"
+          variant="outlined"
+          color="secondary"
           startIcon={<AddCircleIcon/>}
           sx={{
             mt:1
           }}
+          
         >
           Add Subject
         </Button>

@@ -19,15 +19,20 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import { Dashboard } from '@mui/icons-material';
 
+import { styled, useTheme } from '@mui/material/styles';
+
+
+
 const drawerWidth = 220;
 
 
  
 export function Sidebar() {
 
-
+  
   return (
     <>
+    
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
@@ -42,7 +47,9 @@ export function Sidebar() {
         </Toolbar>
       </AppBar>
       <Drawer
+        
         sx={{
+          
           width: drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
@@ -114,7 +121,11 @@ export function Sidebar() {
         {/* <Divider /> */}
         
       </Drawer> 
+
+      
+      
     </Box>
+    
     
       </>
       );

@@ -5,27 +5,9 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { alpha, styled } from '@mui/material/styles';
+import CloseIcon from '@mui/icons-material/Close';
 
-
-// const DeleteButton = styled(Button)(({theme})=>({
-//     width:0,
-//     height:40,
-//     display: 'flex',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: "#ff8787",
-
-//     '&:hover':{
-//         backgroundColor: theme.palette.error.dark
-//     },
-
-//     '&:active':{
-//         backgroundColor: theme.palette.error.main
-//     }
-    
-// }))
-
-const DeleteButton = styled(IconButton)(({theme})=>({
+const CloseButton = styled(IconButton)(({theme})=>({
     backgroundColor: "#f7abab",
     color: theme.palette.error.light,
     borderRadius:4,
@@ -41,15 +23,19 @@ const DeleteButton = styled(IconButton)(({theme})=>({
         color:"#fff",
         backgroundColor: theme.palette.error.light
     }
+
     
 }))
 export default function ButtonCustomization() {
+  
+  
   return (
     <>
     
-    <DeleteButton>
-        {<DeleteIcon/>}
-    </DeleteButton>
+    <CloseButton>
+      {<CloseIcon/>}
+    </CloseButton>
+    
     </>
   );
 }
