@@ -22,34 +22,34 @@ import { alpha, styled } from '@mui/material/styles';
 //     '&:active':{
 //         backgroundColor: theme.palette.error.main
 //     }
-    
+
 // }))
 
-const DeleteButton = styled(IconButton)(({theme})=>({
-    backgroundColor: "#f7abab",
-    color: theme.palette.error.light,
-    borderRadius:4,
+const DeleteButton = styled(IconButton)(({ theme }) => ({
+  backgroundColor: "#f7abab",
+  color: theme.palette.error.light,
+  borderRadius: 4,
 
-    '&:hover':{
-        color:"#fff",
-        backgroundColor: theme.palette.error.light
-    },
+  '&:hover': {
+    color: "#fff",
+    backgroundColor: theme.palette.error.light
+  },
 
-    '&:active':{
-        color:"#fff",
-        backgroundColor: theme.palette.error.light
-    }
-    
+  '&:active': {
+    color: "#fff",
+    backgroundColor: theme.palette.error.light
+  }
+
 }))
 
 
-export default function CustomDeleteButton({onClick}) { 
-  return (  
+export default function CustomDeleteButton({ onClick }) {
+  return (
     <>
-    
-    <DeleteButton onClick={onClick}>
-        {<DeleteIcon/>}
-    </DeleteButton>
+
+      <DeleteButton onClick={onClick}>
+        {<DeleteIcon />}
+      </DeleteButton>
     </>
   );
 }
