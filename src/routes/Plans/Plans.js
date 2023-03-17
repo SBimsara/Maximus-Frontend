@@ -23,9 +23,10 @@ import { getData } from "../../services/getData";
 import { getDataById } from "../../services/getDataById.js";
 
 
-import "./styles/Plans.style.css";
-import CustomDeleteButton from "../../components/ui/DeleteButton";
-import {handleDeleteClick1} from "../../utils/DeleteButtonFunctions";
+// import "./styles/Plans.style.css";
+import CustomDeleteButton from "../../components/ui/DeleteIconButton";
+import {handleDeleteClick1} from "../../utils/DeleteIconBtnFunctions";
+import { DataGridColumnContainer, DataGridContainer, PageContainer } from "./styles/Plans.styles";
 
 //columns for the data grid
 const columns = [
@@ -89,8 +90,7 @@ function Plans() {
 
   return (
     <>
-      <div className="page-container">
-        <div className="plan-detail-container">
+      <PageContainer>
           <Dropdown>
             <Dropdown.Toggle variant="primary" id="plan-dropdown">
               Select Plan
@@ -141,7 +141,7 @@ function Plans() {
               mt: 1.5
             }}
           /><br />
-        </div>
+        
         <Button
           variant="outlined"
           color="primary"
@@ -155,20 +155,24 @@ function Plans() {
 
         
 
-        <div>
-          <Container>
-            <div style={{ height: 400, width: '80%' }}>
+        
+          <DataGridContainer>
+            <div style={{ height: 400, width: '90%' }}>
               <DataGrid
                 rows={rows}
+
                 columns={columns}
+                
+                
               //pageSize={5}
               //rowsPerPageOptions={[5]}
               // checkboxSelection
               />
             </div>
-          </Container>
-        </div>
-      </div>
+            </DataGridContainer>
+          
+        
+            </PageContainer>
     </>
   );
 }

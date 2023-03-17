@@ -7,7 +7,8 @@ import ErrorPage from "./routes/ErrorPage";
 
 
 import './App.css';
-import { Sidebar } from "./components/Sidebar";
+import Sidebar  from "./components/Sidebar";
+import Navbar  from "./components/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Popup from "./routes/Plans/Popup";
 
@@ -24,7 +25,8 @@ function App() {
   
   return (
    <>
-        {/* <Sidebar/> */}
+        <Sidebar/>
+        <Navbar/>
         <Routes>
           <Route path="/" element={<Dashboard/>} />
           <Route path="/questions" element={<Questions/>}/>

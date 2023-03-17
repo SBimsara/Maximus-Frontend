@@ -6,7 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import { alpha, styled } from '@mui/material/styles';
 
-const EditButton = styled(IconButton)(({theme}) => ({
+const EditIconButton = styled(IconButton)(({theme}) => ({
 backgroundColor: "#c0c7f0",
   color: theme.palette.primary.light,
   borderRadius: 4,
@@ -26,9 +26,9 @@ backgroundColor: "#c0c7f0",
 export default function CustomEditButton({onClick}) {
   return (
     <>
-        <EditButton onClick={onClick}>
+        <EditIconButton onClick={onClick}>
             {<EditIcon/>}
-        </EditButton>
+        </EditIconButton>
       
     </>
   )

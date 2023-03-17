@@ -5,12 +5,12 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 
-import DefaultImage from '';
+
 
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-function Navbar() {
+export default function Navbar() {
   
 
   return (
@@ -36,7 +36,7 @@ function Navbar() {
               // id="avatar"
               // alt="user"
               
-              sx={{width:27, height:27}}
+              sx={{width:35, height:35}}
               // onClick={handleClick}
               // aria-control={open ? 'avatar-menu' : undefined}
               // aria-haspopup='true'
@@ -54,4 +54,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+

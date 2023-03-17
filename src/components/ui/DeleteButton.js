@@ -1,55 +1,20 @@
-import * as React from 'react';
+import styled from '@mui/material/styles'
+
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import React from 'react'
 
-import DeleteIcon from '@mui/icons-material/Delete';
-
-import { alpha, styled } from '@mui/material/styles';
-
-
-// const DeleteButton = styled(Button)(({theme})=>({
-//     width:0,
-//     height:40,
-//     display: 'flex',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: "#ff8787",
-
-//     '&:hover':{
-//         backgroundColor: theme.palette.error.dark
-//     },
-
-//     '&:active':{
-//         backgroundColor: theme.palette.error.main
-//     }
-
-// }))
-
-const DeleteButton = styled(IconButton)(({ theme }) => ({
-  backgroundColor: "#f7abab",
-  color: theme.palette.error.light,
-  borderRadius: 4,
-
-  '&:hover': {
-    color: "#fff",
-    backgroundColor: theme.palette.error.light
-  },
-
-  '&:active': {
-    color: "#fff",
-    backgroundColor: theme.palette.error.light
-  }
-
-}))
+const DeleteButton = styled(Button)(({theme}) => ({
+    variant:"contained",
+    color:"error",
+}));
 
 
-export default function CustomDeleteButton({ onClick }) {
-  return (
-    <>
-
-      <DeleteButton onClick={onClick}>
-        {<DeleteIcon />}
-      </DeleteButton>
-    </>
-  );
+export default function CustomDeleteButton({onClick}) {
+    return(
+        <>
+        <DeleteButton onClick={onClick}> 
+            DELETE
+        </DeleteButton>
+        </>
+    )
 }
