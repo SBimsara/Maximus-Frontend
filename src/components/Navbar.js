@@ -1,91 +1,57 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./Navbar.css";
-import { GiRocketThruster } from "react-icons/gi";
-import { FaBars, FaTimes } from "react-icons/fa";
-import { IconContext } from "react-icons/lib";
-import { NavLink } from "react-router-dom";
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import Avatar from '@mui/material/Avatar';
 
-function Navbar() {
-  const [click, setClick] = useState(false);
 
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
+
+import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
+export default function Navbar() {
+  
 
   return (
     <>
-      <IconContext.Provider value={{ color: "#fff" }}>
-        <nav className="navbar">
-          <div className="navbar-container container">
-            <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
-              <GiRocketThruster className="navbar-icon" />
-              Quizz
-            </Link>
-            <div className="menu-icon" onClick={handleClick}>
-              {click ? <FaTimes /> : <FaBars />}
-            </div>
-            <ul className={click ? "nav-menu active" : "nav-menu"}>
-              <li className="nav-item">
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    "nav-links" + (isActive ? " activated" : "")
-                  }
-                  onClick={closeMobileMenu}
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  to="/subjects"
-                  className={({ isActive }) =>
-                    "nav-links" + (isActive ? " activated" : "")
-                  }
-                  onClick={closeMobileMenu}
-                >
-                  Subjects
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  to="/questions"
-                  className={({ isActive }) =>
-                    "nav-links" + (isActive ? " activated" : "")
-                  }
-                  onClick={closeMobileMenu}
-                >
-                  Questions
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  to="/plans"
-                  className={({ isActive }) =>
-                    "nav-links" + (isActive ? " activated" : "")
-                  }
-                  onClick={closeMobileMenu}
-                >
-                  Plans
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  to="/settings"
-                  className={({ isActive }) =>
-                    "nav-links" + (isActive ? " activated" : "")
-                  }
-                  onClick={closeMobileMenu}
-                >
-                  Settings
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </IconContext.Provider>
+      <AppBar position='static' >
+        <Stack direction="row" >
+          <Toolbar>
+
+            <IconButton size='large' edge='start' color='inherit' aria-label='app logo'>
+              <CatchingPokemonIcon />
+            </IconButton>
+
+            <Typography variant='h6' component='div' aria-label='app-title' sx={{ flexGrow: 1 }}>
+              QUIZZ
+            </Typography>
+
+           
+          </Toolbar>
+
+          <Toolbar sx={{ marginLeft: "auto" }}>
+            <Avatar 
+              // src={user}
+              // id="avatar"
+              // alt="user"
+              
+              sx={{width:35, height:35}}
+              // onClick={handleClick}
+              // aria-control={open ? 'avatar-menu' : undefined}
+              // aria-haspopup='true'
+              // aria-expanded={open ? 'true' : undefined}
+              />
+                
+          </Toolbar>
+
+        </Stack>
+        
+
+        
+      </AppBar>
     </>
   );
 }
 
-export default Navbar;
+
