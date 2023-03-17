@@ -1,3 +1,5 @@
+
+
 # Maximus
 L2 IN2900-Industry Based Project
 
@@ -17,3 +19,9 @@ npm install @mui/icons-material
 
 ## MUI Data Grid
 npm install @mui/x-data-grid
+
+
+## Build React Project
+npm install
+
+
