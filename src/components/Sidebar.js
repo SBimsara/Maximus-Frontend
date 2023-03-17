@@ -23,14 +23,14 @@ const drawerWidth = 220;
 
 
  
-export function Sidebar() {
+export default function Sidebar() {
 
 
   return (
     <>
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
+      {/* <AppBar
         
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
@@ -40,8 +40,15 @@ export function Sidebar() {
             Permanent drawer
           </Typography>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
       <Drawer
+          PaperProps={{
+            sx: {
+              // backgroundColor: "#0091ea",
+              color:"#000",
+              
+            }
+          }}
         sx={{
           width: drawerWidth,
           flexShrink: 0,
