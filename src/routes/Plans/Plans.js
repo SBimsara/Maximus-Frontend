@@ -8,6 +8,7 @@ import { BsNewspaper } from "react-icons/bs";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
+import Box from "@mui/material/Box";
 
 import { DataGrid } from '@mui/x-data-grid';
 
@@ -28,14 +29,15 @@ import CustomDeleteButton from "../../components/ui/DeleteIconButton";
 import {handleDeleteClick1} from "../../utils/DeleteIconBtnFunctions";
 import { DataGridColumnContainer, DataGridContainer, PageContainer } from "./styles/Plans.styles";
 
+
 //columns for the data grid
 const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'name', headerName: 'Subject', width: 130 },
-  { field: 'address', headerName: 'Grade', width: 130 },
+  { field: 'id', headerName: 'ID', width: 100 },
+  { field: 'name', headerName: 'Subject', width: 300 },
+  { field: 'address', headerName: 'Grade', width: 300 },
   { field: 'actions',
     headerName: 'Actions',
-    width: 70,
+    width: 100,
     renderCell: (cellValues) => {
       return(
         <CustomDeleteButton onClick={handleDeleteClick1}/>
@@ -43,6 +45,7 @@ const columns = [
     }
     },
 ]
+
 
 function Plans() {
 
@@ -86,7 +89,6 @@ function Plans() {
       fetchPlanDetails(plans[0].id);
     }
   }, [])
-
 
   return (
     <>
@@ -142,36 +144,53 @@ function Plans() {
             }}
           /><br />
         
-        <Button
-          variant="outlined"
-          color="primary"
-          startIcon={<AddCircleIcon />}
-          sx={{
-            mt: 1
-          }}
-        >
-          Add Subject
-        </Button>
+        
 
         
 
         
           <DataGridContainer>
-            <div style={{ height: 400, width: '90%' }}>
+            <Box sx={{
+              ml:98,
+              mb:3,
+            }}>
+            <Button
+              variant="outlined"
+              color="primary"
+              startIcon={<AddCircleIcon />}
+              sx={{
+                mt: 1
+
+              }}
+            >
+              Add Subject
+        </Button>
+        
+            </Box>
+        
+            <div style={{ 
+              height: 400, 
+              width: '90%',
+              
+
+            }}>
               <DataGrid
+               
                 rows={rows}
 
                 columns={columns}
                 
                 
-              //pageSize={5}
-              //rowsPerPageOptions={[5]}
+                
+              // pageSize={3}
+              // rowsPerPageOptions={[3]}
               // checkboxSelection
+              
               />
             </div>
-            </DataGridContainer>
+            
           
-        
+            </DataGridContainer>
             </PageContainer>
     </>
   );

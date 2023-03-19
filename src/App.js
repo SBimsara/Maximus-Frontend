@@ -14,6 +14,7 @@ import Popup from "./routes/Plans/Popup";
 
 import PageLayout from "./routes/PageLayout";
 import Settings from "./routes/Settings";
+import DropdownMenu from "./components/ui/DropdownMenu";
 
 
 
@@ -25,8 +26,8 @@ function App() {
   
   return (
    <>
-        <login/>
-        <Sidebar/>
+        {/* <DropdownMenu/> */}
+        {/* <Sidebar/> */}
         {/* <Navbar/> */}
         <Routes>
           <Route path="/" element={<Dashboard/>} />
