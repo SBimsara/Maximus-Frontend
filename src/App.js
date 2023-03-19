@@ -29,15 +29,15 @@ function App() {
         {/* <DropdownMenu/> */}
         {/* <Sidebar/> */}
         {/* <Navbar/> */}
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<Dashboard/>} />
           <Route path="/questions" element={<Questions/>}/>
           <Route path="/subjects" element={<Subjects/>}/>
           <Route path="/plans" element={<Plans/>}/>
           <Route path="/settings" element={<Settings/>}/>
           <Route path="/*" element={<ErrorPage/>}/>
-        </Routes>
-        {/* <Popup/> */}
+        </Routes> */}
+        <Popup/>
         {/* <PageLayout/> */}
         </> 
   );

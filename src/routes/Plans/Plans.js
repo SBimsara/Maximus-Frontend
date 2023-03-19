@@ -29,7 +29,7 @@ import CustomDeleteButton from "../../components/ui/DeleteIconButton";
 import {handleDeleteClick1} from "../../utils/DeleteIconBtnFunctions";
 import { DataGridColumnContainer, DataGridContainer, PageContainer } from "./styles/Plans.styles";
 
-
+import Popup from "./Popup";
 //columns for the data grid
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
@@ -89,6 +89,8 @@ function Plans() {
       fetchPlanDetails(plans[0].id);
     }
   }, [])
+
+
 
   return (
     <>
@@ -162,6 +164,7 @@ function Plans() {
                 mt: 1
 
               }}
+             
             >
               Add Subject
         </Button>
@@ -198,3 +201,4 @@ function Plans() {
 
 
 export default Plans;
+
