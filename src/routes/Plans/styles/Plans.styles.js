@@ -27,3 +27,11 @@ export const DataGridColumnContainer = styled(Box)(({theme}) => ({
     backgroundColor:"#e3f2fd",
     color:"#1976d2"
 }))
+
+export const PlanDetailContainer = styled(Box)(({theme})=>({
+    backgroundColor:"#fff",
+    justifyContent:"center",
+    marginLeft:"500px",
+    marginRight:"auto",
+    marginTop:"100px"
+}))

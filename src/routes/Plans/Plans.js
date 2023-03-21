@@ -27,7 +27,7 @@ import { getDataById } from "../../services/getDataById.js";
 // import "./styles/Plans.style.css";
 import CustomDeleteButton from "../../components/ui/DeleteIconButton";
 import {handleDeleteClick1} from "../../utils/DeleteIconBtnFunctions";
-import { DataGridColumnContainer, DataGridContainer, PageContainer } from "./styles/Plans.styles";
+import { DataGridColumnContainer, DataGridContainer, PageContainer, PlanDetailContainer } from "./styles/Plans.styles";
 
 import Popup from "./Popup";
 //columns for the data grid
@@ -59,7 +59,7 @@ function Plans() {
   const [isDisabled, setisDisabled] = useState(true);
 
   const url1 = "http://localhost:8080/api/v1/user/getUsers";
-
+  const url2 = "http://localhost:8080/api/v1/user/getUserById/";
 
 
   async function fetchSubjects() {
@@ -70,7 +70,7 @@ function Plans() {
   async function fetchPlanDetails(planId) {
     setisDisabled(false);
 
-    const result = await getDataById(url1, planId);
+    const result = await getDataById(url2, planId);
     setpName(result.name);
     setpPrice(result.price);
     setpDiscount(result.discount);
@@ -95,6 +95,7 @@ function Plans() {
   return (
     <>
       <PageContainer>
+        <PlanDetailContainer>
           <Dropdown>
             <Dropdown.Toggle variant="primary" id="plan-dropdown">
               Select Plan
@@ -145,7 +146,7 @@ function Plans() {
               mt: 1.5
             }}
           /><br />
-        
+        </PlanDetailContainer>
         
 
         
