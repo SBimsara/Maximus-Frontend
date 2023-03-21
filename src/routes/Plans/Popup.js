@@ -8,6 +8,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import Box from '@mui/material/Box';
+
+import CustomCancelButton from '../../components/form/CancelButton';
+
+
 
 export default function Popup() {
   const [open, setOpen] = React.useState(false);
@@ -32,13 +37,23 @@ export default function Popup() {
         Open form dialog
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add Subjects</DialogTitle>
+        <DialogTitle sx={{ display: 'flex', alignItems: 'center' }}>
+        Add Subjects
+          <Box sx={{
+            flexGrow: 1, display: 'flex', justifyContent: 'flex-end'
+          }}>
+            
+            <CustomCancelButton onClick={handleClose}/>
+          </Box>
+          
+        </DialogTitle>
+        
         <DialogContent>
           <DialogContentText>
             Please select a subject and a grade to add a subject.
           </DialogContentText>
           <Select
-          labelId="demo-simple-select-label"
+          labelId="demo-simple-select-label1"
           id="demo-simple-select"
           value={age}
           label="Age"
@@ -48,6 +63,19 @@ export default function Popup() {
           <MenuItem value={20}>Twenty</MenuItem>
           <MenuItem value={30}>Thirty</MenuItem>
         </Select>
+
+        <Select
+          labelId="demo-simple-select-label2"
+          id="demo-simple-select"
+          value={age}
+          label="Age"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
