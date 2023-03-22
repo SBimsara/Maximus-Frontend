@@ -25,8 +25,8 @@ function App() {
   
   return (
    <>
-   <Navbar1/>
-        <Sidebar/>
+   {/* <Navbar1/>
+        <Sidebar/> */}
         
         <Routes>
           <Route path="/" element={<Dashboard/>} />
