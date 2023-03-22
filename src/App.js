@@ -15,6 +15,7 @@ import Popup from "./routes/Plans/Popup";
 import PageLayout from "./routes/PageLayout";
 import Settings from "./routes/Settings";
 import DropdownMenu from "./components/ui/DropdownMenu";
+import CustomDropdown from "./components/form/CustomDropdown";
 
 
 
@@ -39,6 +40,7 @@ function App() {
         </Routes>
         {/* <Popup/> */}
         {/* <PageLayout/> */}
+        <CustomDropdown/>
         </> 
   );
 }

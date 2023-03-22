@@ -27,9 +27,12 @@ import { getDataById } from "../../services/getDataById.js";
 // import "./styles/Plans.style.css";
 import CustomDeleteButton from "../../components/ui/DeleteIconButton";
 import {handleDeleteClick1} from "../../utils/DeleteIconBtnFunctions";
-import { DataGridColumnContainer, DataGridContainer, PageContainer, PlanDetailContainer } from "./styles/Plans.styles";
+import { DataGridColumnContainer, DataGridContainer, PageContainer, PlanButtonContainer, PlanContainer, PlanContentContainer } from "./styles/Plans.styles";
 
 import Popup from "./Popup";
+import { deleteDatabyId } from "../../services/deleteDataById";
+
+
 //columns for the data grid
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
@@ -58,13 +61,23 @@ function Plans() {
 
   const [isDisabled, setisDisabled] = useState(true);
 
+  const [delState,setdelState] = useState(false);
+
+  const [openPopup,setOpenPopup] = useState(false);
+
   const url1 = "http://localhost:8080/api/v1/user/getUsers";
   const url2 = "http://localhost:8080/api/v1/user/getUserById/";
+  const url3= "";
 
 
   async function fetchSubjects() {
     const result = await getData(url1);
     setRows(result);
+  }
+
+  async function deleteSubjects(subId) {
+    const result = await deleteDatabyId(url3,subId);
+    (result) ? console.log("successfull"): console.log("error");
   }
 
   async function fetchPlanDetails(planId) {
@@ -90,12 +103,15 @@ function Plans() {
     }
   }, [])
 
-
+  const handleAddSubjectsClick = () => {
+    setOpenPopup(true);
+  }
 
   return (
     <>
       <PageContainer>
-        <PlanDetailContainer>
+        <PlanContainer>
+          <PlanContentContainer>
           <Dropdown>
             <Dropdown.Toggle variant="primary" id="plan-dropdown">
               Select Plan
@@ -109,7 +125,9 @@ function Plans() {
               })}
 
             </Dropdown.Menu>
-          </Dropdown>
+          </Dropdown> 
+          
+      
 
           <TextField
             id="plan-name"
@@ -146,7 +164,18 @@ function Plans() {
               mt: 1.5
             }}
           /><br />
-        </PlanDetailContainer>
+          </PlanContentContainer>
+          <PlanButtonContainer>
+            <Button variant="contained">Edit</Button>
+            <Button 
+            variant="contained"
+            sx={{
+              marginLeft:"10px"
+            }}>
+            Reset</Button>
+          </PlanButtonContainer>
+          
+        </PlanContainer>
         
 
         
@@ -165,10 +194,11 @@ function Plans() {
                 mt: 1
 
               }}
-             
+              onClick={handleAddSubjectsClick}
             >
               Add Subject
         </Button>
+        <Popup open={openPopup} onClose={setOpenPopup}/>
         
             </Box>
         

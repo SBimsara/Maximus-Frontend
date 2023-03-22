@@ -28,10 +28,27 @@ export const DataGridColumnContainer = styled(Box)(({theme}) => ({
     color:"#1976d2"
 }))
 
-export const PlanDetailContainer = styled(Box)(({theme})=>({
+export const PlanContainer = styled(Box)(({theme})=>({
     backgroundColor:"#fff",
     justifyContent:"center",
-    marginLeft:"500px",
+    marginLeft:"245px",
     marginRight:"auto",
-    marginTop:"100px"
+    marginTop:"100px",
+    width:"80%",
+    boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+}))
+
+export const PlanContentContainer = styled(Box)(({theme}) => ({
+    // justifyContent:"center",
+    // alignContent:"center"
+    textAlign: "center",
+    marginBottom: "10px",
+    padding: "20px",
+
+}))
+
+export const PlanButtonContainer = styled(Box)(({theme}) => ({
+    textAlign: 'center',
+    marginBottom: '10px',
+    padding: '20px'
 }))
