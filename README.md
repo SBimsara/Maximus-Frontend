@@ -17,3 +17,6 @@ npm install @mui/icons-material
 
 ## MUI Data Grid
 npm install @mui/x-data-grid
+
+## React Project Build
+npm install
