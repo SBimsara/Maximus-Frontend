@@ -14,6 +14,7 @@ import Popup from "./routes/Plans/Popup";
 import Navbar1 from "./components/Navbar1";
 import PageLayout from "./routes/PageLayout";
 import Settings from "./routes/Settings";
+import DropdownMenu from "./components/ui/DropdownMenu";
 
 
 
@@ -25,9 +26,8 @@ function App() {
   
   return (
    <>
-   {/* <Navbar1/>
-        <Sidebar/> */}
-        
+        <Sidebar/>
+        {/* <Navbar/> */}
         <Routes>
           <Route path="/" element={<Dashboard/>} />
           <Route path="/questions" element={<Questions/>}/>
