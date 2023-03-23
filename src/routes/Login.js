@@ -17,11 +17,11 @@ function Login() {
   
   return (
     <div>
-    <div className="login">
+    {/*<div className="login">
           <h1>Login</h1>
           <BsNewspaper className="page-icon" />
-        </div>
-        <Grid container justifyContent="center" alignItems="center" style={{ height: "70vh" }}>
+  </div>*/}
+        <Grid container justifyContent="center" alignItems="center" style={{ height: "100vh" }}>
       <Paper elevation={10} style={paperStyle}>
       <h2 style={{ textAlign: "center" }}>Sign In</h2>&nbsp;
         <TextField label='Username' placeholder="Enter username" fullWidth required />&nbsp;
@@ -29,10 +29,10 @@ function Login() {
         <Button type='Submit' color='primary' variant="contained" style={btnStyle} fullWidth>Sign in</Button>&nbsp;
         <Typography>
           <Link href="#" >
-            Forgot Password ?
+            Forgot Password?
           </Link>
         </Typography>&nbsp;
-        <Typography> Not Registered ?
+        <Typography> Not Registered?&nbsp;
           <Link href="#" >
             Create an Account
           </Link>
