@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 
 
 
@@ -11,8 +12,6 @@ import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 export default function Navbar() {
-  
-
   return (
     <>
       <AppBar position='static' >
@@ -25,30 +24,30 @@ export default function Navbar() {
 
             <Typography variant='h6' component='div' aria-label='app-title' sx={{ flexGrow: 1 }}>
               QUIZZ
-            </Typography>
+            </Typography>&nbsp;&nbsp;
 
-           
           </Toolbar>
 
           <Toolbar sx={{ marginLeft: "auto" }}>
-            <Avatar 
+            <Button color='inherit'>Sign In</Button>
+            <Avatar
               // src={user}
               // id="avatar"
               // alt="user"
-              
-              sx={{width:35, height:35}}
-              // onClick={handleClick}
-              // aria-control={open ? 'avatar-menu' : undefined}
-              // aria-haspopup='true'
-              // aria-expanded={open ? 'true' : undefined}
-              />
-                
+
+              sx={{ width: 35, height: 35, marginLeft: 2 }}
+            // onClick={handleClick}
+            // aria-control={open ? 'avatar-menu' : undefined}
+            // aria-haspopup='true'
+            // aria-expanded={open ? 'true' : undefined}
+            />
+
           </Toolbar>
 
         </Stack>
-        
 
-        
+
+
       </AppBar>
     </>
   );
