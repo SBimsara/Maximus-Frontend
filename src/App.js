@@ -15,6 +15,7 @@ import Popup from "./routes/Plans/Popup";
 import PageLayout from "./routes/PageLayout";
 import Settings from "./routes/Settings";
 import DropdownMenu from "./components/ui/DropdownMenu";
+import Login from "./routes/Login";
 
 
 
@@ -27,15 +28,16 @@ function App() {
   return (
    <>
         {/* <DropdownMenu/> */}
-        <Sidebar/>
-        {/* <Navbar/> */}
-        <Routes>
-          <Route path="/" element={<Dashboard/>} />
-          <Route path="/questions" element={<Questions/>}/>
+       {/* <Sidebar/>*/}
+        {<Navbar/>}
+  <Routes>
+          {/*<Route path="/" element={<Dashboard/>} />*/}
+          {/*<Route path="/questions" element={<Questions/>}/>
           <Route path="/subjects" element={<Subjects/>}/>
           <Route path="/plans" element={<Plans/>}/>
-          <Route path="/settings" element={<Settings/>}/>
-          <Route path="/*" element={<ErrorPage/>}/>
+  <Route path="/settings" element={<Settings/>}/>*/}
+          <Route path="/login"element={<Login/>}/>
+          {/*<Route path="/*" element={<ErrorPage/>}/>*/}
         </Routes>
         {/* <Popup/> */}
         {/* <PageLayout/> */}
