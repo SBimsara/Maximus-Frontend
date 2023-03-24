@@ -4,10 +4,10 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
 import { Password } from "@mui/icons-material";
 import { margin } from "@mui/system";
+import { Link } from 'react-router-dom';
 
 function Login() {
 
@@ -28,9 +28,7 @@ function Login() {
         <TextField label='Password' placeholder="Enter password" type='password' fullWidth required />&nbsp;
         <Button type='Submit' color='primary' variant="contained" style={btnStyle} fullWidth>Sign in</Button>&nbsp;
         <Typography>
-          <Link href="#" >
-            Forgot Password?
-          </Link>
+        <Link to="/PasswordResetForm">Forgot Password?</Link>
         </Typography>&nbsp;
         <Typography> Not Registered?&nbsp;
           <Link href="#" >
