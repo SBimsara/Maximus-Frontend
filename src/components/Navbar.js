@@ -29,7 +29,7 @@ export default function Navbar() {
           </Toolbar>
 
           <Toolbar sx={{ marginLeft: "auto" }}>
-            <Button color='inherit'>Sign In</Button>
+            {/*<Button color='inherit'>Sign In</Button>*/}
             <Avatar
               // src={user}
               // id="avatar"
