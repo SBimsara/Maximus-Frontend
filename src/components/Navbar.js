@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 
 
@@ -29,7 +30,8 @@ export default function Navbar() {
           </Toolbar>
 
           <Toolbar sx={{ marginLeft: "auto" }}>
-            {/*<Button color='inherit'>Sign In</Button>*/}
+            <Button color='inherit' component={Link} to="/Login">Sign In</Button>
+
             <Avatar
               // src={user}
               // id="avatar"
