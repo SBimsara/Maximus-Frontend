@@ -7,8 +7,8 @@ import ErrorPage from "./routes/ErrorPage";
 
 
 import './App.css';
-import Sidebar  from "./components/Sidebar";
-import Navbar  from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Popup from "./routes/Plans/Popup";
 
@@ -26,25 +26,25 @@ import PasswordResetForm from './routes/PasswordResetForm';
 
 
 function App() {
-  
+
   return (
-   <>
-        {/* <DropdownMenu/> */}
-       {/* <Sidebar/>*/}
-        {<Navbar/>}
-  <Routes>
-          {/*<Route path="/" element={<Dashboard/>} />*/}
-          {/*<Route path="/questions" element={<Questions/>}/>
+    <>
+      {/* <DropdownMenu/> */}
+      {/*<Sidebar/>*/}
+      {<Navbar />}
+      <Routes>
+        {/*<Route path="/" element={<Dashboard/>} />
+        <Route path="/questions" element={<Questions/>}/>
           <Route path="/subjects" element={<Subjects/>}/>
           <Route path="/plans" element={<Plans/>}/>
   <Route path="/settings" element={<Settings/>}/>*/}
-          <Route path="/login"element={<Login/>}/>
-          <Route path="/passwordResetForm" element={<PasswordResetForm/>}/>
-          {/*<Route path="/*" element={<ErrorPage/>}/>*/}
-        </Routes>
-        {/* <Popup/> */}
-        {/* <PageLayout/> */}
-        </> 
+        <Route path="/login" element={<Login />} />
+        <Route path="/passwordResetForm" element={<PasswordResetForm />} />
+        {/*<Route path="/*" element={<ErrorPage/>}/>*/}
+      </Routes>
+      {/* <Popup/> */}
+      {/* <PageLayout/> */}
+    </>
   );
 }
 
