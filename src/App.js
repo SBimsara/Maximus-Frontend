@@ -17,6 +17,7 @@ import Settings from "./routes/Settings";
 import DropdownMenu from "./components/ui/DropdownMenu";
 import Login from "./routes/Login";
 import PasswordResetForm from './routes/PasswordResetForm';
+import Signup from "./routes/Signup";
 
 
 
@@ -40,6 +41,7 @@ function App() {
   <Route path="/settings" element={<Settings/>}/>*/}
         <Route path="/login" element={<Login />} />
         <Route path="/passwordResetForm" element={<PasswordResetForm />} />
+        <Route path="/signup" element={<Signup />} />
         {/*<Route path="/*" element={<ErrorPage/>}/>*/}
       </Routes>
       {/* <Popup/> */}
