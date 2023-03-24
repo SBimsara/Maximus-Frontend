@@ -31,9 +31,7 @@ function Login() {
                         <Link to="/PasswordResetForm">Forgot Password?</Link>
                     </Typography>&nbsp;
                     <Typography> Not Registered?&nbsp;
-                        <Link href="#" >
-                            Create an Account
-                        </Link>
+                    <Link to="/Signup">Create an account</Link>
                     </Typography>
                 </Paper>
             </Grid>
