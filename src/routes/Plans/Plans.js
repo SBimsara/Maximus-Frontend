@@ -32,6 +32,9 @@ import { DataGridColumnContainer, DataGridContainer, PageContainer, PlanButtonCo
 import Popup from "./Popup";
 import { deleteDatabyId } from "../../services/deleteDataById";
 
+const url1 = "http://localhost:8080/api/v1/user/getUsers";
+const url2 = "http://localhost:8080/api/v1/user/getUserById/";
+const url3= "";
 
 //columns for the data grid
 const columns = [
@@ -43,11 +46,17 @@ const columns = [
     width: 100,
     renderCell: (cellValues) => {
       return(
-        <CustomDeleteButton onClick={handleDeleteClick1}/>
+        <CustomDeleteButton onClick={() => deleteSubjects(cellValues.id)}/>
       )
     }
     },
 ]
+
+export async function deleteSubjects(subId) {
+  const result = await deleteDatabyId(url3,subId);
+  (result) ? console.log("successfull"): console.log("error");
+}
+
 
 
 function Plans() {
@@ -65,9 +74,7 @@ function Plans() {
 
   const [openPopup,setOpenPopup] = useState(false);
 
-  const url1 = "http://localhost:8080/api/v1/user/getUsers";
-  const url2 = "http://localhost:8080/api/v1/user/getUserById/";
-  const url3= "";
+
 
 
   async function fetchSubjects() {
@@ -75,10 +82,7 @@ function Plans() {
     setRows(result);
   }
 
-  async function deleteSubjects(subId) {
-    const result = await deleteDatabyId(url3,subId);
-    (result) ? console.log("successfull"): console.log("error");
-  }
+
 
   async function fetchPlanDetails(planId) {
     setisDisabled(false);
@@ -166,9 +170,14 @@ function Plans() {
           /><br />
           </PlanContentContainer>
           <PlanButtonContainer>
-            <Button variant="contained">Edit</Button>
+            <Button 
+              variant="contained"
+              disableElevation
+            >
+              Edit</Button>
             <Button 
             variant="contained"
+            disableElevation
             sx={{
               marginLeft:"10px"
             }}>

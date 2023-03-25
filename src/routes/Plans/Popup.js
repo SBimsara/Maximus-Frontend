@@ -17,7 +17,9 @@ import {useState,useEffect} from "react";
 
 //importing services
 import { getData } from '../../services/getData';
+import CustomDropdown from '../../components/form/CustomDropdown';
 
+//api links
 const url1="http://localhost:8080/api/v1/plan/getAllPlans";
 const url2="http://localhost:8080/api/v1/user/getUsers";
 
@@ -119,7 +121,7 @@ const [subject,setSubject] = useState([]);
           <MenuItem value={20}>Twenty</MenuItem>
           <MenuItem value={30}>Thirty</MenuItem>
         </Select> */}
-        <TextField
+        {/* <TextField
           label="Select your Subject"
           value={subject}
           onChange={handleSubChange}
@@ -133,7 +135,16 @@ const [subject,setSubject] = useState([]);
           })}
           
             
-        </TextField>
+        </TextField> */}
+        <Box sx={{
+          display:"flex"
+        }}>
+          <CustomDropdown topic={"Select a Subject"}/>
+
+          <CustomDropdown topic={"Select a Grade"}/>
+        </Box>
+        
+
 
         </DialogContent>
         <DialogActions>
