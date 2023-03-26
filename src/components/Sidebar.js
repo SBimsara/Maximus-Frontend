@@ -48,7 +48,7 @@ export default function Sidebar() {
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
 
-        <AppBar
+        {/* <AppBar
 
           position="fixed"
           sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`}}
@@ -69,7 +69,7 @@ export default function Sidebar() {
               </Avatar>
             </Toolbar>
           </Stack>
-        </AppBar>
+        </AppBar> */}
         <Drawer
           PaperProps={{
             sx: {

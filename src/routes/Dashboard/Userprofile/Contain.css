@@ -1,0 +1,79 @@
+
+
+
+
+.Contain {
+   
+    margin-left: 230px;
+    /* margin-top: 10px; */
+    display:flex;
+    justify-content: space-around;
+ 
+    }
+
+    .profile{
+        width: 550px;
+        padding: 10px;
+        -webkit-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 30px;
+        height: 470px;
+
+       
+    }
+    
+
+    .stat{
+        width: 510px;
+        padding: 10px;
+        -webkit-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 30px;
+        height: 470px;
+    }
+
+   .ProfilePic{
+    height: 100px;
+    width:auto;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: 10px;
+
+   }
+
+   /* .formlabels{
+    display: flex;
+   }
+   
+   .labels{
+    display:flex ;
+   } */
+ 
+   .form{
+    display:flex;
+    justify-self: unset;
+    
+    
+   }
+
+   .labels{
+width: 150px;
+display:inline-table;
+gap: 8px;
+text-align: left;
+   }
+
+   .inputs
+   {
+width: 280px;
+display:inline-table;
+gap: 10px;   }
+
+
+   
