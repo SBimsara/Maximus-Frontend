@@ -18,6 +18,7 @@ import DropdownMenu from "./components/ui/DropdownMenu";
 import Login from "./routes/Login";
 import PasswordResetForm from './routes/PasswordResetForm';
 import Signup from "./routes/Signup";
+import AdminsForm from "./routes/AdminsForm";
 
 
 
@@ -31,17 +32,18 @@ function App() {
   return (
     <>
       {/* <DropdownMenu/> */}
-      {/*<Sidebar/>*/}
-      {<Navbar />}
+      <Sidebar/>
+      {/*{<Navbar />}*/}
       <Routes>
         {/*<Route path="/" element={<Dashboard/>} />
         <Route path="/questions" element={<Questions/>}/>
           <Route path="/subjects" element={<Subjects/>}/>
           <Route path="/plans" element={<Plans/>}/>
   <Route path="/settings" element={<Settings/>}/>*/}
-        <Route path="/login" element={<Login />} />
+        {/*<Route path="/login" element={<Login />} />
         <Route path="/passwordResetForm" element={<PasswordResetForm />} />
-        <Route path="/signup" element={<Signup />} />
+<Route path="/signup" element={<Signup />} />*/}
+<Route path="/authentication"element={<AdminsForm/>}/>
         {/*<Route path="/*" element={<ErrorPage/>}/>*/}
       </Routes>
       {/* <Popup/> */}
