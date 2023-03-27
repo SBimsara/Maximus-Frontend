@@ -4,61 +4,91 @@ import CustomEditButton from '../../components/ui/EditIconButton';
 import CustomDeleteButton from '../../components/ui/DeleteIconButton';
 import { deleteDatabyId } from '../../services/deleteDataById';
 import { useState, useEffect } from "react";
-const url3="";
-const url1 = "http://localhost:8080/api/v1/user/getUsers";
 
+import { getData } from '../../services/getData';
+
+import Box from "@mui/material/Box";
+import { useHref } from 'react-router-dom';
+import { Button } from '@mui/material';
+
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+
+import PlanPopup from './PlanPopup';
+
+//url for the deleteDataById service
+const delURL = "http://localhost:8080/api/v1/plan/deletePlan/";
+
+//url for the getData service
+const getAllURL = "http://localhost:8080/api/v1/plan/getAllPlans";
+
+//columns for the data-grid
 const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
     { field: 'name', headerName: 'Name', width: 200 },
-    { field: 'address', headerName: 'Price', width: 200 },
-    { field: 'address', headerName: 'Discount', width: 200 },
-    { field: 'actions',
-      headerName: 'Actions',
-      width: 100,
-      renderCell: (cellValues) => {
-        return(
-          <CustomDeleteButton onClick={() => deletePlans(cellValues.id)}/>
-          
-        )
-      }
-      },
-  ]
+    { field: 'price', headerName: 'Price', width: 200 },
+    { field: 'discount', headerName: 'Discount', width: 200 },
+    {
+        field: 'actions',
+        headerName: 'Actions',
+        width: 100,
+        renderCell: (cellValues) => {
+            return (
+                <>
+                    <Box sx={{
+                        mr: 1
+                    }}>
+                        <CustomEditButton />
+                    </Box>
 
-  export async function deletePlans(subId) {
-    const result = await deleteDatabyId(url3,subId);
-    (result) ? console.log("successfull"): console.log("error");
-  }
+                    <CustomDeleteButton onClick={() => deletePlans(cellValues.id)} />
+
+                </>
+            )
+        }
+    },
+]
+
+
+export async function deletePlans(subId) {
+    const result = await deleteDatabyId(delURL, subId);
+    (result) ? console.log("successfull") : console.log("error");
+}
 
 export default function AddPlans() {
 
     const [rows, setRows] = useState([]);
+    const [openPopup,setOpenPopup] = useState(false);
 
     async function fetchPlans() {
-        const result = await getData(url1);
+        const result = await getData(getAllURL);
         setRows(result);
-      }
+        //console.log(rows);
+    }
 
-      useEffect(() => {
-        
+    useEffect(() => {
+
         fetchPlans();
-    
-      }, [])
 
-  return (
-    <>
-    
-        
-        <div style={{ 
-          height: 400, 
-          width: '90%',
-          
+    }, [])
 
-        }}>
-      <DataGrid>
-        rows={rows}
-        columns={columns}
-      </DataGrid>
-      </div>
-    </>
-  )
+    const handleAddPlanClick = () => {
+        setOpenPopup(true);
+      }
+    return (
+        <>
+            <Button variant='outlined' startIcon={<AddCircleIcon />} onClick={handleAddPlanClick}>Add Plan</Button>
+            <PlanPopup open={openPopup} onClose={setOpenPopup}/>
+            <div style={{
+                height: 400,
+                width: '90%',
+
+
+            }}>
+                <DataGrid
+                    rows={rows}
+                    columns={columns}
+                /> 
+            </div>
+        </>
+    )
 }

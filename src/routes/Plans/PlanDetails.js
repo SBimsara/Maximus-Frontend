@@ -76,14 +76,14 @@ function Plans() {
 
 
 
-
+  //functions to get data for the data-grid
   async function fetchSubjects() {
     const result = await getData(url1);
     setRows(result);
   }
 
 
-
+  // function to set data in the textfields
   async function fetchPlanDetails(planId) {
     setisDisabled(false);
 
@@ -93,6 +93,7 @@ function Plans() {
     setpDiscount(result.discount);
   }
 
+  //function to get data for the dropdown button
   async function fetchPlans() {
     const result = await getData(url1);
     setPlans(result);

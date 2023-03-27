@@ -18,6 +18,7 @@ import DropdownMenu from "./components/ui/DropdownMenu";
 
 import CustomDropdown from "./components/form/CustomDropdown";
 import AddPlans from "./routes/Plans/AddPlans";
+import PlanPopup from "./routes/Plans/PlanPopup";
 
 
 
@@ -47,6 +48,7 @@ function App() {
 
         {/* <CustomDropdown/> */}
         {<AddPlans/>}
+        {/* <PlanPopup/> */}
         </> 
   );
 }
