@@ -5,6 +5,7 @@ import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material'
 import { FaTimes } from 'react-icons/fa';
 import { ArrowBack } from '@mui/icons-material';
 import { ArrowForward } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 const entriesPerPage = 10; // number of entries per page
 const totalEntries = 50; // total number of entries
@@ -44,8 +45,10 @@ function AdminsForm() {
 </div>*/}
             <Box sx={{ p: 3 }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '900px' }}>
-                    <Button variant="contained" color="primary">View Requests</Button>
-                    <Button variant="contained" color="error" startIcon={<FaTimes />}>Remove Admin</Button>
+                    <Button variant="contained" color="primary" component={Link} to="/Requests">View Requests</Button>
+                    <Button variant="contained" color="error" startIcon={<FaTimes />}>
+                        Remove Admin
+                    </Button>
                 </Box>&nbsp;
                 <Box sx={{ border: '1px solid black', borderRadius: '4px', p: 3, width: '900px' }}>
                     <Typography variant="h6" sx={{ p: 2, backgroundColor: '#f5f5f5', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }}>Current Admins</Typography>&nbsp;
@@ -59,12 +62,16 @@ function AdminsForm() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <TableRow>
-                                <TableCell style={{ borderBottom: 'none' }}></TableCell>
-                                <TableCell style={{ borderBottom: 'none' }}></TableCell>
-                                <TableCell align="left" style={{ borderBottom: 'none' }}>
-                                    <Button sx={{ marginLeft: '25px' }} variant="contained" color="primary" size="small" >Change</Button></TableCell>
+                            <TableRow
+                            >
+                                <TableCell style={{ borderBottom: '2px solid black' }}></TableCell>
+                                <TableCell style={{ borderBottom: '2px solid black' }}></TableCell>
+                                <TableCell align="left" style={{ borderBottom: '2px solid black' }}>
+                                    <Button sx={{ marginLeft: '25px' }} variant="contained" color="primary" size="small" >Change</Button>
+                                </TableCell>
                             </TableRow>
+
+
                         </TableBody>
                     </Table>
                     <Box sx={{ p: 3 }}>
