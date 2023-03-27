@@ -19,6 +19,7 @@ import Login from "./routes/Login";
 import PasswordResetForm from './routes/PasswordResetForm';
 import Signup from "./routes/Signup";
 import AdminsForm from "./routes/AdminsForm";
+import Requests from "./routes/Requests";
 
 
 
@@ -32,7 +33,7 @@ function App() {
   return (
     <>
       {/* <DropdownMenu/> */}
-      {/*<Sidebar/>*/}
+      {<Sidebar/>}
       {/*{<Navbar />}*/}
       <Routes>
         {/*<Route path="/" element={<Dashboard/>} />
@@ -42,8 +43,9 @@ function App() {
   <Route path="/settings" element={<Settings/>}/>*/}
         {/*<Route path="/login" element={<Login />} />
         <Route path="/passwordResetForm" element={<PasswordResetForm />} />*/}
-<Route path="/signup" element={<Signup />} />
-{/*<Route path="/authentication"element={<AdminsForm/>}/>*/}
+{/*<Route path="/signup" element={<Signup />} />*/}
+<Route path="/authentication"element={<AdminsForm/>}/>
+<Route path="/requests"element={<Requests/>}/>
         {/*<Route path="/*" element={<ErrorPage/>}/>*/}
       </Routes>
       {/* <Popup/> */}
