@@ -64,11 +64,10 @@ function Stat0() {
   };
   return (
     <div>
-      <Nav></Nav>
       <div
         style={{
           paddingTop: "30px",
-          width: "85%",
+          width: "70%",
           margin: "0 auto",
         }}
       >

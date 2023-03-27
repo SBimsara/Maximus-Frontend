@@ -23,6 +23,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import { Stack } from "@mui/material";
+import Nav from "../routes/Statistics/navBar/Nav";
 
 const drawerWidth = 220;
 

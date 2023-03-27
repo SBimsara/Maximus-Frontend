@@ -31,7 +31,7 @@ function Stat1() {
     datasets: [
       {
         data: chartData.data,
-        backgroundColor: ["green", "brown", "silver", "yellow"],
+        backgroundColor: ["chartreuse", "darkorange", "DimGrey", "gold"],
       },
     ],
   };
@@ -44,7 +44,7 @@ function Stat1() {
   return (
     <div
       style={{
-        width: "45%",
+        width: "38%",
         margin: "0 auto",
       }}
     >
