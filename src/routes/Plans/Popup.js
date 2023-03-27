@@ -23,6 +23,8 @@ import CustomDropdown from '../../components/form/CustomDropdown';
 const url1="http://localhost:8080/api/v1/plan/getAllPlans";
 const url2="http://localhost:8080/api/v1/user/getUsers";
 
+
+
 export default function Popup(props) {
 //  const [open, setOpen] = useState(state);
   
@@ -65,6 +67,19 @@ const [subject,setSubject] = useState([]);
     getSubjects();
     getGrades();
   },[])
+
+  const handleSelectedSubject = (data1) => {
+    console.log(data1);
+  }
+
+  const handleSelectedGrade = (data2) => {
+    console.log(data2);
+
+  }
+
+  const handleConfirm = () => {
+    
+  }
 
   return (
     <div>
@@ -139,9 +154,9 @@ const [subject,setSubject] = useState([]);
         <Box sx={{
           display:"flex"
         }}>
-          <CustomDropdown topic={"Select a Subject"}/>
+          <CustomDropdown topic={"Select a Subject"} url={url2} onSelect={handleSelectedSubject}/>
 
-          <CustomDropdown topic={"Select a Grade"}/>
+          <CustomDropdown topic={"Select a Grade"} url={url2} onSelect={handleSelectedGrade}/>
         </Box>
         
 
@@ -159,9 +174,10 @@ const [subject,setSubject] = useState([]);
               color:"#000",
             }
             }}>Cancel</Button>
-          <Button onClick={handleClose} variant="contained">Confirm</Button>
+          <Button  onClick={handleConfirm} variant="contained">Confirm</Button>
         </DialogActions>
       </Dialog>
     </div>
   );
 }
+

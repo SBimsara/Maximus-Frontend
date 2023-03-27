@@ -1,4 +1,9 @@
 
+
+.col-sm-4{
+    width: 0%;
+}
+
 .form-control {
-    width: 140px;
+    width: 150px;
 }
