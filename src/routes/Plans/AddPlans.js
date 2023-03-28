@@ -14,6 +14,11 @@ import { Button } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import PlanPopup from './PlanPopup';
+import { handleEditClick2 } from '../../utils/EditIconBtnFunctions';
+
+import { PageContainer 
+} from './styles/AddPlans.styles';
+
 
 //url for the deleteDataById service
 const delURL = "http://localhost:8080/api/v1/plan/deletePlan/";
@@ -37,7 +42,7 @@ const columns = [
                     <Box sx={{
                         mr: 1
                     }}>
-                        <CustomEditButton />
+                        <CustomEditButton onClick={handleEditClick2}/>
                     </Box>
 
                     <CustomDeleteButton onClick={() => deletePlans(cellValues.id)} />
@@ -76,12 +81,14 @@ export default function AddPlans() {
       }
     return (
         <>
-            <Button variant='outlined' startIcon={<AddCircleIcon />} onClick={handleAddPlanClick}>Add Plan</Button>
+        <PageContainer>
+            <Box sx={{mb:2}}>
+            <Button variant='outlined' startIcon={<AddCircleIcon /> } onClick={handleAddPlanClick}>Add Plan</Button>
+            </Box>
             <PlanPopup open={openPopup} onClose={setOpenPopup}/>
             <div style={{
                 height: 400,
                 width: '90%',
-
 
             }}>
                 <DataGrid
@@ -89,6 +96,7 @@ export default function AddPlans() {
                     columns={columns}
                 /> 
             </div>
+            </PageContainer>
         </>
     )
 }

@@ -103,11 +103,11 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton href='/plans' selected={location.pathname === '/plans' ? true : false}>
+              <ListItemButton href='/addPlans' selected={location.pathname === '/addPlans' ? true : false}>
                 <ListItemIcon>
                   <SubscriptionsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Plans" />
+                <ListItemText primary="AddPlans" />
               </ListItemButton>
             </ListItem>
 

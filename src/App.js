@@ -1,10 +1,10 @@
 import Questions from "./routes/Questions";
 import Dashboard from "./routes/Dashboard";
 import Subjects from "./routes/Subjects";
-import Plans from "./routes/Plans/PlanDetails";
+//import PlanDetails from "./routes/Plans/PlanDetails";
 import ErrorPage from "./routes/ErrorPage";
-
-
+import AddPlans from "./routes/Plans/AddPlans";
+import PlanDetails from "./routes/Plans/PlanDetails";
 
 import './App.css';
 import Sidebar  from "./components/Sidebar";
@@ -17,7 +17,7 @@ import Settings from "./routes/Settings";
 import DropdownMenu from "./components/ui/DropdownMenu";
 
 import CustomDropdown from "./components/form/CustomDropdown";
-import AddPlans from "./routes/Plans/AddPlans";
+
 import PlanPopup from "./routes/Plans/PlanPopup";
 
 
@@ -32,22 +32,24 @@ function App() {
   return (
    <>
         {/* <DropdownMenu/> */}
-        {/* <Sidebar/> */}
+        <Sidebar/>
         {/* <Navbar/> */}
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<Dashboard/>} />
           <Route path="/questions" element={<Questions/>}/>
           <Route path="/subjects" element={<Subjects/>}/>
-          <Route path="/plans" element={<Plans/>}/>
+          <Route path="/addPlans" element={<AddPlans/>}/>
           <Route path="/settings" element={<Settings/>}/>
           <Route path="/*" element={<ErrorPage/>}/>
-        </Routes> */}
+          <Route path="/planDe" element={<PlanDetails/>}/>
+          
+        </Routes>
         {/* <Popup/> */}
         {/* <PageLayout/> */}
         {/* <CustomDropdown/> */}
 
         {/* <CustomDropdown/> */}
-        {<AddPlans/>}
+        {/* {<AddPlans/>} */}
         {/* <PlanPopup/> */}
         </> 
   );

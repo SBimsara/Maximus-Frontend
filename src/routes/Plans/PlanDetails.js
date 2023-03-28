@@ -27,13 +27,20 @@ import { getDataById } from "../../services/getDataById.js";
 // import "./styles/Plans.style.css";
 import CustomDeleteButton from "../../components/ui/DeleteIconButton";
 import {handleDeleteClick1} from "../../utils/DeleteIconBtnFunctions";
-import { DataGridColumnContainer, DataGridContainer, PageContainer, PlanButtonContainer, PlanContainer, PlanContentContainer } from "./styles/Plans.styles";
+import { 
+  DataGridColumnContainer, 
+  DataGridContainer, 
+  PageContainer, 
+  PlanButtonContainer, 
+  PlanContainer, 
+  PlanContentContainer 
+        } from "./styles/PlanDetails.styles.js";
 
 import Popup from "./Popup";
 import { deleteDatabyId } from "../../services/deleteDataById";
 
-const url1 = "http://localhost:8080/api/v1/user/getUsers";
-const url2 = "http://localhost:8080/api/v1/user/getUserById/";
+const url1 = "http://localhost:8080/api/v1/plan/getAllPlans";
+const url2 = "http://localhost:8080/api/v1/plan/getPlanByPId/";
 const url3= "";
 
 //columns for the data grid

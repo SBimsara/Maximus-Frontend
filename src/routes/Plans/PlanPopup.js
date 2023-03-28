@@ -13,36 +13,64 @@ import Box from '@mui/material/Box';
 import CustomCancelButton from '../../components/form/CancelButton';
 
 import {useState,useEffect} from "react";
+import { saveData } from '../../services/saveData';
+
+//url for the saveData
+const saveURL="http://localhost:8080/api/v1/plan/savePlan";
 
 export default function PlanPopup(props) {
 
     const { open, onClose } = props;
     
+    const [name,setName] = useState("");
+    const [price,setPrice] = useState("");
+    const [discount,setDiscount] = useState("");
 
 
-const handleClose = () => {
-  onClose(false);
-};
 
-const handleNameChange = (e) => {
-    const val= e.target.value;
-    console.log(val);
+    const handleClose = () => {
+      onClose(false);
+    };
+
+
+const handleNameChange = (event) => {
+  const valn = event.target.value;
+  setName(valn);
+}    
+    
+const handlePriceChange =(event) => {
+    const valp = event.target.value;
+    setPrice(valp);
 }
-const handlePriceChange =(e) => {
-    const val= e.target.value;
-    console.log(val);
+const handleDiscountChange =(event) => {
+    const vald = event.target.value;
+    setDiscount(vald);
 }
-const handleDiscountChange =(e) => {
-    const val= e.target.value;
-    console.log(val);
+
+const handleConfirmClick = () => {
+  const data = {
+    "id":1,
+    "name":name,
+    "price":price,
+    "discount":discount
+  };
+  savePlan(data);
 }
+async function savePlan(data) {
+  const result= await saveData(saveURL,data);
+  console.log(result);
+}
+
+useEffect(() => {
+  savePlan();
+},[]) 
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle sx={{ display: 'flex', alignItems: 'center' }}>
+        <DialogTitle sx={{ display: 'flex', alignItems: 'center'}}>
         Add Plan
           <Box sx={{
-            flexGrow: 1, display: 'flex', justifyContent: 'flex-end'
+            flexGrow: 1, display: 'flex', justifyContent: 'flex-end',
           }}>
             
             <CustomCancelButton onClick={handleClose}/>
@@ -52,7 +80,7 @@ const handleDiscountChange =(e) => {
         
         <DialogContent>
           <DialogContentText>
-            Please select a subject and a grade to add a subject.
+            Please enter details to create a new plan.
           </DialogContentText>
           
         <Box sx={{
@@ -79,7 +107,7 @@ const handleDiscountChange =(e) => {
               color:"#000",
             }
             }}>Cancel</Button>
-          <Button   variant="contained">Confirm</Button>
+          <Button   variant="contained" onClick={() => { handleConfirmClick(); handleClose();}}>Confirm</Button>
         </DialogActions>
       </Dialog>
     </div>
