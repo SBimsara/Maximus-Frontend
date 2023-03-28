@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import { Password } from "@mui/icons-material";
 import { margin } from "@mui/system";
 import { Link } from 'react-router-dom';
+import './LoginStyles.css'
 
 function Login() {
 
@@ -20,7 +21,7 @@ function Login() {
             {/*<div className="login">
           <h1>Login</h1>
           <BsNewspaper className="page-icon" />
-  </div>*/}
+    </div>*/}
             <Grid container justifyContent="center" alignItems="center" style={{ height: "100vh" }}>
                 <Paper elevation={10} style={paperStyle}>
                     <h2 style={{ textAlign: "center" }}>Sign In</h2>&nbsp;
@@ -28,10 +29,10 @@ function Login() {
                     <TextField label='Password' placeholder="Enter password" type='password' fullWidth required />&nbsp;
                     <Button type='Submit' color='primary' variant="contained" style={btnStyle} fullWidth component={Link} to="/">Sign in</Button>&nbsp;
                     <Typography>
-                        <Link to="/PasswordResetForm">Forgot Password?</Link>
+                        <Link to="/PasswordResetForm"className="login-link">Forgot Password?</Link>
                     </Typography>&nbsp;
                     <Typography> Not Registered?&nbsp;
-                    <Link to="/Signup">Create an account</Link>
+                    <Link to="/Signup"className="login-link">Create an account</Link>
                     </Typography>
                 </Paper>
             </Grid>

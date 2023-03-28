@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       {/* <DropdownMenu/> */}
-      {<Sidebar/>}
+      {/*{<Sidebar/>}*/}
       {/*{<Navbar />}*/}
       <Routes>
         {/*<Route path="/" element={<Dashboard/>} />
@@ -41,11 +41,11 @@ function App() {
           <Route path="/subjects" element={<Subjects/>}/>
           <Route path="/plans" element={<Plans/>}/>
   <Route path="/settings" element={<Settings/>}/>*/}
-        {/*<Route path="/login" element={<Login />} />
-        <Route path="/passwordResetForm" element={<PasswordResetForm />} />*/}
-{/*<Route path="/signup" element={<Signup />} />*/}
-<Route path="/authentication"element={<AdminsForm/>}/>
-<Route path="/requests"element={<Requests/>}/>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/passwordResetForm" element={<PasswordResetForm />}/>
+<Route path="/signup" element={<Signup />} />
+{/*<Route path="/authentication"element={<AdminsForm/>}/>
+<Route path="/requests"element={<Requests/>}/>*/}
         {/*<Route path="/*" element={<ErrorPage/>}/>*/}
       </Routes>
       {/* <Popup/> */}
