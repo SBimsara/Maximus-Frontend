@@ -6,9 +6,10 @@ function PlanHooks () {
 
   return (
     <div>
-        
+           
     </div>
   );
 }
 
 export default PlanHooks;
+

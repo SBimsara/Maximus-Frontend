@@ -11,6 +11,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
+
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import SubjectIcon from '@mui/icons-material/Subject';
@@ -45,6 +46,7 @@ export default function Sidebar() {
 
   return (
     <>
+
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
 
@@ -89,12 +91,22 @@ export default function Sidebar() {
           variant="permanent"
           anchor="left"
         >
+          <div className="logo">
+                <img src="./all-image/logo.jpg" alt="" className="logo" width="200px" height="200px"/>
+            </div>
           <Toolbar />
           {/* <Divider /> */}
+
+          
           <List>
+          
+          
+          
 
             <ListItem disablePadding  >
+            
               <ListItemButton href='/' selected={location.pathname === '/' ? true : false}>
+             
                 <ListItemIcon>
                   <DashboardIcon />
                 </ListItemIcon>

@@ -27,14 +27,14 @@ function App() {
   
   return (
    <>
-        <Navbar1/>
-        <Sidebar/>
-     
-      
        
-        {/* <Navbar/> */}
+        
+         <Sidebar />
+     
+{/*       
+        <Navbar1 /> */}
         <Routes>
-          <Route path="/" element={<Dashboard/>} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/questions" element={<Questions/>}/>
           <Route path="/subjects" element={<Subjects/>}/>
           <Route path="/plans" element={<Plans/>}/>

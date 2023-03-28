@@ -29,7 +29,7 @@
     .stat{
         width: 510px;
         padding: 10px;
-        -webkit-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 10px 10px 25px -10px rgba(0, 0, 0, 0.75);
         -moz-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
         box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
         border-radius: 10px;
@@ -47,33 +47,33 @@
 
    }
 
-   /* .formlabels{
-    display: flex;
-   }
-   
-   .labels{
-    display:flex ;
+/* 
+   .inputs{
+   margin-top: 10px;
    } */
- 
-   .form{
-    display:flex;
-    justify-self: unset;
-    
+
+   .gaps{
+    margin-top: 20px;
+    text-align: start;
+    margin-left: 20px;
+
+   }
+
+   .column{
+    margin-top: 20px;
+    width: 100px;
     
    }
 
-   .labels{
-width: 150px;
-display:inline-table;
-gap: 8px;
-text-align: left;
-   }
+.column input[type="text"]{
+    width: 330px;
+}
 
-   .inputs
-   {
-width: 280px;
-display:inline-table;
-gap: 10px;   }
+.form {
+    margin-top: 10px;
+  }
 
-
-   
+  .activity{
+    margin-top: 25px;
+    
+  }

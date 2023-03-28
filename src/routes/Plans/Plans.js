@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Box from "@mui/material/Box";
+import Navbar1 from "../../components/Navbar1";
 
 import { DataGrid } from '@mui/x-data-grid';
 
@@ -46,8 +47,12 @@ const columns = [
     },
 ]
 
+export const mytext = "Plans";
 
 function Plans() {
+
+ 
+
 
   const [rows, setRows] = useState([]);
 
@@ -94,6 +99,11 @@ function Plans() {
 
   return (
     <>
+
+      <div className="plan">
+        <Navbar1 text="Plans" />
+      </div>
+      
       <PageContainer>
         <PlanDetailContainer>
           <Dropdown>
