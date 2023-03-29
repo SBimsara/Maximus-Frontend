@@ -9,31 +9,31 @@ function Nav() {
             NavBar
           </a>
           <div
-            class="btn-group"
-            style={{ paddingLeft: "150px", paddingTop: "150px" }}
+            className="btn-group"
+            style={{ paddingLeft: "250px", paddingTop: "150px" }}
           >
             <button
               type="button"
-              class="btn btn-primary dropdown-toggle"
+              className="btn btn-primary dropdown-toggle"
               data-bs-toggle="dropdown"
               data-bs-display="static"
               aria-expanded="false"
             >
               Action
             </button>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul className="dropdown-menu dropdown-menu-end">
               <li>
                 <Link to="/statistics/">
-                  <button class="dropdown-item" type="button">
+                  <button className="dropdown-item" type="button">
                     Stat
                   </button>
                 </Link>
               </li>
               <li>
                 <Link to="/statistics/Stat1">
-                  <buton class="dropdown-item" type="button">
+                  <button className="dropdown-item" type="button">
                     Stat1
-                  </buton>
+                  </button>
                 </Link>
               </li>
             </ul>
