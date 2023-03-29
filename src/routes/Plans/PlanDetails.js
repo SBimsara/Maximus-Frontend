@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { BsNewspaper } from "react-icons/bs";
 
-
+import { planId } from "./AddPlans";
 
 //Material UI imports
 import Button from '@mui/material/Button';
@@ -59,6 +59,8 @@ const columns = [
     },
 ]
 
+  
+
 export async function deleteSubjects(subId) {
   const result = await deleteDatabyId(url3,subId);
   (result) ? console.log("successfull"): console.log("error");
@@ -89,10 +91,10 @@ function Plans() {
     setRows(result);
   }
 
-
   // function to set data in the textfields
-  async function fetchPlanDetails(planId) {
+  async function fetchPlanDetails() {
     setisDisabled(false);
+    
 
     const result = await getDataById(url2, planId);
     setpName(result.name);
@@ -110,9 +112,11 @@ function Plans() {
     fetchSubjects();
     fetchPlans();
 
-    if (plans.length > 0) {
-      fetchPlanDetails(plans[0].id);
+    if(window.onload(true)){
+      fetchPlanDetails();
     }
+    
+    
   }, [])
 
   const handleAddSubjectsClick = () => {
@@ -124,7 +128,7 @@ function Plans() {
       <PageContainer>
         <PlanContainer>
           <PlanContentContainer>
-          <Dropdown>
+          {/* <Dropdown>
             <Dropdown.Toggle variant="primary" id="plan-dropdown">
               Select Plan
             </Dropdown.Toggle>
@@ -137,7 +141,7 @@ function Plans() {
               })}
 
             </Dropdown.Menu>
-          </Dropdown> 
+          </Dropdown>  */}
           
       
 

@@ -41,7 +41,7 @@ function App() {
           <Route path="/addPlans" element={<AddPlans/>}/>
           <Route path="/settings" element={<Settings/>}/>
           <Route path="/*" element={<ErrorPage/>}/>
-          <Route path="/planDe" element={<PlanDetails/>}/>
+          <Route path="/addPlans/planDe" element={<PlanDetails/>}/>
           
         </Routes>
         {/* <Popup/> */}

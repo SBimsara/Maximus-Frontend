@@ -3,6 +3,6 @@ export const handleEditClick1 = () => {
 };
 
 export const handleEditClick2 = () => {
-    window.open("./planDe");
+    window.location.href="./addPlans/planDe";
 }
   

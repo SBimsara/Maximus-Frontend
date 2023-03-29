@@ -19,6 +19,7 @@ import { handleEditClick2 } from '../../utils/EditIconBtnFunctions';
 import { PageContainer 
 } from './styles/AddPlans.styles';
 
+import { fetchPlanDetails } from './PlanDetails';
 
 //url for the deleteDataById service
 const delURL = "http://localhost:8080/api/v1/plan/deletePlan/";
@@ -42,7 +43,7 @@ const columns = [
                     <Box sx={{
                         mr: 1
                     }}>
-                        <CustomEditButton onClick={handleEditClick2}/>
+                        <CustomEditButton onClick={() => {handleEditClick2(); fetchPlanFromID(cellValues.id)}}/>
                     </Box>
 
                     <CustomDeleteButton onClick={() => deletePlans(cellValues.id)} />
@@ -53,6 +54,14 @@ const columns = [
     },
 ]
 
+
+export let planId = 0;
+
+export const fetchPlanFromID = (id) => {
+    planId = id;
+    console.log(planId);
+    
+}
 
 export async function deletePlans(subId) {
     const result = await deleteDatabyId(delURL, subId);

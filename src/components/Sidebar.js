@@ -58,8 +58,10 @@ export default function Sidebar() {
             <Toolbar>
               <Typography variant="h6" noWrap component="div">
                 {location.pathname === '/'
-                  ? "Dashboard"
-                  : location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
+                   ?"Dashboard"
+                    :(location.pathname === '/addPlans')
+                      ?"Add Plans"
+                      :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
               </Typography>
 
             </Toolbar>
@@ -107,7 +109,7 @@ export default function Sidebar() {
                 <ListItemIcon>
                   <SubscriptionsIcon />
                 </ListItemIcon>
-                <ListItemText primary="AddPlans" />
+                <ListItemText primary="Add Plans" />
               </ListItemButton>
             </ListItem>
 
