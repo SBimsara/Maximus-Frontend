@@ -1,9 +1,20 @@
 .login-link {
     text-decoration: none;
-    color: inherit;
+    font-weight: 'bold';
+    color: #3f51b5;
+    cursor: 'pointer';
+    display: 'inline-block';
+    margin-bottom: '16px';
+    margin-top: '8px'
+
   }
   
   .login-link:hover {
     color: mediumblue;
+  }
+
+  .login-container {
+    background-color: #1976d2;
+    
   }
   

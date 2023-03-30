@@ -34,7 +34,7 @@ function App() {
     <>
       {/* <DropdownMenu/> */}
       {/*{<Sidebar/>}*/}
-      {/*{<Navbar />}*/}
+      {/* {<Navbar />} */}
       <Routes>
         {/*<Route path="/" element={<Dashboard/>} />
         <Route path="/questions" element={<Questions/>}/>
@@ -44,8 +44,8 @@ function App() {
         <Route path="/login" element={<Login />}/>
         <Route path="/passwordResetForm" element={<PasswordResetForm />}/>
 <Route path="/signup" element={<Signup />} />
-{/*<Route path="/authentication"element={<AdminsForm/>}/>
-<Route path="/requests"element={<Requests/>}/>*/}
+<Route path="/authentication"element={<AdminsForm/>}/>
+<Route path="/requests"element={<Requests/>}/>
         {/*<Route path="/*" element={<ErrorPage/>}/>*/}
       </Routes>
       {/* <Popup/> */}

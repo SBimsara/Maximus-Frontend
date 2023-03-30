@@ -30,7 +30,6 @@ export default function Navbar() {
           </Toolbar>
 
           <Toolbar sx={{ marginLeft: "auto" }}>
-            <Button color='inherit' component={Link} to="/Login">Sign In</Button>
 
             <Avatar
               // src={user}

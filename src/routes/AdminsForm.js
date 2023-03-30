@@ -38,7 +38,7 @@ let pageNumberText = ` ${currentPage}`;
 
 function AdminsForm() {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '110vh' }}>
             {/*<div className="AdminsForm">
   <h1>AdminsForm</h1>
   <BsNewspaper className="page-icon" />
@@ -50,7 +50,7 @@ function AdminsForm() {
                         Remove Admin
                     </Button>
                 </Box>&nbsp;
-                <Box sx={{ border: '1px solid black', borderRadius: '4px', p: 3, width: '900px' }}>
+                <Box sx={{ border: '1px solid black', borderRadius: '4px', p: 3, width: '900px' , height: '560px'}}>
                     <Typography variant="h6" sx={{ p: 2, backgroundColor: '#f5f5f5', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }}>Current Admins</Typography>&nbsp;
                     <Table>
                         <TableHead>
