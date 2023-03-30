@@ -1,33 +1,43 @@
 import React from "react";
-import { BsNewspaper } from "react-icons/bs";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { margin } from "@mui/system";
+import { Link } from 'react-router-dom';
+import './PasswordResetStyles.css';
 
-function PasswordResetForm() {
+function ResetPassword() {
+  const paperStyle = {
+    padding: 20,
+    height: '70vh',
+    minWidth: '300px',
+    width: '70%',
+    maxWidth: '500px',
+    margin: "20px auto",
+    borderRadius: 20
+  };
 
-    const paperStyle = { padding: 20, height: '50vh', width: 300, margin: "20px auto" }
-    const btnStyle = { margin: '8px 0' }
-
-    return (
-        <div>
-            {/*<div className="passwordResetForm">
-          <h1>PasswordResetForm</h1>
-          <BsNewspaper className="page-icon" />
-      </div>*/}
-            <Grid container justifyContent="center" alignItems="center" style={{ height: "100vh" }}>
-                <Paper elevation={10} style={paperStyle}>
-                    <h2 style={{ textAlign: "center" }}>Reset Password</h2>&nbsp;
-                    <TextField label='New Password' placeholder="Enter new password" fullWidth required />&nbsp;
-                    <TextField label='Confirm Password' placeholder="Enter new password again" type='password' fullWidth required />&nbsp;
-                    <Button type='Submit' color='primary' variant="contained" style={btnStyle} fullWidth>Reset Password</Button>&nbsp;
-                </Paper>
-            </Grid>
+  return (
+    <div style={{ background: '#D0E7F8' }}>
+      <Grid container justifyContent="center" alignItems="center" style={{ height: "100vh" }}>
+        <Paper elevation={10} style={paperStyle}>
+        <div style={{ marginTop: '32px' }}>
+              <Typography variant="h4" align="center" gutterBottom color="primary" style={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
+                Forgot Password
+              </Typography>
+              <TextField label='Username' placeholder="Enter username" fullWidth required={true} style={{ marginTop: 8 }} />&nbsp;
+              <TextField label='New Password' placeholder="Enter new password" fullWidth required={false} style={{ marginTop: 8 }} />&nbsp;
+              <TextField label='Confirm Password' placeholder="Confirm new password" fullWidth required={false} style={{ marginTop: 8 }} />&nbsp;
+              <Button type='Submit' color='primary' variant="contained" fullWidth style={{ marginTop: 8 }}>Reset Password</Button>&nbsp;
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 8 }}>
+                <Link to="/login" className="passwordResetForm-link">Back to Sign In</Link>
+              </div>
+        </Paper>
+        </Grid>
         </div>
-    )
+  )
 }
 
-export default PasswordResetForm;
+export default ResetPassword;

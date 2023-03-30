@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 
 function Signup() {
-    const paperStyle = { padding: '30px 20px', width: 600, margin: "20px auto" }
-    const headerStyle = { margin: 0 }
+    const paperStyle = { padding: '30px 20px', width: 600, margin: "20px auto",borderRadius:20 }
+    const headerStyle = { margin: 0 ,color: '#1976d2',fontWeight:'bold' }
     const [gender, setGender] = useState('');
 
     const handleGenderChange = (event) => {
@@ -14,17 +14,17 @@ function Signup() {
     };
 
     return (
-        <div>
+        <div style={{background:'#D0E7F8' }}>
             {/*<div className="signup">
           <h1>Signup</h1>
           <BsNewspaper className="page-icon" />
   </div>*/}
-            <Box display="flex" justifyContent="center" alignItems="center" height="90vh">
+            <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
                 <Paper elevation={20} style={paperStyle}>
                     <Grid container spacing={3}>
                         <Grid item xs={12} style={{ textAlign: 'center' }}>
                             <h2 style={headerStyle}>Sign Up</h2>
-                            <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
+                            <Typography variant='caption' gutterBottom color='#3f51b5'>Please fill this form to create an account !</Typography>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField fullWidth label='First Name' placeholder="Enter first name" />

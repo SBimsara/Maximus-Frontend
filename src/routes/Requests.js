@@ -38,12 +38,12 @@ let pageNumberText = ` ${currentPage}`;
 
 function Requests() {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '110vh' }}>
             {/*<div className="RequestsForm">
   <h1>RequestsForm</h1>
   <BsNewspaper className="page-icon" />
 </div>*/}
-            <Box sx={{ border: '1px solid black', borderRadius: '4px', p: 3, width: '800px' }}>
+            <Box sx={{ border: '1px solid black', borderRadius: '4px', p: 3, width: '800px',height: '600px' }}>
                 <Typography variant="h6" sx={{ p: 2, backgroundColor: '#f5f5f5', borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }}>Requests</Typography>&nbsp;
                 <Table>
                     <TableHead>
