@@ -9,6 +9,7 @@
 
 .home,
 .Subjects,
+.Lessons,
 .Questions,
 .Plans
 .Settings {
@@ -37,6 +38,7 @@
 @media screen and (max-width: 960px) {
   .home,
   .Subjects,
+  .Lessons,
   .Questions,
   .Plans
   .Settings {

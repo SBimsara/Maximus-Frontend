@@ -130,6 +130,15 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
+              <ListItemButton href='/lessons' selected={location.pathname === '/lessons' ? true : false}>
+                <ListItemIcon>
+                  <SubjectIcon />
+                </ListItemIcon>
+                <ListItemText primary="Lessons" />
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
               <ListItemButton href='/authentication' selected={location.pathname === '/authentication' ? true : false}>
                 <ListItemIcon>
                   <PeopleIcon />

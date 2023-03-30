@@ -1,6 +1,7 @@
 import Questions from "./routes/Questions/Questions";
 import Dashboard from "./routes/Dashboard";
-import Subjects from "./routes/Subjects";
+import Subjects from "./routes/Subjects/Subjects";
+import Lessons from "./routes/Lessons/Lessons";
 import Plans from "./routes/Plans/Plans";
 import ErrorPage from "./routes/ErrorPage";
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/" element={<Dashboard/>} />
           <Route path="/questions" element={<Questions/>}/>
           <Route path="/subjects" element={<Subjects/>}/>
+          <Route path="/lessons" element={<Lessons/>}/>
           <Route path="/plans" element={<Plans/>}/>
           <Route path="/settings" element={<Settings/>}/>
           <Route path="/*" element={<ErrorPage/>}/>
