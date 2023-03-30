@@ -16,10 +16,10 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import PlanPopup from './PlanPopup';
 import { handleEditClick2 } from '../../utils/EditIconBtnFunctions';
 
-import { PageContainer 
-} from './styles/AddPlans.styles';
+import { PageContainer } from './styles/AddPlans.styles';
 
-import { fetchPlanDetails } from './PlanDetails';
+import Plans from './PlanDetails';
+
 
 //url for the deleteDataById service
 const delURL = "http://localhost:8080/api/v1/plan/deletePlan/";
@@ -43,7 +43,7 @@ const columns = [
                     <Box sx={{
                         mr: 1
                     }}>
-                        <CustomEditButton onClick={() => {handleEditClick2(); fetchPlanFromID(cellValues.id)}}/>
+                        <CustomEditButton onClick={() => {handleEditClick2(); setPid(cellValues.id)}}/>
                     </Box>
 
                     <CustomDeleteButton onClick={() => deletePlans(cellValues.id)} />
@@ -55,14 +55,25 @@ const columns = [
 ]
 
 
-export let planId = 0;
+// // variable to store plan Id
+export let pid = 5 ;
 
-export const fetchPlanFromID = (id) => {
-    planId = id;
-    console.log(planId);
-    
+
+
+// setter function for the pid variable
+export const setPid = (newPid) => {
+  console.log(newPid);
+  pid = newPid;
 }
 
+
+
+
+// // exporting pid
+// export {pid};
+
+
+// delete api call
 export async function deletePlans(subId) {
     const result = await deleteDatabyId(delURL, subId);
     (result) ? console.log("successfull") : console.log("error");

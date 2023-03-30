@@ -4,8 +4,8 @@ import Box from "@mui/material/Box";
 import styled from "@emotion/styled";
 
 export const PageContainer = styled(Box)(({theme}) => ({
-    background: 'linear-gradient(to right bottom, #430089, #82ffa1)',
-    //backgroundColor:"#fff",
+    //background: 'linear-gradient(to right bottom, #430089, #82ffa1)',
+    backgroundColor:"#fff",
     alignContent:"center",
     justifyContent:"center",
 }))

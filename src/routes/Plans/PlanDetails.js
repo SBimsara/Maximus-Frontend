@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { BsNewspaper } from "react-icons/bs";
 
-import { planId } from "./AddPlans";
+
 
 //Material UI imports
 import Button from '@mui/material/Button';
@@ -23,6 +23,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { getData } from "../../services/getData";
 import { getDataById } from "../../services/getDataById.js";
 
+import { pid } from "./AddPlans";
 
 // import "./styles/Plans.style.css";
 import CustomDeleteButton from "../../components/ui/DeleteIconButton";
@@ -38,10 +39,12 @@ import {
 
 import Popup from "./Popup";
 import { deleteDatabyId } from "../../services/deleteDataById";
+import { handleEditClick1 } from "../../utils/EditIconBtnFunctions";
+import { updateData } from "../../services/updateData";
 
 const url1 = "http://localhost:8080/api/v1/plan/getAllPlans";
-const url2 = "http://localhost:8080/api/v1/plan/getPlanByPId/";
-const url3= "";
+const url2 = "http://localhost:8080/api/v1/plan/getPlanById/";
+const url3= "http://localhost:8080/api/v1/plan/updatePlan";
 
 //columns for the data grid
 const columns = [
@@ -68,22 +71,37 @@ export async function deleteSubjects(subId) {
 
 
 
-function Plans() {
+function Plans(props) {
 
   const [rows, setRows] = useState([]);
 
   const [plans, setPlans] = useState([]);
+
+  //use states for the mui textfield values
   const [pName, setpName] = useState("");
   const [pPrice, setpPrice] = useState("");
   const [pDiscount, setpDiscount] = useState("");
 
+  //use states for the mui textfield "saved" values
+  const [savedPName, setSavedPName] = useState("");
+  const [savedPPrice, setSavedPPrice] = useState("");
+  const [savedPDiscount, setSavedPDiscount] = useState("");
+  
+  //use state to control the mui textfield disabled state
   const [isDisabled, setisDisabled] = useState(true);
 
   const [delState,setdelState] = useState(false);
 
   const [openPopup,setOpenPopup] = useState(false);
 
+  // use state to change the readOnly state in mui textfield
+  const [isReadOnly, setIsReadOnly] = useState(false);
 
+  // use state to control the disabled state of mui button(save)
+  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+
+  // use state to control the disabled state of mui button(reset)
+  const [isResetDisabled, setIsResetDisabled] = useState(true);
 
   //functions to get data for the data-grid
   async function fetchSubjects() {
@@ -95,11 +113,17 @@ function Plans() {
   async function fetchPlanDetails() {
     setisDisabled(false);
     
-
-    const result = await getDataById(url2, planId);
+    
+    console.log(pid);
+    const result = await getDataById(url2, pid);
+    console.log(result);
     setpName(result.name);
     setpPrice(result.price);
     setpDiscount(result.discount);
+
+    setSavedPName(result.name);
+    setSavedPPrice(result.price);
+    setSavedPDiscount(result.discount);
   }
 
   //function to get data for the dropdown button
@@ -108,13 +132,18 @@ function Plans() {
     setPlans(result);
   }
 
+  //function to update data
+  async function updatePlan(data) {
+    const result = await updateData(url3,data);
+    (result)? console.log("successfull") : console.log("error");
+  }
   useEffect(() => {
     fetchSubjects();
     fetchPlans();
 
-    if(window.onload(true)){
-      fetchPlanDetails();
-    }
+    updateData();
+    fetchPlanDetails();
+    
     
     
   }, [])
@@ -123,6 +152,44 @@ function Plans() {
     setOpenPopup(true);
   }
 
+  const editCilck = () => {
+    setIsReadOnly(false);
+    console.log("eroor")
+  }
+  
+  const handleNameChange = (event) => {
+      setpName(event.target.value);
+      setIsSaveDisabled(false);
+      setIsResetDisabled(false);
+  }
+
+  const handlePriceChange = (event) => {
+    setpPrice(event.target.value);
+    setIsSaveDisabled(false);
+    setIsResetDisabled(false);
+  }
+
+  const handleDiscountChange = (event) => {
+    setpDiscount(event.target.value);
+    setIsSaveDisabled(false);
+    setIsResetDisabled(false);
+  }
+
+  const handleSaveCilck = () => {
+    const data = {
+    "id" : pid,
+    "name" : pName,
+    "price" : pPrice,
+    "discount" : pDiscount
+    };
+    updatePlan(data);
+  }
+
+  const handleResetClick = () => {
+    setpName(savedPName);
+    setpPrice(savedPPrice);
+    setpDiscount(savedPDiscount);
+  }
   return (
     <>
       <PageContainer>
@@ -150,8 +217,10 @@ function Plans() {
             label="Name"
             variant="outlined"
             size="small"
+
             disabled={isDisabled}
-            value={pName}
+            value= {pName}
+            onChange = {handleNameChange}
             sx={{
               mt: 2
             }}
@@ -163,7 +232,11 @@ function Plans() {
             variant="outlined"
             size="small"
             disabled={isDisabled}
+
+
             value={pPrice}
+            onChange = {handlePriceChange}
+            
             sx={{
               mt: 1.5
             }}
@@ -176,6 +249,7 @@ function Plans() {
             size="small"
             disabled={isDisabled}
             value={pDiscount}
+            onChange = {handleDiscountChange}
             sx={{
               mt: 1.5
             }}
@@ -185,15 +259,22 @@ function Plans() {
             <Button 
               variant="contained"
               disableElevation
+              disabled = {isSaveDisabled}
+              onClick={handleSaveCilck}
             >
-              Edit</Button>
+              Save</Button>
+
             <Button 
             variant="contained"
             disableElevation
             sx={{
               marginLeft:"10px"
-            }}>
+            }}
+            disabled = {isResetDisabled}
+              onClick = {handleResetClick}
+            >
             Reset</Button>
+
           </PlanButtonContainer>
           
         </PlanContainer>

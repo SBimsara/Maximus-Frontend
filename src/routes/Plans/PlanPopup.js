@@ -15,6 +15,9 @@ import CustomCancelButton from '../../components/form/CancelButton';
 import {useState,useEffect} from "react";
 import { saveData } from '../../services/saveData';
 
+
+
+
 //url for the saveData
 const saveURL="http://localhost:8080/api/v1/plan/savePlan";
 
@@ -107,7 +110,7 @@ useEffect(() => {
               color:"#000",
             }
             }}>Cancel</Button>
-          <Button   variant="contained" onClick={() => { handleConfirmClick(); handleClose();}}>Confirm</Button>
+          <Button variant="contained" onClick={() => { handleConfirmClick(); handleClose();}}>Confirm</Button>
         </DialogActions>
       </Dialog>
     </div>
