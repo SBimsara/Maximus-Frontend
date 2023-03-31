@@ -6,7 +6,6 @@ export default function Navbar1(props) {
     <div className="box">
        <div className="title">
         <lebal><b>{props.text}</b></lebal>
-    
        </div>
     </div>
 

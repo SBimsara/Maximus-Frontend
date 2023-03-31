@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Contain.css"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -12,6 +12,20 @@ import { Graph } from './Graph';
 
 
 export default function Contain() {
+
+  const [name,setName]=useState('')
+  const [address,setAddress]=useState('')
+  const [phoneNum,setPhonenum]=useState('')
+  const [email,setEmail]=useState('')
+  const [level,setLevel]=useState('')
+
+  const handleClick=(e)=>{
+    e.preventDefault()
+    const Admin={name,address,phoneNum,email,level}
+    console.log(Admin)
+    
+  }
+
   return (
     <>
     <div className="Contain">
@@ -73,29 +87,47 @@ export default function Contain() {
 
                     <div className="inputs">
                                       <div className="column">
-                                      <input type="text"  placeholder='ravindu kavinda' />
+                                      <TextField id='standard-basic'
+                                      value={name}
+                                      onChange={(e)=>setName(e.target.value)} placeholder='ravindu kavinda'
+                                      variant='standard'  />
                                       </div>
                                     
                                     
+
                                      <div className="column">
-                                     <input type="text" placeholder='no 2/1, kandambi road , matara' /> 
-                                     </div>
+                                      <TextField id='standard-basic'
+                                      value={address}
+                                      onChange={(e)=>setName(e.target.value)} placeholder='no 2/1, kandambi road , matara'
+                                      variant='standard'  />
+                                      </div>
                                      
                                       
+                                     
                                       <div className="column">
-                                      <input type="text" placeholder='0713456234' />
+                                      <TextField id='standard-basic'
+                                      value={phoneNum}
+                                      onChange={(e)=>setName(e.target.value)} placeholder='0766891378'
+                                      variant='standard'  />
                                       </div>
-                                    
                                      
                                     
 
+                                    
                                       <div className="column">
-                                      <input type="text" placeholder='ravindu@gmail.com' />
+                                      <TextField id='standard-basic'
+                                      value={email}
+                                      onChange={(e)=>setName(e.target.value)} placeholder='allravindu@gmail.com'
+                                      variant='standard'  />
                                       </div>
                                     
                                       
+                                     
                                       <div className="column">
-                                      <input type="text" placeholder='super admin' />
+                                      <TextField id='standard-basic'
+                                      value={level}
+                                      onChange={(e)=>setName(e.target.value)} placeholder='superAdmin'
+                                      variant='standard'  />
                                       </div>
                                     
                                      
