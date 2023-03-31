@@ -19,6 +19,7 @@ import { handleEditClick2 } from '../../utils/EditIconBtnFunctions';
 import { PageContainer } from './styles/AddPlans.styles';
 
 import Plans from './PlanDetails';
+import ActionAlerts from '../../components/ui/actionAlerts';
 
 
 //url for the deleteDataById service
@@ -72,11 +73,18 @@ export const setPid = (newPid) => {
 // // exporting pid
 // export {pid};
 
+// const variant = "filled";
+// const buttonTitle = "UNDO";
+// const alertMsg = "This is a success alert — check it out!";
+// const severity = "error";
+
 
 // delete api call
 export async function deletePlans(subId) {
     const result = await deleteDatabyId(delURL, subId);
-    (result) ? console.log("successfull") : console.log("error");
+    // {(result) 
+    // ? <ActionAlerts variant={variant} buttonTitle={buttonTitle} alertMsg={alertMsg} severity={severity}/>
+    // : console.log("error")}
 }
 
 export default function AddPlans() {
@@ -99,6 +107,9 @@ export default function AddPlans() {
     const handleAddPlanClick = () => {
         setOpenPopup(true);
       }
+
+
+
     return (
         <>
         <PageContainer>

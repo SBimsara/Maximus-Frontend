@@ -190,6 +190,9 @@ function Plans(props) {
     setpPrice(savedPPrice);
     setpDiscount(savedPDiscount);
   }
+
+
+
   return (
     <>
       <PageContainer>

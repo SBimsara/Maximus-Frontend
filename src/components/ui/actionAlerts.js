@@ -27,10 +27,10 @@ export default function ActionAlerts() {
       setOpen(false);
     };
     
-    // const variant = "filled";
-    // const buttonTitle = "UNDO";
-    // const alertMsg = "This is a success alert — check it out!";
-    // const severity = "error";
+     const variant = "filled";
+     const buttonTitle = "UNDO";
+     const alertMsg = "This is a success alert — check it out!";
+     const severity = "error";
 
         return (
         <>
