@@ -9,6 +9,7 @@ import {
   PointElement,
   Legend,
   Tooltip,
+  Filler,
 } from "chart.js";
 
 ChartJS.register(
@@ -17,7 +18,8 @@ ChartJS.register(
   LinearScale, // y axis
   PointElement,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 );
 function Stat0() {
   const data = {
@@ -30,6 +32,7 @@ function Stat0() {
         borderColor: "black",
         pointBorderColor: "aqua",
         fill: true,
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
         tension: 0.3,
       },
       // {
@@ -56,6 +59,7 @@ function Stat0() {
         },
       },
       y: {
+        beginAtZero: true,
         grid: {
           display: false,
         },

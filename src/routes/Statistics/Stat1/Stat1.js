@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
-import { Chart as chartjs, ArcElement, Tooltip, Legend } from "chart.js";
+import { Chart as chartjs, ArcElement, Tooltip, Legend, Title } from "chart.js";
 import Nav from "../navBar/Nav";
 import axios from "axios";
 
-chartjs.register(ArcElement, Tooltip, Legend);
+chartjs.register(ArcElement, Tooltip, Legend, Title);
 
 function Stat1() {
   const [chartData, setchartData] = useState({});
@@ -12,12 +12,13 @@ function Stat1() {
     const getData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/v1/subscriptionStat/getPlanUserCount"
+          "http://localhost:8080/api/v1/subscriptionStat/getPlanCount"
+          // "http://localhost:8080/api/v1/subscriptionStat/getPlanUserCount"
         );
         console.log(response);
         setchartData({
-          labels: ["Free-Plan", "Bronze-Plan", "Silver-Plan", "Gold-Plan"],
-          data: response.data.map((item) => item),
+          labels: response.data.map((item) => item.planName),
+          data: response.data.map((item) => item.count),
         });
       } catch (error) {
         console.log(error);
@@ -32,23 +33,33 @@ function Stat1() {
       {
         data: chartData.data,
         backgroundColor: ["chartreuse", "darkorange", "DimGrey", "gold"],
+        borderWidth: 2,
+        hoverOffset: 10,
       },
     ],
   };
   const options = {
     responsive: true,
+    maintainAspectRatio: true,
     plugins: {
-      legend: { display: true, position: "left" },
+      legend: { display: true, position: "bottom" },
+      title: {
+        display: true,
+        text: "User-Plan Distribution",
+        font: {
+          size: 20,
+          weight: "bold",
+        },
+      },
     },
   };
   return (
-    <div
-      style={{
-        width: "38%",
-        margin: "0 auto",
-      }}
-    >
-      <Pie data={data} options={options}></Pie>
+    <div style={{}}>
+      <Pie
+        style={{ width: "25%", margin: " 0px auto" }}
+        data={data}
+        options={options}
+      ></Pie>
     </div>
   );
 }
