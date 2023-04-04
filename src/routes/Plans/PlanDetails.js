@@ -27,46 +27,47 @@ import { pid } from "./AddPlans";
 
 // import "./styles/Plans.style.css";
 import CustomDeleteButton from "../../components/ui/DeleteIconButton";
-import {handleDeleteClick1} from "../../utils/DeleteIconBtnFunctions";
-import { 
-  DataGridColumnContainer, 
-  DataGridContainer, 
-  PageContainer, 
-  PlanButtonContainer, 
-  PlanContainer, 
-  PlanContentContainer 
-        } from "./styles/PlanDetails.styles.js";
+import { handleDeleteClick1 } from "../../utils/DeleteIconBtnFunctions";
+import {
+  DataGridColumnContainer,
+  DataGridContainer,
+  PageContainer,
+  PlanButtonContainer,
+  PlanContainer,
+  PlanContentContainer
+} from "./styles/PlanDetails.styles.js";
 
-import Popup from "./Popup";
+import SubjectPopup from "./SubjectPopup";
 import { deleteDatabyId } from "../../services/deleteDataById";
 import { handleEditClick1 } from "../../utils/EditIconBtnFunctions";
 import { updateData } from "../../services/updateData";
 
 const url1 = "http://localhost:8080/api/v1/plan/getAllPlans";
 const url2 = "http://localhost:8080/api/v1/plan/getPlanById/";
-const url3= "http://localhost:8080/api/v1/plan/updatePlan";
+const url3 = "http://localhost:8080/api/v1/plan/updatePlan";
 
 //columns for the data grid
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
   { field: 'name', headerName: 'Subject', width: 300 },
   { field: 'address', headerName: 'Grade', width: 300 },
-  { field: 'actions',
+  {
+    field: 'actions',
     headerName: 'Actions',
     width: 100,
     renderCell: (cellValues) => {
-      return(
-        <CustomDeleteButton onClick={() => deleteSubjects(cellValues.id)}/>
+      return (
+        <CustomDeleteButton onClick={() => deleteSubjects(cellValues.id)} />
       )
     }
-    },
+  },
 ]
 
-  
+
 
 export async function deleteSubjects(subId) {
-  const result = await deleteDatabyId(url3,subId);
-  (result) ? console.log("successfull"): console.log("error");
+  const result = await deleteDatabyId(url3, subId);
+  (result) ? console.log("successfull") : console.log("error");
 }
 
 
@@ -86,13 +87,13 @@ function Plans(props) {
   const [savedPName, setSavedPName] = useState("");
   const [savedPPrice, setSavedPPrice] = useState("");
   const [savedPDiscount, setSavedPDiscount] = useState("");
-  
+
   //use state to control the mui textfield disabled state
   const [isDisabled, setisDisabled] = useState(true);
 
-  const [delState,setdelState] = useState(false);
+  const [delState, setdelState] = useState(false);
 
-  const [openPopup,setOpenPopup] = useState(false);
+  const [openPopup, setOpenPopup] = useState(false);
 
   // use state to change the readOnly state in mui textfield
   const [isReadOnly, setIsReadOnly] = useState(false);
@@ -112,8 +113,8 @@ function Plans(props) {
   // function to set data in the textfields
   async function fetchPlanDetails() {
     setisDisabled(false);
-    
-    
+
+
     console.log(pid);
     const result = await getDataById(url2, pid);
     console.log(result);
@@ -134,8 +135,8 @@ function Plans(props) {
 
   //function to update data
   async function updatePlan(data) {
-    const result = await updateData(url3,data);
-    (result)? console.log("successfull") : console.log("error");
+    const result = await updateData(url3, data);
+    (result) ? console.log("successfull") : console.log("error");
   }
   useEffect(() => {
     fetchSubjects();
@@ -143,9 +144,9 @@ function Plans(props) {
 
     updateData();
     fetchPlanDetails();
-    
-    
-    
+
+
+
   }, [])
 
   const handleAddSubjectsClick = () => {
@@ -156,11 +157,11 @@ function Plans(props) {
     setIsReadOnly(false);
     console.log("eroor")
   }
-  
+
   const handleNameChange = (event) => {
-      setpName(event.target.value);
-      setIsSaveDisabled(false);
-      setIsResetDisabled(false);
+    setpName(event.target.value);
+    setIsSaveDisabled(false);
+    setIsResetDisabled(false);
   }
 
   const handlePriceChange = (event) => {
@@ -177,10 +178,10 @@ function Plans(props) {
 
   const handleSaveCilck = () => {
     const data = {
-    "id" : pid,
-    "name" : pName,
-    "price" : pPrice,
-    "discount" : pDiscount
+      "id": pid,
+      "name": pName,
+      "price": pPrice,
+      "discount": pDiscount
     };
     updatePlan(data);
   }
@@ -198,7 +199,7 @@ function Plans(props) {
       <PageContainer>
         <PlanContainer>
           <PlanContentContainer>
-          {/* <Dropdown>
+            {/* <Dropdown>
             <Dropdown.Toggle variant="primary" id="plan-dropdown">
               Select Plan
             </Dropdown.Toggle>
@@ -212,125 +213,129 @@ function Plans(props) {
 
             </Dropdown.Menu>
           </Dropdown>  */}
-          
-      
-
-          <TextField
-            id="plan-name"
-            label="Name"
-            variant="outlined"
-            size="small"
-
-            disabled={isDisabled}
-            value= {pName}
-            onChange = {handleNameChange}
-            sx={{
-              mt: 2
-            }}
-          /><br />
-
-          <TextField
-            id="plan-price"
-            label="Price"
-            variant="outlined"
-            size="small"
-            disabled={isDisabled}
 
 
-            value={pPrice}
-            onChange = {handlePriceChange}
-            
-            sx={{
-              mt: 1.5
-            }}
-          /><br />
 
-          <TextField
-            id="plan-discount"
-            label="Discount"
-            variant="outlined"
-            size="small"
-            disabled={isDisabled}
-            value={pDiscount}
-            onChange = {handleDiscountChange}
-            sx={{
-              mt: 1.5
-            }}
-          /><br />
+            <TextField
+              id="plan-name"
+              label="Name"
+              variant="outlined"
+              size="small"
+
+              disabled={isDisabled}
+              value={pName}
+              onChange={handleNameChange}
+              sx={{
+                mt: 2
+              }}
+            /><br />
+
+            <TextField
+              id="plan-price"
+              label="Price"
+              variant="outlined"
+              size="small"
+              disabled={isDisabled}
+
+
+              value={pPrice}
+              onChange={handlePriceChange}
+
+              sx={{
+                mt: 1.5
+              }}
+            /><br />
+
+            <TextField
+              id="plan-discount"
+              label="Discount"
+              variant="outlined"
+              size="small"
+              disabled={isDisabled}
+              value={pDiscount}
+              onChange={handleDiscountChange}
+              sx={{
+                mt: 1.5
+              }}
+            /><br />
           </PlanContentContainer>
           <PlanButtonContainer>
-            <Button 
+            <Button
               variant="contained"
               disableElevation
-              disabled = {isSaveDisabled}
+              disabled={isSaveDisabled}
               onClick={handleSaveCilck}
             >
               Save</Button>
 
-            <Button 
-            variant="contained"
-            disableElevation
-            sx={{
-              marginLeft:"10px"
-            }}
-            disabled = {isResetDisabled}
-              onClick = {handleResetClick}
+            <Button
+              variant="contained"
+              disableElevation
+              sx={{
+                marginLeft: "10px"
+              }}
+              disabled={isResetDisabled}
+              onClick={handleResetClick}
             >
-            Reset</Button>
+              Reset</Button>
 
           </PlanButtonContainer>
-          
-        </PlanContainer>
-        
 
         
 
+
+
+
+
         
-          <DataGridContainer>
-            <Box sx={{
-              ml:98,
-              mb:3,
-            }}>
+          <Box sx={{
+            ml: 98,
+            mb: 3,
+          }}>
             <Button
               variant="outlined"
               color="primary"
               startIcon={<AddCircleIcon />}
               sx={{
-                mt: 1
+                mt: 1,
+                ml:4
 
               }}
               onClick={handleAddSubjectsClick}
             >
               Add Subject
-        </Button>
-        <Popup open={openPopup} onClose={setOpenPopup}/>
-        
-            </Box>
-        
-            <div style={{ 
-              height: 400, 
-              width: '90%',
-              
+            </Button>
+            <SubjectPopup open={openPopup} onClose={setOpenPopup} />
 
-            }}>
-              <DataGrid
-               
-                rows={rows}
+          </Box>
 
-                columns={columns}
-                
-                
-                
-              // pageSize={3}
-              // rowsPerPageOptions={[3]}
-              // checkboxSelection
-              
-              />
-            </div>
-            
-          
-            </DataGridContainer>
-            </PageContainer>
+          <div style={{
+            height: 400,
+            width: '90%',
+
+
+          }}>
+            <DataGrid
+
+              rows={rows}
+
+              columns={columns}
+
+              sx={{
+                ml:3
+              }}
+
+            // pageSize={3}
+            // rowsPerPageOptions={[3]}
+            // checkboxSelection
+
+            />
+          </div>
+
+
+        
+        </PlanContainer>
+      </PageContainer>
     </>
   );
 }

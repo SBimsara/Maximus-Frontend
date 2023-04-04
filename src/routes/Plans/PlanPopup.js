@@ -38,11 +38,14 @@ export default function PlanPopup(props) {
 
 const handleNameChange = (event) => {
   const valn = event.target.value;
+
   setName(valn);
 }    
     
 const handlePriceChange =(event) => {
     const valp = event.target.value;
+
+    priceValidation(valp);
     setPrice(valp);
 }
 const handleDiscountChange =(event) => {
@@ -67,6 +70,13 @@ async function savePlan(data) {
 useEffect(() => {
   savePlan();
 },[]) 
+
+const priceValidation = (val) => {
+  {(isNumeric(val))
+  ?console.log("numeric")
+  :console.log("Not a numeric")}
+}
+
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
@@ -98,10 +108,11 @@ useEffect(() => {
 
 
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{mr:2}}>
           <Button 
           onClick={handleClose} 
           variant="contained" 
+          disableElevation
           sx={{
             backgroundColor:"#e0e0e0",
             color:"#000",
@@ -110,7 +121,7 @@ useEffect(() => {
               color:"#000",
             }
             }}>Cancel</Button>
-          <Button variant="contained" onClick={() => { handleConfirmClick(); handleClose();}}>Confirm</Button>
+          <Button variant="contained" disableElevation onClick={() => { handleConfirmClick(); handleClose();}}>Confirm</Button>
         </DialogActions>
       </Dialog>
     </div>

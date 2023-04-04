@@ -10,7 +10,7 @@ import './App.css';
 import Sidebar  from "./components/Sidebar";
 import Navbar  from "./components/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Popup from "./routes/Plans/Popup";
+
 
 import PageLayout from "./routes/PageLayout";
 import Settings from "./routes/Settings";
@@ -45,7 +45,7 @@ function App() {
           <Route path="/planDe" element={<PlanDetails/>}/>
           
         </Routes>
-        {/* <Popup/> */}
+        
         {/* <PageLayout/> */}
         {/* <CustomDropdown/> */}
 

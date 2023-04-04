@@ -33,7 +33,7 @@ function CustomDropdown({ topic, url , onSelect }) {
     <div>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-sm-4">
+          <div className="col-sm">
 
             
             <br />
