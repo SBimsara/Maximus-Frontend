@@ -5,8 +5,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 function Navigation() {
   const items = [
-    { id: 1, name: "Stat0", path: "/statistics/Stat0" },
-    { id: 2, name: "Stat1", path: "/statistics/Stat1" },
+    { id: 0, name: "Select Chart", path: "/statistics" },
+    { id: 1, name: "Chart 1", path: "/statistics/Stat0" },
+    { id: 2, name: "Chart 2", path: "/statistics/Stat1" },
   ];
 
   const location = useLocation();
@@ -36,14 +37,6 @@ function Navigation() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          {/* <Nav className="mr-auto">
-            <LinkContainer to="/statistics/Stat0">
-              <Nav.Link>Stat0</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/statistics/Stat1">
-              <Nav.Link>Stat1</Nav.Link>
-            </LinkContainer>
-          </Nav> */}
           <NavDropdown
             className="btn btn-lg "
             title={selectedOption}
@@ -71,25 +64,25 @@ function Navigation() {
 
 export default Navigation;
 
-{
-  /* <LinkContainer to={"/statistics/Stat0"}>
-              <NavDropdown.Item
-                eventKey="Stat0"
-                // href="/statistics/Stat0"
-                // onClick={() => navigate("/statistics/Stat0")}
-                active={selectedOption === "Stat0"}
-              >
-                Stat0
-              </NavDropdown.Item>
-            </LinkContainer>
-            <LinkContainer to={"/statistics/Stat1"}>
-              <NavDropdown.Item
-                eventKey="Stat1"
-                // href="/statistics/Stat1"
-                // onClick={() => navigate("/statistics/Stat1")}
-                active={selectedOption === "Stat1"}
-              >
-                Stat1
-              </NavDropdown.Item>
-            </LinkContainer> */
-}
+// {
+//    <LinkContainer to={"/statistics/Stat0"}>
+//               <NavDropdown.Item
+//                 eventKey="Stat0"
+//                 // href="/statistics/Stat0"
+//                 // onClick={() => navigate("/statistics/Stat0")}
+//                 active={selectedOption === "Stat0"}
+//               >
+//                 Stat0
+//               </NavDropdown.Item>
+//             </LinkContainer>
+//             <LinkContainer to={"/statistics/Stat1"}>
+//               <NavDropdown.Item
+//                 eventKey="Stat1"
+//                 // href="/statistics/Stat1"
+//                 // onClick={() => navigate("/statistics/Stat1")}
+//                 active={selectedOption === "Stat1"}
+//               >
+//                 Stat1
+//               </NavDropdown.Item>
+//             </LinkContainer>
+// }

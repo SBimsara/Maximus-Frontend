@@ -1,6 +1,5 @@
-import React from "react";
-import Nav from "../navBar/Nav";
-import { Line } from "react-chartjs-2";
+import React, { useEffect, useRef, useState } from "react";
+import { Chart, Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   LineElement,
@@ -10,7 +9,10 @@ import {
   Legend,
   Tooltip,
   Filler,
+  TimeScale,
 } from "chart.js";
+import "./Stat0.style.css";
+import { getData } from "../../../services/getData";
 
 ChartJS.register(
   LineElement,
@@ -19,31 +21,46 @@ ChartJS.register(
   PointElement,
   Tooltip,
   Legend,
-  Filler
+  Filler,
+  TimeScale
 );
+
 function Stat0() {
+  const url = "http://localhost:8080/api/v1/userStat/getRegUserCount";
+
+  const groupedData = async (url) => {
+    try {
+      const response = await getData(url);
+      console.log(response);
+      setchartData({
+        labels: response.map((item) => item.date),
+        data: response.map((item) => item.count),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [chartData, setchartData] = useState({});
+  useEffect(() => {
+    groupedData(url);
+  }, []);
+
   const data = {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    labels: chartData.labels,
     datasets: [
       {
-        label: "DS1",
-        data: [3, 9, 6, 7, 4, 12, 10],
-        backgroundColor: "aqua",
-        borderColor: "black",
-        pointBorderColor: "aqua",
+        label: "COUNT",
+        data: chartData.data,
+        //backgroundColor: "Lightgray",
+        borderColor: "rgb(75, 192, 192)",
+        borderWidth: "3",
+        //pointBorderColor: "Orange",
+        pointBackgroundColor: "Black",
         fill: true,
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        backgroundColor: "#E9FDFF",
         tension: 0.3,
       },
-      // {
-      //   label: "DS2",
-      //   data: [8, 4, 3, 11, 10, 2, 5],
-      //   backgroundColor: "green",
-      //   borderColor: "black",
-      //   pointBorderColor: "green",
-      //   fill: true,
-      //   tension: 0.4,
-      // },
     ],
   };
 
@@ -51,6 +68,14 @@ function Stat0() {
     responsive: true,
     plugins: {
       legend: { display: true, position: "left" },
+      title: {
+        display: true,
+        text: "Total Registered User Count Over Time",
+        font: {
+          size: 21,
+          weight: "bold",
+        },
+      },
     },
     scales: {
       x: {
@@ -58,21 +83,55 @@ function Stat0() {
           display: false,
         },
       },
+
       y: {
         beginAtZero: true,
         grid: {
-          display: false,
+          display: true,
         },
       },
     },
   };
+
+  function handleEvent(e) {
+    const months = e.target.value;
+    if (months == 0) {
+      groupedData(url);
+    } else {
+      const url1 = `http://localhost:8080/api/v1/userStat/getRegUserCountbyMonths/${months.toString()}`;
+      groupedData(url1);
+    }
+  }
+
   return (
     <div>
+      <select
+        //className="selectButton"
+        class="form-select"
+        aria-label="Default select example"
+        style={{
+          marginLeft: "250px",
+          marginRight: "750px",
+          width: "125px",
+          height: "38px",
+        }}
+        onChange={(e) => {
+          handleEvent(e);
+        }}
+      >
+        <option value="">-- Select --</option>
+        <option value="1">1 Month</option>
+        <option value="3">3 Months</option>
+        <option value="6">6 Months</option>
+        <option value="12">1 Year</option>
+        <option value="0">All</option>
+      </select>
+
       <div
         style={{
-          paddingTop: "30px",
-          width: "70%",
-          margin: "0 auto",
+          paddingTop: "25px",
+          width: "65%",
+          margin: "0px auto",
         }}
       >
         <Line data={data} options={options}></Line>
