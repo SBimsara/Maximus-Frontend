@@ -92,7 +92,7 @@ function App() {
               </div>
 
               {
-                i === formVal.length - 1 ? <button className="remove-btn" onClick={()=>onRemove(i)}>Remove</button> : null
+                i === 0 ? "" : <button className="remove-btn" onClick={()=>onRemove(i)}>Remove</button> 
               }
             </div>
           ))}

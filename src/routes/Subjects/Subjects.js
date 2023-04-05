@@ -1,5 +1,9 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import './Subjects.css';
+import { saveData } from '../../services/saveData';
+
+//url for the saveData
+const saveURL="http://localhost:8090/api/v1/user/saveSubject";
 
 function App() {
   const [formVal, setFormVal] = useState([{subject:'', grade:''}])
@@ -54,12 +58,35 @@ function App() {
     console.log("errorRes", errorRes)
     if(errorRes) {
       // api call
+      createSaveSubject();
+      
+
     } else {
       // error msg
+
+      console.log("Error");
     }
   }
+    const createSaveSubject = () => {
+      const subject = {
+        "id": 2,
+        "subjectname": formVal.subject,
+        "grade": formVal.grade
+      }
+      saveSubject(subject)
+    }
+    async function saveSubject(data) {
+      const result= await saveData(saveURL,data);
+      console.log(result);
+    }
+    
+    useEffect(() => {
+      saveSubject();
+    },[])
+  
   
   return (
+    <>
     <div className="App">
       <div className="form-container">
         <h2>Add a Subject</h2>
@@ -91,6 +118,7 @@ function App() {
         </form>
       </div>
     </div>
+    </>
   );
 }
 

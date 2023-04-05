@@ -40,7 +40,7 @@ function App() {
   return (
    <>
         {/* <DropdownMenu/> */}
-        {/* <Sidebar/> */}
+        <Sidebar/>
         {/* <Navbar/> */}
         <Routes>
           <Route path="/" element={<Dashboard/>} />
