@@ -1,3 +1,4 @@
+/*
 import {useState, useEffect} from 'react';
 import './Subjects.css';
 import { saveData } from '../../services/saveData';
@@ -123,5 +124,86 @@ function App() {
 }
 
 export default App;
+*/
+//react imports
+import React from 'react';
+import { useState, useEffect } from "react";
+
+//component impots
+import CustomEditButton from '../../components/ui/EditIconButton';
+import CustomDeleteButton from '../../components/ui/DeleteIconButton';
+
+
+//custom style imports
+import { PageContainer } from '../Plans/styles/AddPlans.styles';
+
+//data-grid imports
+import { DataGrid } from '@mui/x-data-grid';
+
+
+//mui imports
+import Box from "@mui/material/Box";
+import Button from '@mui/material/Button';
+
+//reusable function imports
+import { getData } from '../../services/getData';
+import { handleEditClick2 } from '../../utils/EditIconBtnFunctions';
+
+//icon imports
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+
+
+//columns for the data-grid
+const columns = [
+  { field: 'id', headerName: 'ID', width: 100 },
+  { field: 'name', headerName: 'Name', width: 200 },
+  { field: 'price', headerName: 'Price', width: 200 },
+  { field: 'discount', headerName: 'Discount', width: 200 },
+  {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 100,
+      renderCell: (cellValues) => {
+          return (
+              <>
+                   <Box sx={{
+                      mr: 1
+                  }}>
+                      <CustomEditButton onClick={() => {handleEditClick2()}}/>
+                  </Box> 
+
+                  <CustomDeleteButton />
+
+              </>
+          )
+      }
+  },
+]
+
+function Subjects () {
+  const [rows, setRows] = useState([]);
+  return (
+    <>
+      <PageContainer>
+            <Box sx={{mb:2}}>
+            <Button variant='outlined' startIcon={<AddCircleIcon /> }>Add Subject</Button>
+            </Box>
+            {/* <PlanPopup open={openPopup} onClose={setOpenPopup}/> */}
+            <div style={{
+                height: 400,
+                width: '90%',
+
+            }}>
+                <DataGrid
+                    rows={rows}
+                    columns={columns}
+                /> 
+            </div>
+            </PageContainer>
+    </>
+  )
+}
+
+export default Subjects;
 
 
