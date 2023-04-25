@@ -151,6 +151,7 @@ import { handleEditClick2 } from '../../utils/EditIconBtnFunctions';
 
 //icon imports
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import SubjectPopup from './SubjectPopup';
 
 
 //columns for the data-grid
@@ -182,6 +183,7 @@ const columns = [
 
 function Subjects () {
   const [rows, setRows] = useState([]);
+  const [openPopup,setOpenPopup] = useState(false);
   return (
     <>
       <PageContainer>
@@ -189,6 +191,7 @@ function Subjects () {
             <Button variant='outlined' startIcon={<AddCircleIcon /> }>Add Subject</Button>
             </Box>
             {/* <PlanPopup open={openPopup} onClose={setOpenPopup}/> */}
+            <SubjectPopup open={openPopup} onClose={setOpenPopup}/>
             <div style={{
                 height: 400,
                 width: '90%',
