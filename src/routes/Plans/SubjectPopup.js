@@ -56,12 +56,12 @@ export default function Popup(props) {
 
   async function getSubjects() {
     const result = await getData(url1);
-    setSubject(result);
+    setSubject(result.content);
   }
 
   async function getGrades() {
     const result = await getData(url2);
-    setGrade(result);
+    setGrade(result.content);
   }
 
   useEffect(() => {
@@ -132,7 +132,7 @@ export default function Popup(props) {
           <Button
             onClick={handleClose}
             variant="contained"
-            
+
             sx={{
               backgroundColor: "#e0e0e0",
               color: "#000",

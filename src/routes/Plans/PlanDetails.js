@@ -107,7 +107,7 @@ function Plans(props) {
   //functions to get data for the data-grid
   async function fetchSubjects() {
     const result = await getData(url1);
-    setRows(result);
+    setRows(result.content);
   }
 
   // function to set data in the textfields
@@ -117,20 +117,20 @@ function Plans(props) {
 
     console.log(pid);
     const result = await getDataById(url2, pid);
-    console.log(result);
-    setpName(result.name);
-    setpPrice(result.price);
-    setpDiscount(result.discount);
+    console.log(result.content);
+    setpName(result.content.name);
+    setpPrice(result.content.price);
+    setpDiscount(result.content.discount);
 
-    setSavedPName(result.name);
-    setSavedPPrice(result.price);
-    setSavedPDiscount(result.discount);
+    setSavedPName(result.content.name);
+    setSavedPPrice(result.content.price);
+    setSavedPDiscount(result.content.discount);
   }
 
   //function to get data for the dropdown button
   async function fetchPlans() {
     const result = await getData(url1);
-    setPlans(result);
+    console.log(result);
   }
 
   //function to update data
@@ -140,9 +140,9 @@ function Plans(props) {
   }
   useEffect(() => {
     fetchSubjects();
-    fetchPlans();
+    //    fetchPlans();
 
-    updateData();
+    updatePlan();
     fetchPlanDetails();
 
 
@@ -281,13 +281,13 @@ function Plans(props) {
 
           </PlanButtonContainer>
 
-        
 
 
 
 
 
-        
+
+
           <Box sx={{
             ml: 98,
             mb: 3,
@@ -298,7 +298,7 @@ function Plans(props) {
               startIcon={<AddCircleIcon />}
               sx={{
                 mt: 1,
-                ml:4
+                ml: 4
 
               }}
               onClick={handleAddSubjectsClick}
@@ -322,7 +322,7 @@ function Plans(props) {
               columns={columns}
 
               sx={{
-                ml:3
+                ml: 3
               }}
 
             // pageSize={3}
@@ -333,7 +333,7 @@ function Plans(props) {
           </div>
 
 
-        
+
         </PlanContainer>
       </PageContainer>
     </>

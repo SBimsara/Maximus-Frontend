@@ -56,8 +56,10 @@ const columns = [
 ]
 
 
+
+
 // // variable to store plan Id
-export let pid = 14 ;
+export let pid = 15 ;
 
 
 
@@ -94,7 +96,7 @@ export default function AddPlans() {
 
     async function fetchPlans() {
         const result = await getData(getAllURL);
-        setRows(result);
+        setRows(result.content);
         //console.log(rows);
     }
 
@@ -108,8 +110,7 @@ export default function AddPlans() {
         setOpenPopup(true);
       }
 
-
-
+    
     return (
         <>
         <PageContainer>

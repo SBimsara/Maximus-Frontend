@@ -61,7 +61,9 @@ export default function Sidebar() {
                    ?"Dashboard"
                     :(location.pathname === '/addPlans')
                       ?"Add Plans"
-                      :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
+                      :(location.pathname === '/planDe')
+                        ?"Plan Details"
+                        :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
               </Typography>
 
             </Toolbar>
@@ -105,7 +107,7 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton href='/addPlans' selected={location.pathname === '/addPlans' ? true : false}>
+              <ListItemButton href='/addPlans' selected={(location.pathname === '/addPlans')||(location.pathname === '/planDe') ? true : false}>
                 <ListItemIcon>
                   <SubscriptionsIcon />
                 </ListItemIcon>

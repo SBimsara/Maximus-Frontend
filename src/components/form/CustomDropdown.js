@@ -13,7 +13,7 @@ function CustomDropdown({ topic, url , onSelect }) {
 
   async function dropdownData() {
     const response = await getData(url);
-    setDataList(response);
+    setDataList(response.content);
   }
 
   useEffect(() => {
