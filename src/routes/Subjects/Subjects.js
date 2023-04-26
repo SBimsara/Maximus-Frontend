@@ -153,13 +153,15 @@ import { handleEditClick2 } from '../../utils/EditIconBtnFunctions';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SubjectPopup from './SubjectPopup';
 
+//url for the saveData
+const saveURL="http://localhost:8090/api/v1/user/saveSubject";
 
 //columns for the data-grid
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
-  { field: 'name', headerName: 'Name', width: 200 },
-  { field: 'price', headerName: 'Price', width: 200 },
-  { field: 'discount', headerName: 'Discount', width: 200 },
+  { field: 'name', headerName: 'Subject', width: 200 },
+  { field: 'price', headerName: 'Grade', width: 200 },
+  
   {
       field: 'actions',
       headerName: 'Actions',
@@ -184,11 +186,24 @@ const columns = [
 function Subjects () {
   const [rows, setRows] = useState([]);
   const [openPopup,setOpenPopup] = useState(false);
-  return (
+
+  const handleSubjectPopup = () => {
+    setOpenPopup(true);
+  }
+
+  useEffect(()=>{
+    getSubjects();
+  },[])
+
+  async function getSubjects(){
+    setRows(await getData(saveURL));
+  }
+   
+ return (
     <>
       <PageContainer>
             <Box sx={{mb:2}}>
-            <Button variant='outlined' startIcon={<AddCircleIcon /> }>Add Subject</Button>
+            <Button variant='outlined' startIcon={<AddCircleIcon /> } onClick={handleSubjectPopup}>Add Subject</Button>
             </Box>
             {/* <PlanPopup open={openPopup} onClose={setOpenPopup}/> */}
             <SubjectPopup open={openPopup} onClose={setOpenPopup}/>
