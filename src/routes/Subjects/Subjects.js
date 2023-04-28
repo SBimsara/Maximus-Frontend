@@ -154,13 +154,14 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SubjectPopup from './SubjectPopup';
 
 //url for the saveData
+const getAllURL = "http://localhost:8090/api/v1/user/getSubjects";
 const saveURL="http://localhost:8090/api/v1/user/saveSubject";
 
 //columns for the data-grid
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
-  { field: 'name', headerName: 'Subject', width: 200 },
-  { field: 'price', headerName: 'Grade', width: 200 },
+  { field: 'subjectname', headerName: 'Subject', width: 200 },
+  { field: 'grade', headerName: 'Grade', width: 200 },
   
   {
       field: 'actions',
@@ -196,7 +197,9 @@ function Subjects () {
   },[])
 
   async function getSubjects(){
-    setRows(await getData(saveURL));
+    const result = await getData(getAllURL);
+    console.log(result);
+    setRows(result);
   }
    
  return (

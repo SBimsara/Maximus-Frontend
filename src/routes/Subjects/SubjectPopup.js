@@ -15,13 +15,49 @@ import Box from '@mui/material/Box';
 
 import CustomCancelButton from '../../components/form/CancelButton';
 
+import { useState, useEffect } from "react";
+import { saveData } from '../../services/saveData';
+
+
+const saveURL="http://localhost:8090/api/v1/user/saveSubject";
+
 export default function SubjectPopup(props) {
     const { open, onClose } = props;
 
+    const [subject,setSubject] =useState("");
+    const [grade,setGrade]=useState("");
 
     const handleClose = () => {
         onClose(false);
       };
+    
+    const handleSubjectChange = (event) => {
+      setSubject(event.target.value);
+
+    }
+
+    const handleGradeChange = (event) => {
+      setGrade(event.target.value);
+    }
+    const handleConfirmClick = () => {
+      const data  = {
+        "id" : 0,
+        "subjectname" : subject,
+        "grade" : grade
+      }
+
+      saveSubject(data);
+    }
+
+    async function saveSubject (data){
+      const result = await saveData(saveURL,data);
+      console.log(result);
+    }
+    
+
+    useEffect(()=> {
+      saveSubject();
+    },[])
 
   return (
     <>
@@ -46,8 +82,8 @@ export default function SubjectPopup(props) {
             display: "flex",
             flexDirection: 'column'
           }}>
-            <TextField id="outlined-basic" label="Subject" variant="outlined" sx={{ mt: 2 }}  />
-            <TextField id="outlined-basic" label="Grade" variant="outlined" sx={{ mt: 2 }} />
+            <TextField id="outlined-basic" label="Subject" variant="outlined" sx={{ mt: 2 }} onChange={handleSubjectChange}/>
+            <TextField id="outlined-basic" label="Grade" variant="outlined" sx={{ mt: 2 }} onChange={handleGradeChange}/>
             
             
           </Box>
@@ -68,7 +104,7 @@ export default function SubjectPopup(props) {
                 color: "#000",
               }
             }}>Cancel</Button>
-          <Button variant="contained" disableElevation onClick={() => { handleClose(); }}>Confirm</Button>
+          <Button variant="contained" disableElevation onClick={() => { handleClose(); handleConfirmClick();}}>Confirm</Button>
         </DialogActions>
       </Dialog>
     </>
