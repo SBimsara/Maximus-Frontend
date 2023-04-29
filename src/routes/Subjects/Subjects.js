@@ -145,18 +145,26 @@ import { DataGrid } from '@mui/x-data-grid';
 import Box from "@mui/material/Box";
 import Button from '@mui/material/Button';
 
-//reusable function imports
+//api function imports
 import { getData } from '../../services/getData';
-import { handleEditClick2 } from '../../utils/EditIconBtnFunctions';
 
+//reusable function imports
+import { handleEditClick2 } from '../../utils/EditIconBtnFunctions';
+import { viewLessons } from '../../utils/ViewIconBtnFunctions';
 //icon imports
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+
 import SubjectPopup from './SubjectPopup';
+
+import CustomViewButton from '../../components/ui/ViewIconButton';
+import { deleteDatabyId } from '../../services/deleteDataById';
+
+
 
 //url for the saveData
 const getAllURL = "http://localhost:8090/api/v1/user/getSubjects";
 const saveURL="http://localhost:8090/api/v1/user/saveSubject";
-
+const subjectDelURL = "http://localhost:8090/api/v1/user/deleteSubjectById/";
 //columns for the data-grid
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
@@ -166,7 +174,7 @@ const columns = [
   {
       field: 'actions',
       headerName: 'Actions',
-      width: 100,
+      width: 200,
       renderCell: (cellValues) => {
           return (
               <>
@@ -174,19 +182,32 @@ const columns = [
                       mr: 1
                   }}>
                       <CustomEditButton onClick={() => {handleEditClick2()}}/>
+                  </Box>
+                  <Box sx={{
+                    mr:1
+                  }}>
+                    <CustomViewButton onClick={() => {viewLessons()}}/>
                   </Box> 
-
-                  <CustomDeleteButton />
-
+                  
+                  <CustomDeleteButton onClick={() => {deleteSubject(cellValues.id)}}/>
+                  
+                  
               </>
           )
       }
   },
 ]
 
-function Subjects () {
+export async function deleteSubject(id) {
+  const result = await deleteDatabyId(subjectDelURL,id);
+  console.log(result);
+}
+
+export default function Subjects () {
   const [rows, setRows] = useState([]);
   const [openPopup,setOpenPopup] = useState(false);
+
+
 
   const handleSubjectPopup = () => {
     setOpenPopup(true);
@@ -225,6 +246,5 @@ function Subjects () {
   )
 }
 
-export default Subjects;
 
 
