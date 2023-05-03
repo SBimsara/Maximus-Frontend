@@ -158,6 +158,8 @@ import SubjectPopup from './SubjectPopup';
 
 import CustomViewButton from '../../components/ui/ViewIconButton';
 import { deleteDatabyId } from '../../services/deleteDataById';
+import EditSubjectPopup from './EditSubjectPopup';
+import { getDataById } from '../../services/getDataById';
 
 
 
@@ -165,6 +167,22 @@ import { deleteDatabyId } from '../../services/deleteDataById';
 const getAllURL = "http://localhost:8090/api/v1/user/getSubjects";
 const saveURL="http://localhost:8090/api/v1/user/saveSubject";
 const subjectDelURL = "http://localhost:8090/api/v1/user/deleteSubjectById/";
+
+const getURL = "http://localhost:8090/api/v1/user/getUserBySubjectId/";
+export async function deleteSubject(id) {
+
+  
+  const result = await deleteDatabyId(subjectDelURL,id);
+  console.log(result);
+}
+
+function Subjects () {
+  const [rows, setRows] = useState([]);
+  const [openPopup,setOpenPopup] = useState(false);
+  const [openEditPopup, setOpenEditPopup] = useState(false);
+
+  const [result,setResult] = useState(null);
+
 //columns for the data-grid
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
@@ -181,7 +199,7 @@ const columns = [
                    <Box sx={{
                       mr: 1
                   }}>
-                      <CustomEditButton onClick={() => {handleEditClick2()}}/>
+                      <CustomEditButton onClick={() => {handleOpenEditPopup();getSubjectById(cellValues.id);}}/>
                   </Box>
                   <Box sx={{
                     mr:1
@@ -198,16 +216,17 @@ const columns = [
   },
 ]
 
-export async function deleteSubject(id) {
-  const result = await deleteDatabyId(subjectDelURL,id);
+async function getSubjectById(sid) {
+  const data = await getDataById(getURL,sid);
+  setResult(data);
+  console.log(data);
   console.log(result);
 }
 
-export default function Subjects () {
-  const [rows, setRows] = useState([]);
-  const [openPopup,setOpenPopup] = useState(false);
+  const handleOpenEditPopup = () => {
+    setOpenEditPopup(true);
 
-
+  }
 
   const handleSubjectPopup = () => {
     setOpenPopup(true);
@@ -231,6 +250,7 @@ export default function Subjects () {
             </Box>
             {/* <PlanPopup open={openPopup} onClose={setOpenPopup}/> */}
             <SubjectPopup open={openPopup} onClose={setOpenPopup}/>
+            <EditSubjectPopup open={openEditPopup} onClose={setOpenEditPopup} />
             <div style={{
                 height: 400,
                 width: '90%',
@@ -247,4 +267,6 @@ export default function Subjects () {
 }
 
 
+
+export default Subjects;
 
