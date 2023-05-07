@@ -62,7 +62,7 @@ export default function Sidebar() {
                     :(location.pathname === '/addPlans')
                       ?"Add Plans"
                       :(location.pathname === '/planDe')
-                        ?"Plan Details"
+                        ?"Edit Plans"
                         :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
               </Typography>
 

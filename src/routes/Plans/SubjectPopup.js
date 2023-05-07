@@ -24,6 +24,8 @@ import { saveData } from '../../services/saveData';
 const url1 = "http://localhost:8080/api/v1/plan/getAllPlans";
 const url2 = "http://localhost:8080/api/v1/user/getUsers";
 
+const getALLSubjects = "http://localhost:8080/api/v1/user/getSubjects";
+
 
 
 export default function Popup(props) {
@@ -55,8 +57,9 @@ export default function Popup(props) {
   // };
 
   async function getSubjects() {
-    const result = await getData(url1);
-    setSubject(result.content);
+    const result = await getData(getALLSubjects);
+    console.log(result)
+    //setSubject(result.content.subjectname);
   }
 
   async function getGrades() {

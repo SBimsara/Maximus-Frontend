@@ -28,7 +28,6 @@ export default function PlanPopup(props) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [discount, setDiscount] = useState("");
-  const [amount, setAmount] = useState("");
 
 
 
@@ -57,11 +56,10 @@ export default function PlanPopup(props) {
 
   const handleConfirmClick = () => {
     const data = {
-      "id": 1,
       "name": name,
       "price": price,
       "discount": discount,
-      "amount":amount,
+    
     };
     savePlan(data);
   }

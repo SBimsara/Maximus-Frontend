@@ -23,7 +23,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { getData } from "../../services/getData";
 import { getDataById } from "../../services/getDataById.js";
 
-import { pid } from "./AddPlans";
+//import { pid } from "./AddPlans";
 
 // import "./styles/Plans.style.css";
 import CustomDeleteButton from "../../components/ui/DeleteIconButton";
@@ -49,8 +49,8 @@ const url3 = "http://localhost:8080/api/v1/plan/updatePlan";
 //columns for the data grid
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
-  { field: 'name', headerName: 'Subject', width: 300 },
-  { field: 'address', headerName: 'Grade', width: 300 },
+  { field: 'subjectname', headerName: 'Subject', width: 300 },
+  { field: 'grade', headerName: 'Grade', width: 300 },
   {
     field: 'actions',
     headerName: 'Actions',
@@ -74,6 +74,7 @@ export async function deleteSubjects(subId) {
 
 function Plans(props) {
 
+  const {pid} = props ;
   const [rows, setRows] = useState([]);
 
   const [plans, setPlans] = useState([]);
@@ -105,10 +106,10 @@ function Plans(props) {
   const [isResetDisabled, setIsResetDisabled] = useState(true);
 
   //functions to get data for the data-grid
-  async function fetchSubjects() {
-    const result = await getData(url1);
-    setRows(result.content);
-  }
+  // async function fetchSubjects() {
+  //   const result = await getData(url1);
+  //   setRows(result.content);
+  // }
 
   // function to set data in the textfields
   async function fetchPlanDetails() {
@@ -118,6 +119,8 @@ function Plans(props) {
     console.log(pid);
     const result = await getDataById(url2, pid);
     console.log(result.content);
+
+    setRows(result.content.subjects)
     setpName(result.content.name);
     setpPrice(result.content.price);
     setpDiscount(result.content.discount);
@@ -139,13 +142,11 @@ function Plans(props) {
     (result) ? console.log("successfull") : console.log("error");
   }
   useEffect(() => {
-    fetchSubjects();
+    //fetchSubjects();
     //    fetchPlans();
 
-    updatePlan();
+    //updatePlan();
     fetchPlanDetails();
-
-
 
   }, [])
 
