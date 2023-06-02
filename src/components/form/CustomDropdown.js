@@ -13,7 +13,9 @@ function CustomDropdown({ topic, url , onSelect }) {
 
   async function dropdownData() {
     const response = await getData(url);
-    setDataList(response.content);
+    setDataList(response);
+    console.log(response);
+    console.log(dataList);
   }
 
   useEffect(() => {
@@ -22,8 +24,9 @@ function CustomDropdown({ topic, url , onSelect }) {
   }, [])
 
   const handleChange = (event) => {
-    const selectedData = dataList.find((data) => data.name === event.target.value);
+    const selectedData = dataList.find((data) => data.subjectname === event.target.value);
     setDataName(event.target.value);
+    // console.log(dataName);
     onSelect(selectedData);
   }
 
@@ -42,7 +45,7 @@ function CustomDropdown({ topic, url , onSelect }) {
               <option value="">{topic}</option>
 
               {dataList.map(data => (
-                <option value={data.name} key={data.id} >{data.name}</option>
+                <option value={data.subjectname} key={data.id} >{data.subjectname}</option>
 
               ))
               }

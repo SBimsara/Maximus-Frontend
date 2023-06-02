@@ -20,6 +20,10 @@ import { getData } from '../../services/getData';
 import CustomDropdown from '../../components/form/CustomDropdown';
 import { saveData } from '../../services/saveData';
 
+
+
+import axios from "axios";
+
 //api links
 const url1 = "http://localhost:8080/api/v1/plan/getAllPlans";
 const url2 = "http://localhost:8080/api/v1/user/getUsers";
@@ -37,7 +41,7 @@ export default function Popup(props) {
   //    setOpen();
   //  };
 
-  const { open, onClose } = props;
+  const { pid,open, onClose } = props;
 
   const handleClose = () => {
     onClose(false);
@@ -46,7 +50,7 @@ export default function Popup(props) {
   //  const [age, setAge] = useState('');
 
   const [grade, setGrade] = useState([]);
-  const [subject, setSubject] = useState([]);
+  const [subjectID, setSubjectID] = useState(-1);
 
   // const handleSubChange = (event) => {
   //   setSubject(event.target.ariaValueNow);
@@ -73,10 +77,16 @@ export default function Popup(props) {
   }, [])
 
   const handleSelectedSubject = (data1) => {
-    setSubject(data1.name);
+    setSubjectID(data1.id);
 
-    console.log(subject);
+    console.log(data1.id);
+    console.log(pid);
 
+  }
+
+  async function addNewSubject (){
+    const result = await axios.put(`http://localhost:8080/api/v1/plan/addSubject/plans/${pid}/subjects/${subjectID}`);
+    console.log(result);
   }
 
   const handleSelectedGrade = (data2) => {
@@ -86,10 +96,7 @@ export default function Popup(props) {
   }
 
   const handleConfirm = () => {
-    const data = {
-
-    }
-    addSubject(data);
+    
   }
 
   // function to add subjects to the plan
@@ -123,9 +130,9 @@ export default function Popup(props) {
           <Box sx={{
             display: "flex"
           }}>
-            <CustomDropdown topic={"Select a Subject"} url={url1} onSelect={handleSelectedSubject} />
+            <CustomDropdown topic={"Select a Subject"} url={getALLSubjects} onSelect={handleSelectedSubject} />
 
-            <CustomDropdown topic={"Select a Grade"} url={url1} onSelect={handleSelectedGrade} />
+            {/* <CustomDropdown topic={"Select a Grade"} url={url1} onSelect={handleSelectedGrade} /> */}
           </Box>
 
 
@@ -144,7 +151,7 @@ export default function Popup(props) {
                 color: "#000",
               }
             }}>Cancel</Button>
-          <Button onClick={handleConfirm} variant="contained">Confirm</Button>
+          <Button onClick={addNewSubject} variant="contained">Confirm</Button>
         </DialogActions>
       </Dialog>
     </div>

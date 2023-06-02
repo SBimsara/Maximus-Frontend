@@ -41,34 +41,11 @@ import SubjectPopup from "./SubjectPopup";
 import { deleteDatabyId } from "../../services/deleteDataById";
 import { handleEditClick1 } from "../../utils/EditIconBtnFunctions";
 import { updateData } from "../../services/updateData";
+import axios from "axios";
 
 const url1 = "http://localhost:8080/api/v1/plan/getAllPlans";
 const url2 = "http://localhost:8080/api/v1/plan/getPlanById/";
 const url3 = "http://localhost:8080/api/v1/plan/updatePlan";
-
-//columns for the data grid
-const columns = [
-  { field: 'id', headerName: 'ID', width: 100 },
-  { field: 'subjectname', headerName: 'Subject', width: 300 },
-  { field: 'grade', headerName: 'Grade', width: 300 },
-  {
-    field: 'actions',
-    headerName: 'Actions',
-    width: 100,
-    renderCell: (cellValues) => {
-      return (
-        <CustomDeleteButton onClick={() => deleteSubjects(cellValues.id)} />
-      )
-    }
-  },
-]
-
-
-
-export async function deleteSubjects(subId) {
-  const result = await deleteDatabyId(url3, subId);
-  (result) ? console.log("successfull") : console.log("error");
-}
 
 
 
@@ -111,6 +88,32 @@ function Plans(props) {
   //   setRows(result.content);
   // }
 
+  //columns for the data grid
+const columns = [
+  { field: 'id', headerName: 'ID', width: 100 },
+  { field: 'subjectname', headerName: 'Subject', width: 300 },
+  { field: 'grade', headerName: 'Grade', width: 300 },
+  {
+    field: 'actions',
+    headerName: 'Actions',
+    width: 100,
+    renderCell: (cellValues) => {
+      return (
+        <CustomDeleteButton onClick={() => deleteSubjects(cellValues.id)} />
+      )
+    }
+  },
+]
+
+
+
+async function deleteSubjects(subId) {
+  const result = await axios.delete(`http://localhost:8080/api/v1/plan/removeSubject/plans/${pid}/subjects/${subId}`);
+  (result) ? console.log("successfull") : console.log("error");
+}
+
+
+
   // function to set data in the textfields
   async function fetchPlanDetails() {
     setisDisabled(false);
@@ -120,7 +123,9 @@ function Plans(props) {
     const result = await getDataById(url2, pid);
     console.log(result.content);
 
-    setRows(result.content.subjects)
+    setRows(result.content.subjects);
+    console.log(rows);
+    
     setpName(result.content.name);
     setpPrice(result.content.price);
     setpDiscount(result.content.discount);
@@ -306,7 +311,7 @@ function Plans(props) {
             >
               Add Subject
             </Button>
-            <SubjectPopup open={openPopup} onClose={setOpenPopup} />
+            <SubjectPopup pid={pid} open={openPopup} onClose={setOpenPopup} />
 
           </Box>
 
