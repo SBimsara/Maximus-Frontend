@@ -24,16 +24,25 @@ function AddLessonsPopup(props) {
   const [lessonName, setLessonName] = useState("");
   const [term, setTerm] = useState(-1);
 
-  const [isError, setIsError] = useState(false);
+  const [isNameError, setIsNameError] = useState(false);
+  const [isTermError, setIsTermError] = useState(false);
+
+  const [nameHelperText, setNameHelperText] = useState("helperText");
 
   const handleClose = () => {
-    setIsError(false);
+    setIsNameError(false);
+    setNameHelperText("helperText");
+    setIsTermError(false);
     onClose(false);
   };
 
   const handleConfirm = () => {
-    if (term == -1) {
-      setIsError(true);
+    if (lessonName === "") {
+      setIsNameError(true);
+      setNameHelperText("Field cannot be left empty");
+    }
+    if (term === -1) {
+      setIsTermError(true);
     }
   };
 
@@ -72,9 +81,19 @@ function AddLessonsPopup(props) {
               id="outlined-basic"
               label="Name"
               variant="outlined"
-              sx={{ mt: 2 }}
+              error={isNameError}
+              helperText={nameHelperText}
+              sx={{
+                mt: 2,
+                "& .MuiFormHelperText-root": {
+                  visibility:
+                    nameHelperText === "helperText" ? "hidden" : "visible",
+                  //height: nameHelperText ? "1rem" : 0,
+                  // marginTop: nameHelperText ? "0.5rem" : 0,
+                },
+              }}
             />
-            <FormControl fullWidth sx={{ mt: 2 }} error={isError}>
+            <FormControl fullWidth sx={{ mt: 0.8 }} error={isTermError}>
               <InputLabel id="demo-select-small-label">Term</InputLabel>
               <Select
                 labelId="demo-select-small-label"
