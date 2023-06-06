@@ -1,3 +1,4 @@
+/*
 import {useState, useEffect} from 'react';
 import './Subjects.css';
 import { saveData } from '../../services/saveData';
@@ -123,5 +124,170 @@ function App() {
 }
 
 export default App;
+*/
+//react imports
+import React from "react";
+import { useState, useEffect } from "react";
 
+//component impots
+import CustomEditButton from "../../components/ui/EditIconButton";
+import CustomDeleteButton from "../../components/ui/DeleteIconButton";
 
+//custom style imports
+import { PageContainer } from "../Plans/styles/AddPlans.styles";
+
+//data-grid imports
+import { DataGrid } from "@mui/x-data-grid";
+
+//mui imports
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+
+//api function imports
+import { getData } from "../../services/getData";
+
+//reusable function imports
+import { handleEditClick2 } from "../../utils/EditIconBtnFunctions";
+import { viewLessons } from "../../utils/ViewIconBtnFunctions";
+//icon imports
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+
+import SubjectPopup from "./SubjectPopup";
+
+import CustomViewButton from "../../components/ui/ViewIconButton";
+import { deleteDatabyId } from "../../services/deleteDataById";
+import EditSubjectPopup from "./EditSubjectPopup";
+import { getDataById } from "../../services/getDataById";
+
+//url for the saveData
+const getAllURL = "http://localhost:8080/api/v1/user/getSubjects";
+const saveURL = "http://localhost:8080/api/v1/user/saveSubject";
+const subjectDelURL = "http://localhost:8080/api/v1/user/deleteSubjectById/";
+
+const getURL = "http://localhost:8080/api/v1/user/getUserBySubjectId/";
+export async function deleteSubject(id) {
+  const result = await deleteDatabyId(subjectDelURL, id);
+  console.log(result);
+}
+
+function Subjects() {
+  const [rows, setRows] = useState([]);
+  const [openPopup, setOpenPopup] = useState(false);
+  const [openEditPopup, setOpenEditPopup] = useState(false);
+
+  const [subjectData, setSubjectData] = useState(null);
+
+  const [subjectId, setSubjectId] = useState(-1);
+
+  const [isClicked, setIsClicked] = useState(false);
+
+  //columns for the data-grid
+  const columns = [
+    { field: "id", headerName: "ID", width: 100 },
+    { field: "subjectname", headerName: "Subject", width: 200 },
+    { field: "grade", headerName: "Grade", width: 200 },
+
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 200,
+      renderCell: (cellValues) => {
+        return (
+          <>
+            <Box
+              sx={{
+                mr: 1,
+              }}
+            >
+              <CustomEditButton
+                onClick={() => {
+                  getSubjectById(cellValues.id);
+                }}
+              />
+            </Box>
+            <Box
+              sx={{
+                mr: 1,
+              }}
+            >
+              <CustomViewButton
+                onClick={() => {
+                  viewLessons();
+                }}
+              />
+            </Box>
+
+            <CustomDeleteButton
+              onClick={() => {
+                deleteSubject(cellValues.id);
+              }}
+            />
+          </>
+        );
+      },
+    },
+  ];
+
+  async function getSubjectById(sid) {
+    try {
+      const data = await getDataById(getURL, sid);
+      setSubjectData(data);
+      console.log(data);
+      handleOpenEditPopup();
+    } catch (error) {
+      console.log(error);
+    }
+    // console.log(result);
+  }
+
+  const handleOpenEditPopup = () => {
+    setOpenEditPopup(true);
+  };
+
+  const handleSubjectPopup = () => {
+    setOpenPopup(true);
+  };
+
+  useEffect(() => {
+    getSubjects();
+  }, []);
+
+  async function getSubjects() {
+    const result = await getData(getAllURL);
+    console.log(result);
+    setRows(result);
+  }
+
+  return (
+    <>
+      <PageContainer>
+        <Box sx={{ mb: 2 }}>
+          <Button
+            variant="outlined"
+            startIcon={<AddCircleIcon />}
+            onClick={handleSubjectPopup}
+          >
+            Add Subject
+          </Button>
+        </Box>
+        {/* <PlanPopup open={openPopup} onClose={setOpenPopup}/> */}
+        <SubjectPopup open={openPopup} onClose={setOpenPopup} />
+        <EditSubjectPopup
+          data={subjectData}
+          open={openEditPopup}
+          onClose={setOpenEditPopup}
+        />
+        <div
+          style={{
+            height: 400,
+            width: "90%",
+          }}
+        >
+          <DataGrid rows={rows} columns={columns} />
+        </div>
+      </PageContainer>
+    </>
+  );
+}
+
+export default Subjects;
