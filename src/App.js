@@ -12,9 +12,9 @@ import ErrorPage from "./routes/ErrorPage";
 import AddPlans from "./routes/Plans/AddPlans";
 import PlanDetails from "./routes/Plans/PlanDetails";
 
-import './App.css';
-import Sidebar  from "./components/Sidebar";
-import Navbar  from "./components/Navbar";
+import "./App.css";
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Popup from "./routes/Plans/Popup";
 
@@ -26,42 +26,37 @@ import CustomDropdown from "./components/form/CustomDropdown";
 
 import PlanPopup from "./routes/Plans/PlanPopup";
 import ActionAlerts from "./components/ui/actionAlerts";
-
-
-
-
-
-
-
-
+import AddLessonsPopup from "./routes/Lessons/AddLessonspopup";
 
 function App() {
-  
   return (
-   <>
-        {/* <DropdownMenu/> */}
-        <Sidebar/>
-        {/* <Navbar/> */}
-        <Routes>
-          <Route path="/" element={<Dashboard/>} />
-          <Route path="/questions" element={<Questions/>}/>
-          <Route path="/subjects" element={<Subjects/>}/>
-          <Route path="/lessons" element={<Lessons/>}/>
-          <Route path="/addPlans" element={<AddPlans/>}/>
-          <Route path="/settings" element={<Settings/>}/>
-          <Route path="/*" element={<ErrorPage/>}/>
-          <Route path="/planDe" element={<PlanDetails/>}/>
-          
-        </Routes>
-        {/* <Popup/> */}
-        {/* <PageLayout/> */}
-        {/* <CustomDropdown/> */}
+    <>
+      {/* <DropdownMenu/> */}
+      {/* <Navbar/> */}
 
-        {/* <CustomDropdown/> */}
-        {/* {<AddPlans/>} */}
-        {/* <PlanPopup/> */}
-        {/* <ActionAlerts/> */}
-        </> 
+      <Sidebar />
+
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/questions" element={<Questions />} />
+        <Route path="/subjects" element={<Subjects />} />
+        <Route path="/lessons" element={<Lessons />} />
+        <Route path="/addPlans" element={<AddPlans />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/*" element={<ErrorPage />} />
+        <Route path="/planDe" element={<PlanDetails />} />
+      </Routes>
+      {/* <AddLessonsPopup /> */}
+
+      {/* <Popup/> */}
+      {/* <PageLayout/> */}
+      {/* <CustomDropdown/> */}
+
+      {/* <CustomDropdown/> */}
+      {/* {<AddPlans/>} */}
+      {/* <PlanPopup/> */}
+      {/* <ActionAlerts/> */}
+    </>
   );
 }
 
