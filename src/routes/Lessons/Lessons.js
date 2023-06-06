@@ -125,15 +125,21 @@ import CustomEditButton from "../../components/ui/EditIconButton";
 import { PageContainer } from "../Plans/styles/AddPlans.styles";
 import { getData } from "../../services/getData";
 import AddLessonsPopup from "./AddLessonspopup";
+import { getDataById } from "../../services/getDataById";
+
+const getURL = "http://localhost:8080/api/v1/user/getLessons";
+const getDataURL = "http://localhost:8080/api/v1/user/getLessonByLessonId/";
 
 function Lessons() {
   const [rows, setRows] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
+  const [data, setData] = useState(null);
 
   //columns for the data-grid
   const columns = [
     { field: "id", headerName: "ID", width: 100 },
     { field: "lessonName", headerName: "Lesson", width: 200 },
+    { field: "term", headerName: "Term", width: 200 },
     { field: "subjectname", headerName: "Subject", width: 200 },
 
     {
@@ -148,7 +154,11 @@ function Lessons() {
                 mr: 1,
               }}
             >
-              <CustomEditButton onClick={() => {}} />
+              <CustomEditButton
+                onClick={() => {
+                  handleEditLessonClick(cellValues.id);
+                }}
+              />
             </Box>
             <Box
               sx={{
@@ -163,8 +173,24 @@ function Lessons() {
     },
   ];
 
-  useEffect(() => {}, []);
+  const handleEditLessonClick = (lessonId) => {
+    getLessonById(lessonId);
+    setOpenPopup(true);
+  };
 
+  async function getLessonById(lessonId) {
+    const result = await getDataById(getDataURL, lessonId);
+    setData(result);
+  }
+
+  useEffect(() => {
+    getLessons();
+  }, []);
+
+  async function getLessons() {
+    const result = await getData(getURL);
+    setRows(result);
+  }
   const handleAddLessonClick = () => {
     setOpenPopup(true);
   };
@@ -181,7 +207,7 @@ function Lessons() {
             Add Lesson
           </Button>
         </Box>
-        <AddLessonsPopup open={openPopup} onClose={setOpenPopup} />
+        <AddLessonsPopup data={data} open={openPopup} onClose={setOpenPopup} />
         <div
           style={{
             height: 400,
