@@ -126,9 +126,11 @@ import { PageContainer } from "../Plans/styles/AddPlans.styles";
 import { getData } from "../../services/getData";
 import AddLessonsPopup from "./AddLessonspopup";
 import { getDataById } from "../../services/getDataById";
+import { deleteDatabyId } from "../../services/deleteDataById";
 
 const getURL = "http://localhost:8080/api/v1/user/getLessons";
 const getDataURL = "http://localhost:8080/api/v1/user/getLessonByLessonId/";
+const deleteURL = "";
 
 function Lessons() {
   const [rows, setRows] = useState([]);
@@ -166,7 +168,7 @@ function Lessons() {
               }}
             ></Box>
 
-            <CustomDeleteButton onClick={() => {}} />
+            <CustomDeleteButton onClick={() => {deleteDatabyId(deleteURL,cellValues.id)}} />
           </>
         );
       },

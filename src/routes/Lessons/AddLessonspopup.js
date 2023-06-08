@@ -18,8 +18,10 @@ import Select from "@mui/material/Select";
 
 import CustomCancelButton from "../../components/form/CancelButton";
 import { saveData } from "../../services/saveData";
+import { updateData } from "../../services/updateData";
 
 const saveURL = "http://localhost:8080/api/v1/user/saveLesson";
+const updateURL = "http://localhost:8080/api/v1/user/updateLesson";
 
 function AddLessonsPopup(props) {
   const { data, open, onClose } = props;
@@ -74,17 +76,33 @@ function AddLessonsPopup(props) {
 
     if (isNameError && isTermError) {
       console.log("access");
-      const data = {
-        lessonName: lessonName,
-        term: term,
-      };
-      saveLesson(data);
-      handleClose();
+
+      if (isEdit) {
+        const LessonData = {
+          id: data.id,
+          lessonName: lessonName,
+          term: term,
+        };
+        updateLesson(LessonData);
+        handleClose();
+      } else if (!isEdit) {
+        const LessonData = {
+          lessonName: lessonName,
+          term: term,
+        };
+        saveLesson(LessonData);
+        handleClose();
+      }
     }
   };
 
   async function saveLesson(data) {
     const result = await saveData(saveURL, data);
+    console.log(result);
+  }
+
+  async function updateLesson(data) {
+    const result = await updateData(saveURL, data);
     console.log(result);
   }
 
