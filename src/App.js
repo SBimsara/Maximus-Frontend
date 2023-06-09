@@ -39,14 +39,14 @@ function App() {
   return (
     <>
       {/* <DropdownMenu/> */}
-      {/*{<Sidebar/>}*/}
-      {/* {<Navbar />} */}
+      {<Sidebar/>}
+      {<Navbar />} 
       <Routes>
-        {/*<Route path="/" element={<Dashboard/>} />
+        <Route path="/" element={<Dashboard/>} />
         <Route path="/questions" element={<Questions/>}/>
           <Route path="/subjects" element={<Subjects/>}/>
           <Route path="/addPlans" element={<AddPlans/>}/>
-  <Route path="/settings" element={<Settings/>}/>*/}
+  <Route path="/settings" element={<Settings/>}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/passwordResetForm" element={<PasswordResetForm />}/>
 <Route path="/signup" element={<Signup />} />

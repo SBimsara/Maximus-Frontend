@@ -7,6 +7,9 @@ import { useState } from 'react';
 import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 // Importing a function named 'saveData' from a file named 'saveData.js' in '../services' directory.
 import { saveData } from '../../services/saveData';
+import IconButton from '@mui/material/IconButton';
+
+
 
 
 
@@ -17,8 +20,11 @@ const saveURL = "http://localhost:8080/api/v1/admin/saveDetails";
 function Signup() {
     const paperStyle = { padding: '30px 20px', width: 600, margin: "20px auto", borderRadius: 20 }
     const headerStyle = { margin: 0, color: '#1976d2', fontWeight: 'bold' }
+   
+  
 
-    // State variables.
+
+// State variables.
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [gender, setGender] = useState("");
@@ -41,7 +47,7 @@ function Signup() {
     const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [error, setError] = useState('');
-
+    const [showPassword, setShowPassword] = useState(false);
 
 
     const [errors, setErrors] = useState({
@@ -73,6 +79,7 @@ function Signup() {
         }
     }
 
+
     const handleLastNameChange = (event) => {
         const vall = event.target.value;
         setLastName(vall);
@@ -81,7 +88,7 @@ function Signup() {
         } else if (!/^[a-zA-Z]+$/.test(vall)) {
             setErrors({ ...errors, lastName: 'Last name should contain only alphabetic letters' });
         } else if (vall.length > 30) {
-            setErrors({ ...errors, lastName: 'First name should not exceed 30 characters' });
+            setErrors({ ...errors, lastName: 'Last name should not exceed 30 characters' });
         } else {
             setErrors({ ...errors, lastName: '' });
         }
@@ -128,12 +135,12 @@ function Signup() {
         if (!valn) {
             setErrors({ ...errors, nic: 'Please enter your Nic number' });
         }
-        else if (!/^\d{9}[V\d]$/.test(valn)) {
+        else if (!/^\d{9}[Vv]$|^\d{12}$/.test(valn)) {
             setErrors({ ...errors, nic: 'Please enter a valid NIC number' });
         }
         else {
-            setErrors({ ...errors, nic: '' });
-        }
+                setErrors({ ...errors, nic: '' });
+          }
     }
 
     const handleContactNumberChange = (event) => {
@@ -147,8 +154,8 @@ function Signup() {
 
         }
         else {
-            setErrors({ ...errors, contactNumber: '' });
-        }
+                setErrors({ ...errors, contactNumber: '' });
+          }
     }
 
 
@@ -169,15 +176,17 @@ function Signup() {
             setErrors({ ...errors, email: 'Please enter a valid email address' });
         }
         else {
-            setErrors({ ...errors, email: '' });
-        }
+                setErrors({ ...errors, email: '' });
+              }
+          }
 
-    }
+    
 
 
     const handleUsernameChange = (event) => {
         const valu = event.target.value;
         setUsername(valu);
+        
         if (!valu) {
             setErrors({ ...errors, username: 'Please enter a username' });
         }
@@ -189,8 +198,9 @@ function Signup() {
         }
         else {
             setErrors({ ...errors, username: '' });
-        }
+              
     }
+}
 
     const handlePasswordChange = (event) => {
         const valp = event.target.value;
@@ -297,10 +307,10 @@ function Signup() {
         setErrors({ firstName: firstNameError, lastName: lastNameError, gender: genderError, dateOfBirth: dateOfBirthError, nic: nicError, contactNumber: contactNumberError, email: emailError, username: usernameError, password: passwordError, confirmPassword: confirmPasswordError });
 
         // If there are no errors, submit the form.
-        if (!firstNameError && !lastNameError && !genderError && !dateOfBirthError && !nicError && !contactNumberError && !email && !usernameError && !passwordError && !confirmPasswordError) {
+        if (!firstNameError && !lastNameError && !genderError && !dateOfBirthError && !nicError && !contactNumberError && !emailError && !usernameError && !passwordError && !confirmPasswordError) {
             try {
                 // Send form data to server using fetch.
-                const response = await fetch('/submit-form', {
+                const response = await fetch('/saveDetails', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ firstName, lastName, gender, dateOfBirth, nic, contactNumber, email, username, password, confirmPassword }),
@@ -317,7 +327,7 @@ function Signup() {
             }
 
         }
-    }
+    };
 
     const handleReset = () => {
         // Reset the form by setting `isSubmitted` to false
@@ -427,6 +437,11 @@ function Signup() {
         setIsConfirmPasswordFocused(false);
     };
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+      };
+    
+
     const handleFocusConfirmPassword = () => {
         setIsFirstNameFocused(false);
         setIsLastNameFocused(false);
@@ -453,38 +468,44 @@ function Signup() {
         setIsConfirmPasswordFocused(false);
     };
 
+    
+
     // This function handles saving the user's signup information.
-    const handleSaveSignup = () => {
+    const handleSaveSignup = async () => {
         // Create an object with the user's information.
         const data = {
-            "id": 1,
-            "firstName": firstName,
-            "lastName": lastName,
-            "gender": gender,
-            "dateOfBirth": dateOfBirth,
-            "nic": nic,
-            "contactNumber": contactNumber,
-            "email": email,
-            "username": username,
-            "password": password,
-            "confirmPassword": confirmPassword,
-            "isMainAdmin": isMainAdmin
+          "firstName": firstName,
+          "lastName": lastName,
+          "gender": gender,
+          "dateOfBirth": dateOfBirth,
+          "nic": nic,
+          "contactNumber": contactNumber,
+          "email": email,
+          "username": username,
+          "password": password,
+          "confirmPassword": confirmPassword,
+          "isMainAdmin": isMainAdmin
+        };
+      
+        try {
+          // Call the Signup function with the data object.
+          const response = await Signup(data);
+          console.log(response);
+          // Set the isSubmitted state to true or perform any other actions upon successful signup.
+          setIsSubmitted(true);
+        } catch (error) {
+          console.log(error);
+          // Handle any errors that occur during signup.
         }
-        // Call the Signup function with the data object and set the isSubmitted state to true.
-        Signup(data);
-        setIsSubmitted(true);
-    }
-
-    // This function sends a POST request to the server to save the data.
-    async function Signup(data) {
-        const reply = await saveData(saveURL, data);
-        console.log(reply);
-    }
-
-    // This useEffect hook calls the Signup function when the component mounts.
-    useEffect(() => {
-        Signup();
-    }, [])
+      };
+      
+      // This function sends a POST request to the server to save the data.
+      async function Signup(data) {
+        const response = await saveData(saveURL, data);
+        return response;
+      }
+      
+      
 
 
     return (
@@ -508,7 +529,8 @@ function Signup() {
                                     <Typography variant='caption' gutterBottom color='#3f51b5'>Please fill this form to create an account !</Typography>
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <TextField fullWidth label='First Name' placeholder="Enter first name" error={Boolean(errors.firstName)}
+                                    <TextField fullWidth label='First Name' placeholder="Enter first name"
+                                    error={Boolean(errors.firstName)}
                                         helperText={errors.firstName}
                                         FormHelperTextProps={{
                                             style: errors.firstName ? { color: '#ff0000' } : {}
@@ -526,7 +548,8 @@ function Signup() {
                                                 color: errors.firstName ? (isFirstNameFocused ? '#ff0000' : 'rgba(0, 0, 0, 0.54)') : (isFirstNameFocused ? '#1976d2' : 'rgba(0, 0, 0, 0.54)')
                                             },
                                         }}
-                                        onChange={handleFirstNameChange} />
+                                        onChange={handleFirstNameChange}
+                                         />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField fullWidth label='Last Name' placeholder="Enter last name" style={{ marginTop: '-0.5px' }} error={Boolean(errors.lastName)}
@@ -550,10 +573,10 @@ function Signup() {
                                         }} onChange={handleLastNameChange} />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <FormControl component="fieldset" fullWidth>
+                                    <FormControl component="fieldset" fullWidth >
                                         <FormLabel component="legend">Gender</FormLabel>
                                         <RadioGroup aria-label="gender" name="gender" value={gender}
-                                            onChange={handleGenderChange}>
+                                            onChange={handleGenderChange} >
                                             <Grid container direction="row">
                                                 <Grid item>
                                                     <FormControlLabel value="female" control={<Radio />} label="Female" />
@@ -568,7 +591,7 @@ function Signup() {
                                                 {errors.gender}
                                             </Typography>)}
                                     </FormControl>&nbsp;
-                                    <TextField fullWidth label='NIC Number' placeholder="Enter NIC Number" error={Boolean(errors.nic)}
+                                    <TextField fullWidth label='NIC Number' placeholder="Enter NIC Number" autoComplete='off' error={Boolean(errors.nic)}
                                         helperText={errors.nic}
                                         FormHelperTextProps={{
                                             style: errors.nic ? { color: '#ff0000' } : {}
@@ -606,7 +629,7 @@ function Signup() {
                                             },
 
                                         }} onChange={handleEmailChange} />&nbsp;
-                                    <TextField fullWidth label='Password' placeholder="Enter password" error={Boolean(errors.password)}
+                                    <TextField fullWidth label='Password' placeholder="Enter password"type={showPassword ? 'text' : 'password'} autoComplete='off' error={Boolean(errors.password)}
                                         helperText={errors.password}
                                         FormHelperTextProps={{
                                             style: errors.password ? { color: '#ff0000' } : {}
@@ -618,6 +641,10 @@ function Signup() {
                                             },
                                             onFocus: handleFocusPassword,
                                             onBlur: handleBlur,
+                                            endAdornment: (
+                                                <IconButton edge="end" onClick={togglePasswordVisibility}>
+                                                </IconButton>
+                                              ),
                                         }}
                                         InputLabelProps={{
                                             style: {
@@ -627,7 +654,7 @@ function Signup() {
                                         }} onChange={handlePasswordChange} />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <TextField fullWidth label='Date of Birth' placeholder="YYYY-MM-DD   eg:1999-02-13" style={{ marginBottom: '10px', marginTop: '7px' }} error={Boolean(errors.dateOfBirth)}
+                                    <TextField fullWidth label='Date of Birth' placeholder="YYYY-MM-DD   eg:1999-02-13" style={{ marginBottom: '10px', marginTop: '7px' }} autoComplete='off' error={Boolean(errors.dateOfBirth)}
                                         helperText={errors.dateOfBirth}
                                         FormHelperTextProps={{
                                             style: errors.dateOfBirth ? { color: '#ff0000' } : {}
@@ -663,7 +690,7 @@ function Signup() {
                                                 color: errors.contactNumber ? (isContactNumberFocused ? '#ff0000' : 'rgba(0, 0, 0, 0.54)') : (isContactNumberFocused ? '#1976d2' : 'rgba(0, 0, 0, 0.54)')
                                             },
                                         }} onChange={handleContactNumberChange} />&nbsp;
-                                    <TextField fullWidth label='Username' placeholder="Enter username" error={Boolean(errors.username)}
+                                    <TextField fullWidth label='Username' placeholder="Enter username" autoComplete='off' error={Boolean(errors.username)}
                                         helperText={errors.username}
                                         FormHelperTextProps={{
                                             style: errors.username ? { color: '#ff0000' } : {}
@@ -671,7 +698,7 @@ function Signup() {
                                         InputProps={{
                                             style: {
                                                 color: 'initial',
-                                                borderBottomColor: errors.username ? '#ff0000' : 'initial',
+                                                borderBottomColor: errors.username? '#ff0000' : 'initial',
                                             },
                                             onFocus: handleFocusUsername,
                                             onBlur: handleBlur,
@@ -681,7 +708,7 @@ function Signup() {
                                                 color: errors.username ? (isUsernameFocused ? '#ff0000' : 'rgba(0, 0, 0, 0.54)') : (isUsernameFocused ? '#1976d2' : 'rgba(0, 0, 0, 0.54)')
                                             },
                                         }} onChange={handleUsernameChange} />&nbsp;
-                                    <TextField fullWidth label='Confirm Password' placeholder="Enter password again" error={Boolean(errors.confirmPassword)}
+                                    <TextField fullWidth label='Confirm Password' placeholder="Enter password again"type={showPassword ? 'text' : 'password'} autoComplete='off' error={Boolean(errors.confirmPassword)}
                                         helperText={errors.confirmPassword}
                                         FormHelperTextProps={{
                                             style: errors.confirmPassword ? { color: '#ff0000' } : {}
@@ -693,6 +720,10 @@ function Signup() {
                                             },
                                             onFocus: handleFocusConfirmPassword,
                                             onBlur: handleBlur,
+                                            endAdornment: (
+                                                <IconButton edge="end" onClick={togglePasswordVisibility}>
+                                                </IconButton>
+                                              ),
                                         }}
                                         InputLabelProps={{
                                             style: {
