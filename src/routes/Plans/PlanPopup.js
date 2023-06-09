@@ -9,16 +9,36 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
+import React from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Box from "@mui/material/Box";
 
 import CustomCancelButton from "../../components/form/CancelButton";
+import CustomCancelButton from "../../components/form/CancelButton";
 
+import { useState, useEffect } from "react";
+import { saveData } from "../../services/saveData";
 import { useState, useEffect } from "react";
 import { saveData } from "../../services/saveData";
 
 //url for the saveData
 const saveURL = "http://localhost:8080/api/v1/plan/savePlan";
+const saveURL = "http://localhost:8080/api/v1/plan/savePlan";
 
 export default function PlanPopup(props) {
+  const { open, onClose } = props;
+
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [discount, setDiscount] = useState("");
   const { open, onClose } = props;
 
   const [name, setName] = useState("");
@@ -54,6 +74,8 @@ export default function PlanPopup(props) {
 
     //change price in use state
     setPrice(valp);
+  };
+  const handleDiscountChange = (event) => {
   };
   const handleDiscountChange = (event) => {
     const vald = event.target.value;
@@ -126,8 +148,19 @@ export default function PlanPopup(props) {
             }}
           >
             <CustomCancelButton onClick={handleClose} />
+        <DialogTitle sx={{ display: "flex", alignItems: "center" }}>
+          Add Plan
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <CustomCancelButton onClick={handleClose} />
           </Box>
         </DialogTitle>
+
 
         <DialogContent>
           <DialogContentText>

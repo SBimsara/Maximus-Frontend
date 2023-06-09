@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { BsNewspaper } from "react-icons/bs";
 
+import { planId } from "./AddPlans";
+
 //Material UI imports
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -21,7 +23,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { getData } from "../../services/getData";
 import { getDataById } from "../../services/getDataById.js";
 
-//import { pid } from "./AddPlans";
+import { pid } from "./AddPlans";
 
 // import "./styles/Plans.style.css";
 import CustomDeleteButton from "../../components/ui/DeleteIconButton";
@@ -39,19 +41,37 @@ import SubjectPopup from "./SubjectPopup";
 import { deleteDatabyId } from "../../services/deleteDataById";
 import { handleEditClick1 } from "../../utils/EditIconBtnFunctions";
 import { updateData } from "../../services/updateData";
-import axios from "axios";
 
 const url1 = "http://localhost:8080/api/v1/plan/getAllPlans";
 const url2 = "http://localhost:8080/api/v1/plan/getPlanById/";
 const url3 = "http://localhost:8080/api/v1/plan/updatePlan";
 
+//columns for the data grid
+const columns = [
+  { field: "id", headerName: "ID", width: 100 },
+  { field: "name", headerName: "Subject", width: 300 },
+  { field: "address", headerName: "Grade", width: 300 },
+  {
+    field: "actions",
+    headerName: "Actions",
+    width: 100,
+    renderCell: (cellValues) => {
+      return (
+        <CustomDeleteButton onClick={() => deleteSubjects(cellValues.id)} />
+      );
+    },
+  },
+];
+
+export async function deleteSubjects(subId) {
+  const result = await deleteDatabyId(url3, subId);
+  result ? console.log("successfull") : console.log("error");
+}
+
 function Plans(props) {
-  const { pid } = props;
   const [rows, setRows] = useState([]);
 
   const [plans, setPlans] = useState([]);
-
-  //use states for the mui textfield values
   const [pName, setpName] = useState("");
   const [pPrice, setpPrice] = useState("");
   const [pDiscount, setpDiscount] = useState("");
@@ -76,9 +96,6 @@ function Plans(props) {
 
   // use state to control the disabled state of mui button(reset)
   const [isResetDisabled, setIsResetDisabled] = useState(true);
-
-  //use state for datagrid refresh
-  const [refreshGrid, setRefreshGrid] = useState(true);
 
   //functions to get data for the data-grid
   // async function fetchSubjects() {
@@ -117,19 +134,14 @@ function Plans(props) {
 
     console.log(pid);
     const result = await getDataById(url2, pid);
-    console.log(result.content);
+    console.log(result);
+    setpName(result.name);
+    setpPrice(result.price);
+    setpDiscount(result.discount);
 
-    setRows(result.content.subjects);
-    console.log(rows);
-
-    setpName(result.content.name);
-    setpPrice(result.content.price);
-    setpDiscount(result.content.discount);
-
-    setSavedPName(result.content.name);
-    setSavedPPrice(result.content.price);
-    setSavedPDiscount(result.content.discount);
-    setRefreshGrid(false);
+    setSavedPName(result.name);
+    setSavedPPrice(result.price);
+    setSavedPDiscount(result.discount);
   }
 
   //function to get data for the dropdown button
@@ -147,9 +159,9 @@ function Plans(props) {
     //fetchSubjects();
     //    fetchPlans();
 
-    //updatePlan();
+    updateData();
     fetchPlanDetails();
-  }, [refreshGrid]);
+  }, []);
 
   const handleAddSubjectsClick = () => {
     setOpenPopup(true);
@@ -278,7 +290,9 @@ function Plans(props) {
               Reset
             </Button>
           </PlanButtonContainer>
+        </PlanContainer>
 
+        <DataGridContainer>
           <Box
             sx={{
               ml: 98,
@@ -291,13 +305,12 @@ function Plans(props) {
               startIcon={<AddCircleIcon />}
               sx={{
                 mt: 1,
-                ml: 4,
               }}
               onClick={handleAddSubjectsClick}
             >
               Add Subject
             </Button>
-            <SubjectPopup pid={pid} open={openPopup} onClose={setOpenPopup} />
+            <Popup open={openPopup} onClose={setOpenPopup} />
           </Box>
 
           <div
@@ -309,16 +322,13 @@ function Plans(props) {
             <DataGrid
               rows={rows}
               columns={columns}
-              sx={{
-                ml: 3,
-              }}
 
               // pageSize={3}
               // rowsPerPageOptions={[3]}
               // checkboxSelection
             />
           </div>
-        </PlanContainer>
+        </DataGridContainer>
       </PageContainer>
     </>
   );
