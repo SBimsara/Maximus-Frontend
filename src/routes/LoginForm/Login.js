@@ -8,57 +8,57 @@ import Button from "@mui/material/Button";
 import { Link } from 'react-router-dom';
 // Importing custom styles.
 import './Styles/LoginStyles.css';
-import axios from 'axios';
-import { useState } from 'react';
 import Dashboard from "../Dashboard";
+import { useState } from 'react';
 
 
 function Login() {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
   // Setting up paper and button styles.
   const paperStyle = { padding: 20, height: '60vh', minwidth: '300px', width: '70%', maxwidth: '500px', margin: "20px auto", borderRadius: 20 };
   const btnStyle = { margin: '8px 0' };
 
-  const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [usernameError, setUsernameError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false); // State to track login status
-
-  const handleLogin = async () => {
-
-    // Resetting any previous error messages
-    setUsernameError('');
-    setPasswordError('');
-
-    // Validating the username and password
-    if (!username) {
-      setUsernameError('Please enter a username');
-      return;
-    }
-
-    if (!password) {
-      setPasswordError('Please enter a password');
-      return;
-    }
-
-    // Create an object with the user's information.
-    const data = {
-      "username": username,
-      "password": password,
-    };
+  // ...
+const handleLogin = () => {
+  // Perform validation if needed
+  if (username === '' || password === '') {
+    setErrorMessage('Please enter username and password');
+    return;
   }
 
-  async function loginAPI() {
-  try {
-    const response = await axios.get('http://localhost:8080/api/v1/admin/login');
-    console.log(response); // Do something with the response
-     // Assuming the login API returns a success status
-     setLoggedIn(true); // Set the login status to true
-  } catch (error) {
-    console.error(error); // Handle any errors that occurred during the API call
-  }
+  // Make the API request
+  fetch("http://localhost:8080/api/v1/admin/login", {
+    method: 'POST',
+    body: JSON.stringify({ username, password }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.text())  // Read the response as text
+    .then(data => {
+      console.log(data); // Add this line to inspect the response data
+    
+      // Handle the response from the backend
+      if (data.trim() === 'Login successful!') {
+        console.log('Login successful!');
+        setErrorMessage('Login successful!');
+      } else {
+        setErrorMessage('Invalid username or password');
+      }
+    })
+    .catch(error => {
+      console.error('Failed to login:', error);
+      setErrorMessage('An error occurred during login');
+    });
 };
+// ...
 
+    
+  
   // Rendering Login component.
   return (
     <div style={{ background: '#D0E7F8' }}>
@@ -77,12 +77,17 @@ function Login() {
                 <Typography variant="h5" gutterBottom>
                   Already have an account?
                 </Typography>
+                <form onSubmit={e => e.preventDefault()}>
                 {/*Username and password text fields. */}
-                <TextField label='Username' placeholder="Enter username" fullWidth required={true} style={{ marginTop: 8 }} />&nbsp;
-                <TextField label='Password' placeholder="Enter password" type='password' fullWidth required={true} style={{ marginTop: 8 }} />&nbsp;
+                <TextField label='Username' placeholder="Enter username" fullWidth required={true} style={{ marginTop: 8 }}autoComplete="username"value={username}
+                    onChange={e => setUsername(e.target.value)} />&nbsp;
+                <TextField label='Password' placeholder="Enter password" type='password' fullWidth required={true} style={{ marginTop: 8 }} autoComplete="current-password"value={password}
+                    onChange={e => setPassword(e.target.value)}/>&nbsp;
                 {/* Sign in button */}
-                <Button type='Submit' color='primary' variant="contained" style={btnStyle} fullWidth onClick={handleLogin}>Sign in</Button> {loggedIn && <Dashboard/>} {/* Render the Dashboard component if logged in */} &nbsp;
+                <Button type='Submit' color='primary' variant="contained" style={btnStyle} fullWidth onClick={handleLogin}>Sign in</Button>&nbsp;
                 {/* Forgot password link. */}
+                </form>
+                {errorMessage && <Typography>{errorMessage}</Typography>}
                 <Typography>
                   <Link to="/PasswordResetForm" className="login-link">Forgot Password?</Link>
                 </Typography>&nbsp;

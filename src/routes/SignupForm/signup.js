@@ -498,7 +498,6 @@ function Signup() {
           // Handle any errors that occur during signup.
         }
       };
-      
       // This function sends a POST request to the server to save the data.
       async function Signup(data) {
         const response = await saveData(saveURL, data);
