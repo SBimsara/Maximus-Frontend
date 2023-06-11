@@ -5,7 +5,7 @@ export default function Navbar1(props) {
   return (
     <div className="box">
        <div className="title">
-        <lebal><b>{props.text}</b></lebal>
+        <label><b>{props.text}</b></label>
        </div>
     </div>
 

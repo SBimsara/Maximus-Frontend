@@ -1,10 +1,11 @@
 import Questions from "./routes/Questions";
 import Dashboard from "./routes/Dashboard/Dashboard";
 import Subjects from "./routes/Subjects";
-import Plans from "./routes/Plans/Plans";   
+// import Plans from "./routes/Plans/Plans";   
+//import PlanDetails from "./routes/Plans/PlanDetails";
 import ErrorPage from "./routes/ErrorPage";
-
-
+import AddPlans from "./routes/Plans/AddPlans";
+import PlanDetails from "./routes/Plans/PlanDetails";
 
 import './App.css';
 import Navbar1 from "./components/Navbar1";
@@ -16,6 +17,12 @@ import Popup from "./routes/Plans/Popup";
 import PageLayout from "./routes/PageLayout";
 import Settings from "./routes/Settings";
 import DropdownMenu from "./components/ui/DropdownMenu";
+
+import CustomDropdown from "./components/form/CustomDropdown";
+
+import PlanPopup from "./routes/Plans/PlanPopup";
+import ActionAlerts from "./components/ui/actionAlerts";
+
 
 
 
@@ -37,13 +44,21 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/questions" element={<Questions/>}/>
           <Route path="/subjects" element={<Subjects/>}/>
-          <Route path="/plans" element={<Plans/>}/>
+          <Route path="/addPlans" element={<AddPlans/>}/>
           <Route path="/settings" element={<Settings/>}/>
           <Route path="/*" element={<ErrorPage/>}/>
+          <Route path="/planDe" element={<PlanDetails/>}/>
+          
         </Routes>
         {/* <Popup/> */}
         {/* <PageLayout/> */}
         
+        {/* <CustomDropdown/> */}
+
+        {/* <CustomDropdown/> */}
+        {/* {<AddPlans/>} */}
+        {/* <PlanPopup/> */}
+        {/* <ActionAlerts/> */}
         </> 
   );
 }

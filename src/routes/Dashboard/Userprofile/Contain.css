@@ -39,10 +39,10 @@
     }
 
    .ProfilePic{
-    height: 100px;
+    height: 110px;
     width:auto;
-    object-fit: cover;
-    border-radius: 50%;
+    object-fit:cover;
+    border-radius: 30%;
     margin-top: 10px;
 
    }
@@ -77,3 +77,10 @@
     margin-top: 25px;
     
   }
+
+.massageBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    }

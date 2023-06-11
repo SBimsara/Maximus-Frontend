@@ -3,7 +3,7 @@ import { TableContainer,Table,TableBody,TableRow,TableCell,Paper, TableHead} fro
 export const Graph = () => {
   return (
     <TableContainer component={Paper} sx={{maxHeight:'400px',marginTop:'30px'}}  >
-      <Table aria-aria-label="admin data" stickyHeader>
+      <Table aria-label="admin data" stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell><b>Most recent login</b></TableCell>
