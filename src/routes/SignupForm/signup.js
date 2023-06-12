@@ -512,9 +512,7 @@ function Signup() {
             {isSubmitted ? (
                 <div style={{ background: '#D0E7F8', padding: '350px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                     <Typography variant="h5" align="center">Thank you for your interest in becoming a member! We will review your application and inform you of your eligibility.</Typography>&nbsp;
-                    <Button variant="contained" color="primary" onClick={handleReset}>
-                        Go back
-                    </Button>
+                    
                 </div>
 
 
