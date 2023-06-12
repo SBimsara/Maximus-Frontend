@@ -22,8 +22,8 @@ export default function PlanPopup(props) {
   const { open, onClose } = props;
 
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [discount, setDiscount] = useState("");
+  const [price, setPrice] = useState(null);
+  const [discount, setDiscount] = useState(null);
 
   const [nameHelperText, setNameHelperText] = useState("");
   const [priceHelperText, setPriceHelperText] = useState("");
@@ -45,7 +45,6 @@ export default function PlanPopup(props) {
 
   const handleNameChange = (event) => {
     const valn = event.target.value;
-
     setName(valn);
   };
 
@@ -60,54 +59,97 @@ export default function PlanPopup(props) {
     setDiscount(vald);
   };
 
-  const handleConfirmClick = () => {
-    setIsNameError(false);
-    setIsPriceError(false);
-    setIsDiscountError(false);
-
-    setNameHelperText("");
-    setPriceHelperText("");
-    setDiscountHelperText("");
-
+  const nameValidation = () => {
     if (name === "") {
       setIsNameError(true);
       setNameHelperText("This field is required");
+      return false; // name is not error free
+    } else {
+      setIsNameError(false);
+      setNameHelperText("");
+      return true; //name is error free
     }
-    if (price === "") {
+  };
+
+  const priceValidation = () => {
+    if (price === null) {
       setIsPriceError(true);
       setPriceHelperText("This field is required");
+      return false;
     } else if (/[a-zA-Z]/.test(price)) {
       setIsPriceError(true);
-      setPriceHelperText("Please restrict your input to Integers");
+      setPriceHelperText("Please do not enter characters");
+      return false;
+    } else if (price < 0) {
+      setIsPriceError(true);
+      setPriceHelperText("Please restrict your inputs into positive numbers");
+      return false;
+    } else {
+      setIsPriceError(false);
+      setPriceHelperText("");
+      return true;
     }
+  };
 
-    if (discount === "") {
-      setIsDiscountError(true);
+  const discountValidation = () => {
+    if (discount === null) {
+      setIsPriceError(true);
       setDiscountHelperText("This field is required");
+      return false;
     } else if (/[a-zA-Z]/.test(discount)) {
-      setIsDiscountError(true);
+      setIsPriceError(true);
       setDiscountHelperText("Please restrict your input to Integers or floats");
+      return false;
+    } else if (discount < 0 || discount > 1) {
+      setIsDiscountError(true);
+      setDiscountHelperText("Discount should be between 0 and 1");
+      return false;
+    } else {
+      setIsDiscountError(false);
+      setDiscountHelperText("");
+      return true;
     }
+  };
 
-    if (isNameError && isPriceError && isDiscountError) {
+  const handleConfirmClick = () => {
+    // setIsNameError(true);
+    // setIsPriceError(true);
+    // setIsDiscountError(true);
+
+    // setNameHelperText("");
+    // setPriceHelperText("");
+    // setDiscountHelperText("");
+
+    let isNameErrorFree = nameValidation();
+    let isPriceErrorFree = priceValidation();
+    let isDiscountErrorFree = discountValidation();
+
+    console.log(isNameError, isPriceError, isDiscountError);
+
+    if (isNameErrorFree && isPriceErrorFree && isDiscountErrorFree) {
       const data = {
         name: name,
         price: price,
         discount: discount,
       };
 
-      savePlan(data);
-      handleClose();
+      async function savePlanData() {
+        try {
+          const result = await saveData(saveURL, data);
+          console.log(result);
+          handleClose();
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      savePlanData(data);
     }
   };
-  async function savePlan(data) {
-    const result = await saveData(saveURL, data);
-    console.log(result);
-  }
 
-  useEffect(() => {
-    savePlan();
-  }, []);
+  // useEffect(() => {
+
+  // }, [, isNameError, isPriceError, isDiscountError]);
 
   //
   //
