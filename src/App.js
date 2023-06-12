@@ -39,8 +39,9 @@ function App() {
   return (
     <>
       {/* <DropdownMenu/> */}
-      {<Sidebar/>}
-      {<Navbar />} 
+      {/*{<Sidebar/>}
+      {<Navbar />} */}
+      {/*{<Login/>}*/}
       <Routes>
         <Route path="/" element={<Dashboard/>} />
         <Route path="/questions" element={<Questions/>}/>

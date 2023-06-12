@@ -19,16 +19,11 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState('');
 
   // Setting up paper and button styles.
-  const paperStyle = { padding: 20, height: '60vh', minwidth: '300px', width: '70%', maxwidth: '500px', margin: "20px auto", borderRadius: 20 };
+  const paperStyle = { padding: 20, height: '64vh', minwidth: '300px', width: '70%', maxwidth: '500px', margin: "20px auto", borderRadius: 20 };
   const btnStyle = { margin: '8px 0' };
 
   // ...
 const handleLogin = () => {
-  // Perform validation if needed
-  if (username === '' || password === '') {
-    setErrorMessage('Please enter username and password');
-    return;
-  }
 
   // Make the API request
   fetch("http://localhost:8080/api/v1/admin/login", {
@@ -45,9 +40,10 @@ const handleLogin = () => {
       // Handle the response from the backend
       if (data.trim() === 'Login successful!') {
         console.log('Login successful!');
-        setErrorMessage('Login successful!');
+         // Navigate to the dashboard
+         window.location.href = "/";
       } else {
-        setErrorMessage('Invalid username or password');
+        setErrorMessage('Invalid login, please try again');
       }
     })
     .catch(error => {
@@ -63,31 +59,40 @@ const handleLogin = () => {
   return (
     <div style={{ background: '#D0E7F8' }}>
       <Grid container justifyContent="center" alignItems="center" style={{ height: "100vh" }}>
-        <Paper elevation={10} style={paperStyle}>
-          <Grid container spacing={3}>
-            {/* Login container. */}
-            <Grid item xs={12} md={6} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginBottom: '-45px', marginTop: '3px', borderTopLeftRadius: '20px', borderBottomLeftRadius: '20px' }} className="login-container">
-              <Typography variant="h4" align="center" gutterBottom color="#f1f1f1" style={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
-                Welcome to Quizzer!
-              </Typography>
-            </Grid>
+      <Paper elevation={10} style={paperStyle}>
+        <Grid container spacing={3}>
+          {/* Typography and Picture */}
+          <Grid item xs={12} md={6} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <Typography variant="h4" align="center" gutterBottom style={{ fontWeight: 'bold', fontSize: '2.5rem', color: '#000000' }}>
+  Quizzer
+</Typography>
+
+<img src="\assets\images" alt="Quizzer Logo" style={{ width: '200px', height: '200px', marginTop: '20px' }} />
+
+          </Grid>
             {/* Login form container. */}
             <Grid item xs={12} md={6} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <div style={{ marginTop: '32px' }}>
+            <div style={{ marginTop:'32px' }}>
                 <Typography variant="h5" gutterBottom>
                   Already have an account?
                 </Typography>
                 <form onSubmit={e => e.preventDefault()}>
                 {/*Username and password text fields. */}
                 <TextField label='Username' placeholder="Enter username" fullWidth required={true} style={{ marginTop: 8 }}autoComplete="username"value={username}
-                    onChange={e => setUsername(e.target.value)} />&nbsp;
+                    onChange={e => setUsername(e.target.value)} error={errorMessage !== ''}
+                    className={errorMessage !== '' ? 'error-textfield' : ''}/>&nbsp;
                 <TextField label='Password' placeholder="Enter password" type='password' fullWidth required={true} style={{ marginTop: 8 }} autoComplete="current-password"value={password}
-                    onChange={e => setPassword(e.target.value)}/>&nbsp;
+                    onChange={e => setPassword(e.target.value)} error={errorMessage !== ''}
+                    className={errorMessage !== '' ? 'error-textfield' : ''}/>&nbsp;
                 {/* Sign in button */}
                 <Button type='Submit' color='primary' variant="contained" style={btnStyle} fullWidth onClick={handleLogin}>Sign in</Button>&nbsp;
-                {/* Forgot password link. */}
                 </form>
-                {errorMessage && <Typography>{errorMessage}</Typography>}
+                {errorMessage && (
+                <Typography variant="body2" color="error">
+                  {errorMessage}
+                </Typography>
+              )}&nbsp;
+                {/* Forgot password link. */}
                 <Typography>
                   <Link to="/PasswordResetForm" className="login-link">Forgot Password?</Link>
                 </Typography>&nbsp;
