@@ -1,272 +1,331 @@
-// import React from "react";
-// import { AiOutlineMail } from "react-icons/ai";
-
-
-// function Questions() {
-//   return (
-//     <div className="questions">
-//       <h1>Questions</h1>
-//       <AiOutlineMail className="page-icon" />
-//     </div>
-//   );
-// }
-
-// export default Questions;
-
-import React, { useState, Fragment } from "react";
-import { nanoid } from "nanoid";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import * as XLSX from "xlsx";
 import "./Questions.css";
 
-import data from "./mock-data.json";
-import EditableRow from "../../components/EditableRow";
-import ReadOnlyRow from "../../components/ReadOnlyRow";
+export default function QuestionPage() {
+  const [grade, setGrade] = useState([]);
+  const [subject, setSubject] = useState([]);
+  const [term, setTerm] = useState([]);
+  const [lesson, setLesson] = useState([]);
+  const [quizType, setQuizType] = useState([]);
+  const [questionData, setQuestionData] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-const Questions = () => {
-  const [contacts, setContacts] = useState(data);
-  const [addFormData, setAddFormData] = useState({
-    grade:"",
-    subject:"",
-    lesson:"",
-    question:"",
-    answer_1:"",
-    answer_2:"",
-    answer_3:"",
-    answer_4:"",
-    correct_answer_number:"",
-  });
+  useEffect(() => {
+    loadGrades();
+    loadSubjects();
+    loadTerms();
+  }, []);
 
-  const [editFormData, setEditFormData] = useState({
-    grade:"",
-    subject:"",
-    lesson:"",
-    question:"",
-    answer_1:"",
-    answer_2:"",
-    answer_3:"",
-    answer_4:"",
-    correct_answer_number:"",
-  });
-
-  const [editContactId, setEditContactId] = useState(null);
-
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
-
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
-
-    setAddFormData(newFormData);
+  const loadGrades = async () => {
+    try {
+      const result = await axios.get("http://localhost:8090/grades");
+      setGrade(result.data);
+    } catch (error) {
+      console.error("Failed to load grades:", error);
+    }
+  };
+  const loadSubjects = async () => {
+    try {
+      const result = await axios.get("http://localhost:8090/subjects");
+      setSubject(result.data);
+    } catch (error) {
+      console.error("Failed to load subjects:", error);
+    }
+  };
+  const loadTerms = async () => {
+    try {
+      const result = await axios.get("http://localhost:8090/terms");
+      setTerm(result.data);
+    } catch (error) {
+      console.error("Failed to load terms:", error);
+    }
+  };
+  const loadLessons = async (gradeId, subjectId, termId) => {
+    try {
+      const result = await axios.get(
+        `http://localhost:8090/lessons?gradeId=${gradeId}&subjectId=${subjectId}&termId=${termId}`
+      );
+      setLesson(result.data);
+    } catch (error) {
+      console.error("Failed to load lessons:", error);
+    }
   };
 
-  const handleEditFormChange = (event) => {
-    event.preventDefault();
+  const handleGradeChange = (event) => {
+    const gradeId = event.target.value;
+    const selectedSubjectId = document.getElementById("subject").value;
+    const selectedTermId = document.getElementById("term").value;
 
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
+    loadLessons(gradeId, 0, 0);
+  };
+  const handleSubjectChange = (event) => {
+    const subjectId = event.target.value;
+    const selectedGradeId = document.getElementById("grade").value;
+    const selectedTermId = document.getElementById("term").value;
 
-    const newFormData = { ...editFormData };
-    newFormData[fieldName] = fieldValue;
+    loadLessons(selectedGradeId, subjectId, 0);
+  };
+  const handleTermChange = (event) => {
+    const termId = event.target.value;
+    const selectedGradeId = document.getElementById("grade").value;
+    const selectedSubjectId = document.getElementById("subject").value;
 
-    setEditFormData(newFormData);
+    loadLessons(selectedGradeId, selectedSubjectId, termId);
+  };
+  const handleQuizTypeChange = (e) => {
+    setQuizType({ ...quizType, [e.target.name]: e.target.value });
   };
 
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault();
-
-    const newContact = {
-      id: nanoid(),
-       
-      grade:addFormData.grade,
-      subject: addFormData.subject,
-       lesson: addFormData.lesson,
-       question: addFormData.question,
-       answer_1: addFormData.answer_1,
-       answer_2: addFormData.answer_2,
-       answer_3: addFormData.answer_3,
-       answer_4: addFormData.answer_4,
-       correct_answer_number: addFormData.correct_answer_number,
-     
-    };
-
-    const newContacts = [...contacts, newContact];
-    setContacts(newContacts);
+  const readExcel = async (e) => {
+    const file = e.target.files[0];
+    const data = await file.arrayBuffer(file);
+    const excelfile = XLSX.read(data);
+    const excelsheet = excelfile.Sheets[excelfile.SheetNames[0]];
+    const exceljson = XLSX.utils.sheet_to_json(excelsheet);
+    setQuestionData(exceljson);
   };
 
-  const handleEditFormSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const selectedGradeElement = document.getElementById("grade");
+    const selectedSubjectElement = document.getElementById("subject");
+    const selectedTermElement = document.getElementById("term");
+    const selectedLessonElement = document.getElementById("lesson");
+    const selectedQuizTypeElement = document.querySelector(
+      'input[name="quizType"]:checked'
+    );
 
-    const editedContact = {
-      id: editContactId,
-      grade: editFormData.grade,
-       subject: editFormData.subject,
-       lesson: editFormData.lesson,
-       question: editFormData.question,
-       answer_1: editFormData.answer_1,
-       answer_2: editFormData.answer_2,
-       answer_3: editFormData.answer_3,
-       answer_4: editFormData.answer_4,
-       correct_answer_number: editFormData.correct_answer_number
-      
-    };
+    if (
+      selectedGradeElement &&
+      selectedSubjectElement &&
+      selectedTermElement &&
+      selectedLessonElement &&
+      selectedQuizTypeElement &&
+      questionData.length > 0
+    ) {
+      const selectedGradeId = selectedGradeElement.value;
+      const selectedSubjectId = selectedSubjectElement.value;
+      const selectedTermId = selectedTermElement.value;
+      const selectedLessonId = selectedLessonElement.value;
+      const selectedQuizTypeId = selectedQuizTypeElement.value;
 
-    const newContacts = [...contacts];
+      try {
+        for (const questionItem of questionData) {
+          const newQuestionData = {
+            grade: {
+              grade_id: selectedGradeId,
+            },
+            subject: {
+              subject_id: selectedSubjectId,
+            },
+            term: {
+              term_id: selectedTermId,
+            },
+            lesson: {
+              lesson_id: selectedLessonId,
+            },
+            quizType: {
+              quiz_type_id: selectedQuizTypeId,
+            },
+            question_text: questionItem.Question,
+            answer1: questionItem.Answer1,
+            answer2: questionItem.Answer2,
+            answer3: questionItem.Answer3,
+            answer4: questionItem.Answer4,
+            correct_answer: questionItem.CorrectAnswer,
+          };
 
-    const index = contacts.findIndex((contact) => contact.id === editContactId);
+          const response = await axios.post(
+            "http://localhost:8090/question",
+            newQuestionData
+          );
+          console.log("Question data added successfully", response.data);
+        }
+        setSuccessMessage("Question data added successfully");
+        setQuestionData([]);
 
-    newContacts[index] = editedContact;
-
-    setContacts(newContacts);
-    setEditContactId(null);
-  };
-
-  const handleEditClick = (event, contact) => {
-    event.preventDefault();
-    setEditContactId(contact.id);
-
-    const formValues = {
-      grade: contact.grade,
-    subject: contact.subject,
-    lesson: contact.lesson,
-    question: contact.question,
-    answer_1: contact.answer_1,
-    answer_2: contact.answer_2,
-    answer_3: contact.answer_3,
-    answer_4: contact.answer_4,
-    correct_answer_number: contact.correct_answer_number,
-      
-    };
-
-    setEditFormData(formValues);
-  };
-
-  const handleCancelClick = () => {
-    setEditContactId(null);
-  };
-
-  const handleDeleteClick = (contactId) => {
-    const newContacts = [...contacts];
-
-    const index = contacts.findIndex((contact) => contact.id === contactId);
-
-    newContacts.splice(index, 1);
-
-    setContacts(newContacts);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2500);
+      } catch (error) {
+        console.error("Failed to add question data:", error);
+        setErrorMessage("Failed to add question data. Please try again.");
+      }
+    }
   };
 
   return (
-    <div className="app-container">
-      <form onSubmit={handleEditFormSubmit}>
-        <table>
-          <thead>
-            <tr>
-            <th>Grade</th>
-          <th>Subject</th>
-          <th>lesson</th>
-          <th>Question</th>
-          <th>Answer_1</th>
-          <th>Answer_2</th>
-          <th>Answer_3</th>
-          <th>Answer_4</th>
-          <th>Correct_answer_number</th>
-          <th>Actions</th>
-            </tr>
-          </thead>
+    <form onSubmit={handleSubmit}>
+      {successMessage && (
+        <div className="alert alert-success mt-3 width container" role="alert">
+          {successMessage}
+        </div>
+      )}
+      {errorMessage && (
+        <div className="alert alert-danger mt-3 width container" role="alert">
+          {errorMessage}
+        </div>
+      )}
+      <div className="container center">
+        <table className="tableStyle">
           <tbody>
-            {contacts.map((contact) => (
-              <Fragment>
-                {editContactId === contact.id ? (
-                  <EditableRow
-                    editFormData={editFormData}
-                    handleEditFormChange={handleEditFormChange}
-                    handleCancelClick={handleCancelClick}
-                  />
-                ) : (
-                  <ReadOnlyRow
-                    contact={contact}
-                    handleEditClick={handleEditClick}
-                    handleDeleteClick={handleDeleteClick}
-                  />
-                )}
-              </Fragment>
-            ))}
+            <tr>
+              <td>
+                <label htmlFor="grade">Grade:</label>
+              </td>
+              <td>
+                <select
+                  className="form-control"
+                  name="grade"
+                  id="grade"
+                  onChange={handleGradeChange}
+                >
+                  <option value="">-- Select Grade--</option>
+
+                  {grade.map((grade) => (
+                    <option key={grade.grade_id} value={grade.grade_id}>
+                      {grade.grade_name}
+                    </option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="subject">Subject:</label>
+              </td>
+              <td>
+                <select
+                  className="form-control"
+                  name="subject"
+                  id="subject"
+                  onChange={handleSubjectChange}
+                >
+                  <option value="">-- Select Subject --</option>
+
+                  {subject.map((subject) => (
+                    <option
+                      key={subject.subject_id}
+                      value={subject.subject_id}
+                      name={subject.subject_name}
+                    >
+                      {subject.subject_name}
+                    </option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="term">Term:</label>
+              </td>
+              <td>
+                <select
+                  className="form-control"
+                  name="term"
+                  id="term"
+                  onChange={handleTermChange}
+                >
+                  <option value="">-- Select Term --</option>
+
+                  {term.map((term) => (
+                    <option key={term.term_id} value={term.term_id}>
+                      {term.term_name}
+                    </option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="lesson">Lesson:</label>
+              </td>
+              <td>
+                <select className="form-control" name="lesson" id="lesson">
+                  <option value="">-- Select Lesson --</option>
+
+                  {lesson.map((lesson) => (
+                    <option
+                      key={lesson.lesson_id}
+                      value={lesson.lesson_id}
+                      name={lesson.lesson_name}
+                    >
+                      {lesson.lesson_name}
+                    </option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Quiz Type:</label>
+              </td>
+              <td>
+                <input
+                  className="form-check-input spaceRadio"
+                  type="radio"
+                  name="quizType"
+                  id="normalquiz"
+                  value={1}
+                  onChange={handleQuizTypeChange}
+                />
+                <label className="form-check-label space" htmlFor="normalquiz">
+                  Normal Quiz
+                </label>
+
+                <input
+                  className="form-check-input spaceRadio"
+                  type="radio"
+                  name="quizType"
+                  id="endtermquiz"
+                  value={2}
+                  onChange={handleQuizTypeChange}
+                />
+                <label className="form-check-label" htmlFor="endtermquiz">
+                  End Term Quiz
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={2}>
+                <a
+                  href="https://docs.google.com/spreadsheets/d/1wJsoohSzZCQDAdm6sbNe-6_sJ4KW_4Fs/export?format=xlsx"
+                  target="_blank"
+                  className="spaceLink"
+                  download={true}
+                >
+                  Download QuestionData Template
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="formFileMultiple" className="form-label">
+                  Select Questions:
+                </label>
+              </td>
+              <td>
+                <input
+                  className="form-control"
+                  type="file"
+                  id="formFileMultiple"
+                  onChange={(e) => readExcel(e)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={2}>
+                <button type="submit" className="btn btn-lg btn-success">
+                  Submit
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
-      </form>
-
-      <h2>Add a Question</h2>
-      <form onSubmit={handleAddFormSubmit}>
-      <select name="grade" required="required" onChange={handleAddFormChange}>
-  <option value="">Select a grade</option>
-  <option value="10"> 10</option>
-  <option value="11"> 11</option>
-  <option value="other"> Other</option>
-  
-</select>
-
-
-        <input
-         type="text"
-         name="subject"
-         required="required"
-         placeholder="Enter the subject"
-         onChange={handleAddFormChange} 
-        />
-        <input
-          type="text"
-          name="lesson"
-          required="required"
-          placeholder="Enter the lesson"
-          onChange={handleAddFormChange}
-        />
-        <input
-         type="text"
-         name="question"
-         required="required"
-         placeholder="Enter the question"
-         onChange={handleAddFormChange}
-        />
-        <input
-         type="text"
-         name="answer_1"
-         required="required"
-         placeholder="Enter the answer_1"
-         onChange={handleAddFormChange}
-        />
-        <input
-         type="text"
-         name="answer_2"
-         required="required"
-         placeholder="Enter the answer_2"
-         onChange={handleAddFormChange}
-        />
-        <input
-         type="text"
-         name="answer_3"
-         required="required"
-         placeholder="Enter the answer_3"
-         onChange={handleAddFormChange}
-        />
-        <input
-         type="text"
-         name="answer_4"
-         required="required"
-         placeholder="Enter the answer_4"
-         onChange={handleAddFormChange}
-        />
-        <input
-         type="text"
-         name="correct_answer_number"
-         required="required"
-         placeholder="Enter the correct_answer_number"
-         onChange={handleAddFormChange}
-        />
-        <button type="submit">Add</button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
-};
-
-export default Questions;
+}

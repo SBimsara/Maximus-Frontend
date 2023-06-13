@@ -1,30 +1,26 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
+import axios from "axios";
 import CustomCancelButton from "../../components/form/CancelButton";
-import { getDataById } from "../../services/getDataById";
-import { updateData } from "../../services/updateData";
 
-const getURL = "http://localhost:8080/api/v1/user/getUserBySubjectId/";
-const updateURL = "http://localhost:8080/api/v1/user/updateSubject";
+const getURL = "http://localhost:8090/api/v1/user/getUserBySubjectId/";
+const updateURL = "http://localhost:8090/subject/";
 
 export default function EditSubjectPopup(props) {
   const { data, open, onClose } = props;
 
   //use state for mui text field values
   const [subject, setSubject] = useState("");
-  const [grade, setGrade] = useState("");
+  // const [grade, setGrade] = useState("");
 
   //use satte for mui test field 'saved' values
   const [savedSubject, setSavedSubject] = useState("");
@@ -42,39 +38,38 @@ export default function EditSubjectPopup(props) {
     setIsDisabled(false);
   };
 
-  const handleGradeChange = (event) => {
-    setGrade(event.target.value);
-    setIsDisabled(false);
-  };
+  // const handleGradeChange = (event) => {
+  //   setGrade(event.target.value);
+  //   setIsDisabled(false);
+  // };
 
   const handleReset = () => {
     setSubject(savedSubject);
-    setGrade(savedGrade);
+    // setGrade(savedGrade);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     handleClose();
     const updateData = {
-      id: data.id,
-      subjectname: subject,
-      grade: grade,
+      subject_name: subject,
+      // grade: grade,
     };
-    updateSubject(updateData);
+    await updateSubject(data.subject_id, updateData);
   };
 
-  async function updateSubject(data) {
-    const reply = await updateData(updateURL, data);
-    reply ? console.log("Success") : console.log("Error");
-  }
+  const updateSubject = async (id, updateData) => {
+    await axios.put(`${updateURL}${id}`, updateData);
+    console.log("Successfully updated subject");
+  };
 
   useEffect(() => {
     console.log(data);
     //set the values of subject and grade
     if (open) {
-      setSubject(data.subjectname);
-      setGrade(data.grade);
-      setSavedSubject(data.subjectname);
-      setSavedGrade(data.grade);
+      setSubject(data.subject_name);
+      // setGrade(data.grade);
+      setSavedSubject(data.subject_name);
+      // setSavedGrade(data.grade);
     }
   }, [open, data]);
 
@@ -112,14 +107,14 @@ export default function EditSubjectPopup(props) {
               sx={{ mt: 2 }}
             />
 
-            <TextField
+            {/* <TextField
               id="outlined-basic"
               label="Grade"
               variant="outlined"
               value={grade}
               onChange={handleGradeChange}
               sx={{ mt: 2 }}
-            />
+            /> */}
           </Box>
         </DialogContent>
         <DialogActions sx={{ mr: 2 }}>

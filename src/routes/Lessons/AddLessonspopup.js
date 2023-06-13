@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import axios from "axios";
 
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -20,17 +21,68 @@ import CustomCancelButton from "../../components/form/CancelButton";
 import { saveData } from "../../services/saveData";
 import { updateData } from "../../services/updateData";
 
-const saveURL = "http://localhost:8080/api/v1/user/saveLesson";
-const updateURL = "http://localhost:8080/api/v1/user/updateLesson";
+const saveURL = "http://localhost:8090/lesson";
+const updateURL = "http://localhost:8090/lesson/";
 
 function AddLessonsPopup(props) {
   const { data, open, onClose } = props;
 
   const [lessonName, setLessonName] = useState("");
-  const [term, setTerm] = useState(-1);
+  const [grade, setGrade] = useState([]);
+  const [subject, setSubject] = useState([]);
+  const [term, setTerm] = useState([]);
+
+  const [selectedGradeId, setSelectedGradeId] = useState("");
+  const [selectedSubjectId, setSelectedSubjectId] = useState("");
+  const [selectedTermId, setSelectedTermId] = useState("");
+
+  useEffect(() => {
+    loadGrades();
+    loadSubjects();
+    loadTerms();
+  }, []);
+
+  const loadGrades = async () => {
+    try {
+      const result = await axios.get("http://localhost:8090/grades");
+      setGrade(result.data);
+    } catch (error) {
+      console.error("Failed to load grades:", error);
+    }
+  };
+  const loadSubjects = async () => {
+    try {
+      const result = await axios.get("http://localhost:8090/subjects");
+      setSubject(result.data);
+    } catch (error) {
+      console.error("Failed to load subjects:", error);
+    }
+  };
+  const loadTerms = async () => {
+    try {
+      const result = await axios.get("http://localhost:8090/terms");
+      console.log(result.data);
+      setTerm(result.data);
+    } catch (error) {
+      console.error("Failed to load terms:", error);
+    }
+  };
+
+  const handleGradeChange = (event) => {
+    const selectedGradeId = event.target.value;
+    setSelectedGradeId(selectedGradeId);
+  };
+  const handleSubjectChange = (event) => {
+    const selectedsubjectId = event.target.value;
+    setSelectedSubjectId(selectedsubjectId);
+  };
+  const handleTermChange = (event) => {
+    const selectedTermId = event.target.value;
+    setSelectedTermId(selectedTermId);
+  };
 
   const [savedLessonName, setSavedLessonName] = useState("");
-  const [savedTerm, setSavedTerm] = useState(-1);
+  const [savedTerm, setSavedTerm] = useState("");
 
   const [isNameError, setIsNameError] = useState(false);
   const [isTermError, setIsTermError] = useState(false);
@@ -43,57 +95,99 @@ function AddLessonsPopup(props) {
 
   const handleClose = () => {
     setIsNameError(false);
-    setNameHelperText("helperText");
     setIsTermError(false);
 
     setLessonName("");
-    setTerm(-1);
-
-    setSavedLessonName("");
-    setSavedTerm(-1);
-
-    setShouldRenderButton(false);
-
-    setIsEdit(false);
+    setSelectedGradeId("");
+    setSelectedSubjectId("");
+    setSelectedTermId("");
+    // setTerm([0]);
 
     onClose(false);
   };
 
-  const handleConfirm = () => {
-    if (lessonName === "") {
-      setIsNameError(true);
-      setNameHelperText("Field cannot be left empty");
-    } else {
-      setIsNameError(false);
-      setNameHelperText("helperText");
-    }
+  const handleNameChange = (event) => {
+    setLessonName(event.target.value);
+  };
 
-    if (term === -1) {
-      setIsTermError(true);
-    } else {
-      setIsTermError(false);
-    }
+  // const handleTermChange = (event) => {
+  //   setTerm(event.target.value);
+  // };
 
-    if (isNameError && isTermError) {
-      console.log("access");
+  const handleConfirm = async (e) => {
+    e.preventDefault();
+    // const selectedGradeElement = document.getElementById("grade");
+    // const selectedSubjectElement = document.getElementById("subject");
+    // const selectedTermElement = document.getElementById("term");
 
-      if (isEdit) {
-        const LessonData = {
-          id: data.id,
-          lessonName: lessonName,
-          term: term,
-        };
-        updateLesson(LessonData);
-        handleClose();
-      } else if (!isEdit) {
-        const LessonData = {
-          lessonName: lessonName,
-          term: term,
-        };
-        saveLesson(LessonData);
-        handleClose();
+    if (lessonName && selectedGradeId && selectedSubjectId && selectedTermId) {
+      // const selectedGradeId = selectedGradeElement.value;
+      // const selectedSubjectId = selectedSubjectElement.value;
+      // const selectedTermId = selectedTermElement.value;
+
+      try {
+        if (data) {
+          const updatedLesson = {
+            lesson_id: data.id,
+            lesson_name: lessonName,
+            grade: {
+              grade_id: selectedGradeId,
+            },
+            subject: {
+              subject_id: selectedSubjectId,
+            },
+            term: {
+              term_id: selectedTermId,
+            },
+          };
+          await axios.put(`${updateURL}${data.lesson_id}`, updatedLesson);
+          console.log("Lesson updated successfully");
+        } else {
+          const newLesson = {
+            lesson_name: lessonName,
+            grade: {
+              grade_id: selectedGradeId,
+            },
+            subject: {
+              subject_id: selectedSubjectId,
+            },
+            term: {
+              term_id: selectedTermId,
+            },
+          };
+          const result = await axios.post(saveURL, newLesson);
+          console.log("Lesson added successfully", result.data);
+        }
+      } catch (error) {
+        console.error("Failed to add/update lesson data:", error);
       }
+    } else {
+      setIsNameError(!lessonName);
+      setNameHelperText(!lessonName ? "Lesson name is required" : "helperText");
+      setIsTermError(!selectedTermId);
     }
+
+    // if (isNameError && isTermError) {
+    //   console.log("access");
+
+    //   if (isEdit) {
+    //     const LessonData = {
+    //       id: data.id,
+    //       lessonName: lessonName,
+    //       term: term,
+    //     };
+    //     updateLesson(LessonData);
+    //     handleClose();
+    //   } else if (!isEdit) {
+    //     const LessonData = {
+    //       lesson_name: lessonName,
+    //       grade_id: term,
+    //     };
+    //     saveLesson(LessonData);
+    //     handleClose();
+    //   }
+    // }
+    handleClose();
   };
 
   async function saveLesson(data) {
@@ -106,31 +200,11 @@ function AddLessonsPopup(props) {
     console.log(result);
   }
 
-  const handleNameChange = (event) => {
-    setLessonName(event.target.value);
-  };
-
-  const handleTermChange = (event) => {
-    setTerm(event.target.value);
-  };
-
-  useEffect(() => {
-    if (data != null) {
-      setShouldRenderButton(true);
-      setIsEdit(true);
-      setLessonName(data.lessonName);
-      setTerm(data.term);
-    } else {
-      setShouldRenderButton(false);
-      setIsEdit(false);
-    }
-  }, [data]);
-
   return (
     <>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle sx={{ display: "flex", alignItems: "center" }}>
-          {isEdit ? "Edit Lesson" : "Create Lesson"}
+          {data ? "Edit Lesson" : "Add Lesson"}
           <Box
             sx={{
               flexGrow: 1,
@@ -172,20 +246,62 @@ function AddLessonsPopup(props) {
               }}
             />
             <FormControl fullWidth sx={{ mt: 0.8 }} error={isTermError}>
-              <InputLabel id="demo-select-small-label">Term</InputLabel>
+              <InputLabel id="grade-label">Grade</InputLabel>
               <Select
-                labelId="demo-select-small-label"
-                id="demo-select-small"
-                value={data != null ? term : undefined}
-                label="Age*"
-                onChange={handleTermChange}
+                labelId="grade-label"
+                id="grade"
+                value={selectedGradeId || ""}
+                label="Grade*"
+                onChange={handleGradeChange}
               >
-                <MenuItem value={-1}>
+                <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={1}>Term 1</MenuItem>
-                <MenuItem value={2}>Term 2</MenuItem>
-                <MenuItem value={3}>Term 3</MenuItem>
+                {grade.map((grade) => (
+                  <MenuItem key={grade.grade_id} value={grade.grade_id}>
+                    {grade.grade_name}
+                  </MenuItem>
+                ))}
+              </Select>
+              <FormHelperText>Required</FormHelperText>
+            </FormControl>
+            <FormControl fullWidth sx={{ mt: 0.8 }} error={isTermError}>
+              <InputLabel id="subject-label">Subject</InputLabel>
+              <Select
+                labelId="subject-label"
+                id="subject"
+                value={selectedSubjectId || ""}
+                label="Subject*"
+                onChange={handleSubjectChange}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {subject.map((subject) => (
+                  <MenuItem key={subject.subject_id} value={subject.subject_id}>
+                    {subject.subject_name}
+                  </MenuItem>
+                ))}
+              </Select>
+              <FormHelperText>Required</FormHelperText>
+            </FormControl>
+            <FormControl fullWidth sx={{ mt: 0.8 }} error={isTermError}>
+              <InputLabel id="term-label">Term</InputLabel>
+              <Select
+                labelId="term-label"
+                id="term"
+                value={selectedTermId || ""}
+                label="Term*"
+                onChange={handleTermChange}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {term.map((term) => (
+                  <MenuItem key={term.term_id} value={term.term_id}>
+                    {term.term_name}
+                  </MenuItem>
+                ))}
               </Select>
               <FormHelperText>Required</FormHelperText>
             </FormControl>

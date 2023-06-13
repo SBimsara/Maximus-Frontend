@@ -1,28 +1,26 @@
 import React from "react";
 
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 import CustomCancelButton from "../../components/form/CancelButton";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { saveData } from "../../services/saveData";
 
-const saveURL = "http://localhost:8080/api/v1/user/saveSubject";
+const saveURL = "http://localhost:8090/subject";
 
 export default function SubjectPopup(props) {
   const { open, onClose } = props;
 
   const [subject, setSubject] = useState("");
-  const [grade, setGrade] = useState("");
+  // const [grade, setGrade] = useState("");
 
   const handleClose = () => {
     onClose(false);
@@ -32,15 +30,15 @@ export default function SubjectPopup(props) {
     setSubject(event.target.value);
   };
 
-  const handleGradeChange = (event) => {
-    setGrade(event.target.value);
-  };
+  // const handleGradeChange = (event) => {
+  //   setGrade(event.target.value);
+  // };
 
   const handleConfirmClick = () => {
     const data = {
-      id: 0,
-      subjectname: subject,
-      grade: grade,
+      // subject_id: 0,
+      subject_name: subject,
+      // grade: grade,
     };
     saveSubject(data);
   };
@@ -88,13 +86,13 @@ export default function SubjectPopup(props) {
               sx={{ mt: 2 }}
               onChange={handleSubjectChange}
             />
-            <TextField
+            {/* <TextField
               id="outlined-basic"
               label="Grade"
               variant="outlined"
               sx={{ mt: 2 }}
               onChange={handleGradeChange}
-            />
+            /> */}
           </Box>
         </DialogContent>
         <DialogActions sx={{ mr: 2 }}>
