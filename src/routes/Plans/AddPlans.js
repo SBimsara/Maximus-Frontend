@@ -22,6 +22,8 @@ import Plans from "./PlanDetails";
 import ActionAlerts from "../../components/ui/actionAlerts";
 
 import { useLocation } from "react-router-dom";
+import Navbar1 from '../../components/Navbar1';
+
 
 //url for the deleteDataById service
 const delURL = "http://localhost:8080/api/v1/plan/deletePlan/";
@@ -32,29 +34,6 @@ const getAllURL = "http://localhost:8080/api/v1/plan/getAllPlans";
 // // variable to store plan Id
 export let pid = 17;
 
-// setter function for the pid variable
-// export const setPid = (newPid) => {
-//     const planID = newPid;
-//     console.log("Called");
-//   console.log(newPid);
-//   <Plans pid={newPid}/>
-// }
-
-// // exporting pid
-// export {pid};
-
-// const variant = "filled";
-// const buttonTitle = "UNDO";
-// const alertMsg = "This is a success alert — check it out!";
-// const severity = "error";
-
-// delete api call
-// export async function deletePlans(subId) {
-//     const result = await deleteDatabyId(delURL, subId);
-//     // {(result)
-//     // ? <ActionAlerts variant={variant} buttonTitle={buttonTitle} alertMsg={alertMsg} severity={severity}/>
-//     // : console.log("error")}
-// }
 
 export default function AddPlans() {
   const [rows, setRows] = useState([]);
