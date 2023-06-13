@@ -47,31 +47,28 @@ export default function Sidebar() {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
 
-        <AppBar
-          position="fixed"
-          sx={{
-            width: `calc(100% - ${drawerWidth}px)`,
-            ml: `${drawerWidth}px`,
-          }}
-          elevation={0}
-        >
-          <Stack direction="row">
-            <Toolbar>
-              <Typography variant="h6" noWrap component="div">
-                {location.pathname === '/'
-                   ?"Dashboard"
-                    :(location.pathname === '/addPlans')
-                      ?"Plans"
-                      :(location.pathname === '/planDe')
-                        ?"Edit Plans"
-                        :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
-              </Typography>
-            </Toolbar>
-            <Toolbar sx={{ marginLeft: "auto" }}>
-              <Avatar></Avatar>
-            </Toolbar>
-          </Stack>
-        </AppBar>
+        // <AppBar
+        //   position="fixed"
+        //   sx={{width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`}}
+        //   elevation={0}
+        // >
+        //   <Stack direction="row">
+        //     <Toolbar>
+        //       <Typography variant="h6" noWrap component="div">
+        //         {location.pathname === '/'
+        //            ?"Dashboard"
+        //             :(location.pathname === '/addPlans')
+        //               ?"Plans"
+        //               :(location.pathname === '/planDe')
+        //                 ?"Edit Plans"
+        //                 :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
+        //       </Typography>
+        //     </Toolbar>
+        //     <Toolbar sx={{ marginLeft: "auto" }}>
+        //       <Avatar></Avatar>
+        //     </Toolbar>
+        //   </Stack>
+        // </AppBar>
         <Drawer
           PaperProps={{
             sx: {
@@ -90,12 +87,15 @@ export default function Sidebar() {
           variant="permanent"
           anchor="left"
         >
+            <div className="logo">
+                <img src="./all-image/logo.jpg" alt="" className="logo" width="200px" height="200px"/>
+            </div>
           <Toolbar />
           {/* <Divider /> */}
           <List>
             <ListItem disablePadding>
               <ListItemButton
-                href="/"
+                href="/dashboard"
                 selected={location.pathname === "/" ? true : false}
               >
                 <ListItemIcon>
@@ -115,10 +115,7 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton
-                href="/questions"
-                selected={location.pathname === "/questions" ? true : false}
-              >
+              <ListItemButton href="/questions"selected={location.pathname === "/questions" ? true : false}>
                 <ListItemIcon>
                   <UploadFileIcon />
                 </ListItemIcon>
@@ -127,10 +124,7 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton
-                href="/subjects"
-                selected={location.pathname === "/subjects" ? true : false}
-              >
+              <ListItemButton href="/subjects" selected={location.pathname === "/subjects" ? true : false}>
                 <ListItemIcon>
                   <SubjectIcon />
                 </ListItemIcon>
@@ -139,7 +133,6 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
-
               <ListItemButton href='/lessons' selected={location.pathname === '/lessons' ? true : false}>
                 <ListItemIcon>
                   <SubjectIcon />
@@ -148,20 +141,14 @@ export default function Sidebar() {
               </ListItemButton>
             </ListItem>
 
-            {/* <ListItem disablePadding>
-              <ListItemButton href='/authentication' selected={location.pathname === '/authentication' ? true : false}>
-
-              <ListItemButton
-                href="/authentication"
-                selected={
-                  location.pathname === "/authentication" ? true : false}/>
-
-                <ListItemIcon>
-                  <PeopleIcon />
-                </ListItemIcon>
-                <ListItemText primary="Authentication" />
-              </ListItemButton>
-            </ListItem> */}
+            // <ListItem disablePadding>
+            //   <ListItemButton href='/authentication' selected={location.pathname === '/authentication' ? true : false}>
+            //     <ListItemIcon>
+            //       <PeopleIcon />
+            //     </ListItemIcon>
+            //     <ListItemText primary="Authentication" />
+            //   </ListItemButton>
+            // </ListItem>
 
             <ListItem disablePadding>
               <ListItemButton
