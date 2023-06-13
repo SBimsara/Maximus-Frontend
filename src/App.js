@@ -10,7 +10,7 @@ import './App.css';
 import Navbar1 from "./components/Navbar1";
 import Sidebar  from "./components/Sidebar";
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link,Route, Routes } from "react-router-dom";
 
 
 import PageLayout from "./routes/PageLayout";
@@ -42,7 +42,7 @@ function App() {
        <Sidebar />
      
        
-         
+        <Navigation /> 
 {/*       
         <Navbar1 /> */}
         <Routes>
@@ -60,25 +60,17 @@ function App() {
           
         
         <Route path="/passwordResetForm" element={<PasswordResetForm />}/>
-<Route path="/signup" element={<Signup />} />
-<Route path="/authentication"element={<AdminsForm/>}/>
-<Route path="/requests"element={<Requests/>}/>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/authentication"element={<AdminsForm/>}/>
+        <Route path="/requests"element={<Requests/>}/>
         
           
-<Route path="/settings" element={<Settings/>}/>
-          <Route path="/*" element={<ErrorPage/>}/>
+        <Route path="/settings" element={<Settings/>}/>
+        <Route path="/*" element={<ErrorPage/>}/>
           
           
         </Routes>
-        {/* <Popup/> */}
-        {/* <PageLayout/> */}
         
-        {/* <CustomDropdown/> */}
-
-        {/* <CustomDropdown/> */}
-        {/* {<AddPlans/>} */}
-        {/* <PlanPopup/> */}
-        {/* <ActionAlerts/> */}
         </> 
   );
 }
