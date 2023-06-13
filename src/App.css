@@ -10,8 +10,7 @@
 .home,
 .Subjects,
 .Questions,
-.Plans
-.Settings {
+.Plans .Settings {
   display: flex;
   height: 90vh;
   align-items: center;
@@ -38,8 +37,7 @@
   .home,
   .Subjects,
   .Questions,
-  .Plans
-  .Settings {
+  .Plans .Settings {
     font-size: 2.5rem;
   }
 
