@@ -24,6 +24,11 @@ export const SidebarData = [
         link:"/Subjects"
     },
     {
+        title:"Lessons",
+        icon:<lessonIcon/>,
+        link:"/Lessons"
+    },
+    {
         title:"Plans",
         icon:<SubscriptionsIcon/>,
         link:"/Plans"
