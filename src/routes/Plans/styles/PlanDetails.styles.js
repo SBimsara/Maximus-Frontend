@@ -42,14 +42,14 @@ export const PlanContainer = styled(Box)(({theme})=>({
 export const PlanContentContainer = styled(Box)(({theme}) => ({
     // justifyContent:"center",
     // alignContent:"center"
-    textAlign: "center",
+    textAlign: "left",
     marginBottom: "10px",
     padding: "20px",
 
 }))
 
 export const PlanButtonContainer = styled(Box)(({theme}) => ({
-    textAlign: 'center',
+    textAlign: 'left',
     marginBottom: '10px',
     padding: '20px'
 }))
