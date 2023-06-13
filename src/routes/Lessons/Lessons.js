@@ -28,6 +28,14 @@ function Lessons() {
   const [openPopup, setOpenPopup] = useState(false);
   const [data, setData] = useState(null);
 
+  const [selectedSubjectName, setSelectedSubjectName] = useState("");
+  const [selectedGradeName, setSelectedGradeName] = useState("");
+  const [selectedTermName, setSelectedTermName] = useState("");
+
+  const [selectedSubjectId, setSelectedSubjectId] = useState("");
+  const [selectedGradeId, setSelectedGradeId] = useState("");
+  const [selectedTermId, setSelectedTermId] = useState("");
+
   const handleEditLessonClick = async (id) => {
     const result = await getDataById(getDataURL, id);
     setData(result);
@@ -59,21 +67,56 @@ function Lessons() {
     const rowsWithIds = result.map((row) => ({
       ...row,
       id: row.lesson_id,
+      subject_name: row.subject.subject_name,
+      grade_name: row.grade.grade_name,
+      term_name: row.term.term_name,
     }));
     setRows(rowsWithIds);
   }
-  const handleAddLessonClick = () => {
-    setData(null);
-    setOpenPopup(true);
+  const handleAddLessonClick = (
+    selectedSubjectId,
+    selectedSubjectName,
+    selectedGradeId,
+    selectedGradeName,
+    selectedTermId,
+    selectedTermName
+  ) => {
+    if (data) {
+      setOpenPopup(true);
+    } else {
+      setData(null);
+      setOpenPopup(true);
+      setSelectedSubjectId(selectedSubjectId);
+      setSelectedSubjectName(selectedSubjectName);
+      setSelectedGradeId(selectedGradeId);
+      setSelectedGradeName(selectedGradeName);
+      setSelectedTermId(selectedTermId);
+      setSelectedTermName(selectedTermName);
+    }
   };
 
   //columns for the data-grid
   const columns = [
     { field: "lesson_id", headerName: "ID", width: 100 },
     { field: "lesson_name", headerName: "Lesson", width: 200 },
-    // { field: "grade_id", headerName: "Grade", width: 200 },
-    // { field: "subject_id", headerName: "Subject", width: 200 },
-    // { field: "term_id", headerName: "Term", width: 200 },
+    {
+      field: "grade_name",
+      headerName: "Grade",
+      width: 200,
+      valueGetter: (params) => params.row.grade.grade_name,
+    },
+    {
+      field: "subject_name",
+      headerName: "Subject",
+      width: 200,
+      valueGetter: (params) => params.row.subject.subject_name,
+    },
+    {
+      field: "term_id",
+      headerName: "Term",
+      width: 200,
+      valueGetter: (params) => params.row.term.term_name,
+    },
 
     {
       field: "actions",
@@ -123,7 +166,17 @@ function Lessons() {
             Add Lesson
           </Button>
         </Box>
-        <AddLessonsPopup data={data} open={openPopup} onClose={setOpenPopup} />
+        <AddLessonsPopup
+          data={data}
+          open={openPopup}
+          onClose={setOpenPopup}
+          onSelectedSubject={handleAddLessonClick}
+          onSelectedGrade={handleAddLessonClick}
+          onSelectedTerm={handleAddLessonClick}
+          selectedSubjectName={selectedSubjectName}
+          selectedGradeName={selectedGradeName}
+          selectedTermName={selectedTermName}
+        />
         <div
           style={{
             height: 400,

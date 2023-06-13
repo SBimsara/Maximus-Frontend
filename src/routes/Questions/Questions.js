@@ -95,8 +95,7 @@ export default function QuestionPage() {
     const selectedTermElement = document.getElementById("term");
     const selectedLessonElement = document.getElementById("lesson");
     const selectedQuizTypeElement = document.querySelector(
-      'input[name="quizType"]:checked'
-    );
+      'input[name="quizType"]:checked' );
 
     if (
       selectedGradeElement &&

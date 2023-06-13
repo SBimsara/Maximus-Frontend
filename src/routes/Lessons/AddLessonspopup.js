@@ -18,14 +18,22 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
 import CustomCancelButton from "../../components/form/CancelButton";
-import { saveData } from "../../services/saveData";
-import { updateData } from "../../services/updateData";
 
 const saveURL = "http://localhost:8090/lesson";
 const updateURL = "http://localhost:8090/lesson/";
 
 function AddLessonsPopup(props) {
-  const { data, open, onClose } = props;
+  const {
+    data,
+    open,
+    onClose,
+    onSelectedSubject,
+    onSelectedGrade,
+    onSelectedTerm,
+    selectedSubjectName,
+    selectedGradeName,
+    selectedTermName,
+  } = props;
 
   const [lessonName, setLessonName] = useState("");
   const [grade, setGrade] = useState([]);
@@ -71,14 +79,17 @@ function AddLessonsPopup(props) {
   const handleGradeChange = (event) => {
     const selectedGradeId = event.target.value;
     setSelectedGradeId(selectedGradeId);
+    onSelectedGrade(selectedGradeId, event.target.textContent);
   };
   const handleSubjectChange = (event) => {
     const selectedsubjectId = event.target.value;
     setSelectedSubjectId(selectedsubjectId);
+    onSelectedSubject(selectedsubjectId, event.target.textContent);
   };
   const handleTermChange = (event) => {
     const selectedTermId = event.target.value;
     setSelectedTermId(selectedTermId);
+    onSelectedTerm(selectedTermId, event.target.textContent);
   };
 
   const [savedLessonName, setSavedLessonName] = useState("");
@@ -93,6 +104,8 @@ function AddLessonsPopup(props) {
 
   const [nameHelperText, setNameHelperText] = useState("helperText");
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleClose = () => {
     setIsNameError(false);
     setIsTermError(false);
@@ -102,7 +115,7 @@ function AddLessonsPopup(props) {
     setSelectedSubjectId("");
     setSelectedTermId("");
     // setTerm([0]);
-
+    window.location.reload();
     onClose(false);
   };
 
@@ -120,85 +133,64 @@ function AddLessonsPopup(props) {
     // const selectedSubjectElement = document.getElementById("subject");
     // const selectedTermElement = document.getElementById("term");
 
-    if (lessonName && selectedGradeId && selectedSubjectId && selectedTermId) {
+    if (
+      !lessonName &&
+      !selectedGradeId &&
+      !selectedSubjectId &&
+      !selectedTermId
+    ) {
       // const selectedGradeId = selectedGradeElement.value;
       // const selectedSubjectId = selectedSubjectElement.value;
       // const selectedTermId = selectedTermElement.value;
 
-      try {
-        if (data) {
-          const updatedLesson = {
-            lesson_id: data.id,
-            lesson_name: lessonName,
-            grade: {
-              grade_id: selectedGradeId,
-            },
-            subject: {
-              subject_id: selectedSubjectId,
-            },
-            term: {
-              term_id: selectedTermId,
-            },
-          };
-          await axios.put(`${updateURL}${data.lesson_id}`, updatedLesson);
-          console.log("Lesson updated successfully");
-        } else {
-          const newLesson = {
-            lesson_name: lessonName,
-            grade: {
-              grade_id: selectedGradeId,
-            },
-            subject: {
-              subject_id: selectedSubjectId,
-            },
-            term: {
-              term_id: selectedTermId,
-            },
-          };
-          const result = await axios.post(saveURL, newLesson);
-          console.log("Lesson added successfully", result.data);
-        }
-      } catch (error) {
-        console.error("Failed to add/update lesson data:", error);
-      }
-    } else {
       setIsNameError(!lessonName);
       setNameHelperText(!lessonName ? "Lesson name is required" : "helperText");
-      setIsTermError(!selectedTermId);
+
+      return;
     }
+    try {
+      if (data) {
+        const updatedLesson = {
+          lesson_id: data.id,
+          lesson_name: lessonName,
+          grade: {
+            grade_id: selectedGradeId,
+          },
+          subject: {
+            subject_id: selectedSubjectId,
+          },
+          term: {
+            term_id: selectedTermId,
+          },
+        };
+        await axios.put(`${updateURL}${data.lesson_id}`, updatedLesson);
+        console.log("Lesson updated successfully");
 
-    // if (isNameError && isTermError) {
-    //   console.log("access");
-
-    //   if (isEdit) {
-    //     const LessonData = {
-    //       id: data.id,
-    //       lessonName: lessonName,
-    //       term: term,
-    //     };
-    //     updateLesson(LessonData);
-    //     handleClose();
-    //   } else if (!isEdit) {
-    //     const LessonData = {
-    //       lesson_name: lessonName,
-    //       grade_id: term,
-    //     };
-    //     saveLesson(LessonData);
-    //     handleClose();
-    //   }
-    // }
-    handleClose();
+        handleClose();
+        window.location.reload();
+      } else {
+        const newLesson = {
+          lesson_name: lessonName,
+          grade: {
+            grade_id: selectedGradeId,
+          },
+          subject: {
+            subject_id: selectedSubjectId,
+          },
+          term: {
+            term_id: selectedTermId,
+          },
+        };
+        const result = await axios.post(saveURL, newLesson);
+        console.log("Lesson added successfully", result.data);
+        handleClose();
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error("Failed to add/update lesson data:", error);
+      setErrorMessage("*required");
+    }
   };
-
-  async function saveLesson(data) {
-    const result = await saveData(saveURL, data);
-    console.log(result);
-  }
-
-  async function updateLesson(data) {
-    const result = await updateData(saveURL, data);
-    console.log(result);
-  }
 
   return (
     <>
@@ -218,7 +210,7 @@ function AddLessonsPopup(props) {
 
         <DialogContent>
           <DialogContentText>
-            Please enter details to create a new lesson.
+            Please enter details to {data ? "edit Lesson" : "add Lesson"}.
           </DialogContentText>
 
           <Box
@@ -231,7 +223,7 @@ function AddLessonsPopup(props) {
               id="outlined-basic"
               label="Name"
               variant="outlined"
-              value={lessonName}
+              value={lessonName || ""}
               error={isNameError}
               helperText={nameHelperText}
               onChange={handleNameChange}
@@ -253,6 +245,7 @@ function AddLessonsPopup(props) {
                 value={selectedGradeId || ""}
                 label="Grade*"
                 onChange={handleGradeChange}
+                required={true}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -263,7 +256,11 @@ function AddLessonsPopup(props) {
                   </MenuItem>
                 ))}
               </Select>
-              <FormHelperText>Required</FormHelperText>
+              {errorMessage && (
+                <FormHelperText className="space">
+                  {errorMessage}
+                </FormHelperText>
+              )}
             </FormControl>
             <FormControl fullWidth sx={{ mt: 0.8 }} error={isTermError}>
               <InputLabel id="subject-label">Subject</InputLabel>
@@ -273,6 +270,7 @@ function AddLessonsPopup(props) {
                 value={selectedSubjectId || ""}
                 label="Subject*"
                 onChange={handleSubjectChange}
+                required={true}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -283,7 +281,11 @@ function AddLessonsPopup(props) {
                   </MenuItem>
                 ))}
               </Select>
-              <FormHelperText>Required</FormHelperText>
+              {errorMessage && (
+                <FormHelperText className="space">
+                  {errorMessage}
+                </FormHelperText>
+              )}
             </FormControl>
             <FormControl fullWidth sx={{ mt: 0.8 }} error={isTermError}>
               <InputLabel id="term-label">Term</InputLabel>
@@ -293,6 +295,7 @@ function AddLessonsPopup(props) {
                 value={selectedTermId || ""}
                 label="Term*"
                 onChange={handleTermChange}
+                required={true}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -303,7 +306,11 @@ function AddLessonsPopup(props) {
                   </MenuItem>
                 ))}
               </Select>
-              <FormHelperText>Required</FormHelperText>
+              {errorMessage && (
+                <FormHelperText className="space">
+                  {errorMessage}
+                </FormHelperText>
+              )}
             </FormControl>
           </Box>
         </DialogContent>
