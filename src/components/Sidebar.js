@@ -148,22 +148,20 @@ export default function Sidebar() {
               </ListItemButton>
             </ListItem>
 
-            <ListItem disablePadding>
+            {/* <ListItem disablePadding>
               <ListItemButton href='/authentication' selected={location.pathname === '/authentication' ? true : false}>
 
               <ListItemButton
                 href="/authentication"
                 selected={
-                  location.pathname === "/authentication" ? true : false
-                }
-              >
+                  location.pathname === "/authentication" ? true : false}/>
 
                 <ListItemIcon>
                   <PeopleIcon />
                 </ListItemIcon>
                 <ListItemText primary="Authentication" />
               </ListItemButton>
-            </ListItem>
+            </ListItem> */}
 
             <ListItem disablePadding>
               <ListItemButton
