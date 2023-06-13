@@ -14,6 +14,7 @@ import CustomCancelButton from "../../components/form/CancelButton";
 
 import { useState, useEffect } from "react";
 import { saveData } from "../../services/saveData";
+import CustomAlert from "../../components/ui/CustomAlert";
 
 //url for the saveData
 const saveURL = "http://localhost:8080/api/v1/plan/savePlan";
@@ -59,6 +60,8 @@ export default function PlanPopup(props) {
     setDiscount(vald);
   };
 
+  //data validation functions
+
   const nameValidation = () => {
     if (name === "") {
       setIsNameError(true);
@@ -93,11 +96,11 @@ export default function PlanPopup(props) {
 
   const discountValidation = () => {
     if (discount === null) {
-      setIsPriceError(true);
+      setIsDiscountError(true);
       setDiscountHelperText("This field is required");
       return false;
     } else if (/[a-zA-Z]/.test(discount)) {
-      setIsPriceError(true);
+      setIsDiscountError(true);
       setDiscountHelperText("Please restrict your input to Integers or floats");
       return false;
     } else if (discount < 0 || discount > 1) {
@@ -137,6 +140,7 @@ export default function PlanPopup(props) {
         try {
           const result = await saveData(saveURL, data);
           console.log(result);
+
           handleClose();
         } catch (error) {
           console.log(error);
@@ -147,9 +151,7 @@ export default function PlanPopup(props) {
     }
   };
 
-  // useEffect(() => {
-
-  // }, [, isNameError, isPriceError, isDiscountError]);
+  useEffect(() => {}, [onClose]);
 
   //
   //
@@ -233,6 +235,7 @@ export default function PlanPopup(props) {
             onClick={() => {
               handleConfirmClick();
             }}
+            s
           >
             Confirm
           </Button>

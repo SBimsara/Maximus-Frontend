@@ -80,6 +80,14 @@ function Plans(props) {
   //use state for datagrid refresh
   const [refreshGrid, setRefreshGrid] = useState(true);
 
+  const [nameHelperText, setNameHelperText] = useState("");
+  const [priceHelperText, setPriceHelperText] = useState("");
+  const [discountHelperText, setDiscountHelperText] = useState("");
+
+  const [isNameError, setIsNameError] = useState(false);
+  const [isPriceError, setIsPriceError] = useState(false);
+  const [isDiscountError, setIsDiscountError] = useState(false);
+
   //functions to get data for the data-grid
   // async function fetchSubjects() {
   //   const result = await getData(url1);
@@ -178,14 +186,72 @@ function Plans(props) {
     setIsResetDisabled(false);
   };
 
+  const nameValidation = () => {
+    if (pName === "") {
+      setIsNameError(true);
+      setNameHelperText("This field is required");
+      return false; // name is not error free
+    } else {
+      setIsNameError(false);
+      setNameHelperText("");
+      return true; //name is error free
+    }
+  };
+
+  const priceValidation = () => {
+    if (pPrice === null) {
+      setIsPriceError(true);
+      setPriceHelperText("This field is required");
+      return false;
+    } else if (/[a-zA-Z]/.test(pPrice)) {
+      setIsPriceError(true);
+      setPriceHelperText("Please do not enter characters");
+      return false;
+    } else if (pPrice < 0) {
+      setIsPriceError(true);
+      setPriceHelperText("Please restrict your inputs into positive numbers");
+      return false;
+    } else {
+      setIsPriceError(false);
+      setPriceHelperText("");
+      return true;
+    }
+  };
+
+  const discountValidation = () => {
+    if (pDiscount === null) {
+      setIsDiscountError(true);
+      setDiscountHelperText("This field is required");
+      return false;
+    } else if (/[a-zA-Z]/.test(pDiscount)) {
+      setIsDiscountError(true);
+      setDiscountHelperText("Please restrict your input to Integers or floats");
+      return false;
+    } else if (pDiscount < 0 || pDiscount > 1) {
+      setIsDiscountError(true);
+      setDiscountHelperText("Discount should be between 0 and 1");
+      return false;
+    } else {
+      setIsDiscountError(false);
+      setDiscountHelperText("");
+      return true;
+    }
+  };
+
   const handleSaveCilck = () => {
-    const data = {
-      id: pid,
-      name: pName,
-      price: pPrice,
-      discount: pDiscount,
-    };
-    updatePlan(data);
+    let isNameErrorFree = nameValidation();
+    let isPriceErrorFree = priceValidation();
+    let isDiscountErrorFree = discountValidation();
+
+    if (isNameErrorFree && isPriceErrorFree && isDiscountErrorFree) {
+      const data = {
+        id: pid,
+        name: pName,
+        price: pPrice,
+        discount: pDiscount,
+      };
+      updatePlan(data);
+    }
   };
 
   const handleResetClick = () => {
@@ -215,6 +281,8 @@ function Plans(props) {
           </Dropdown>  */}
 
             <TextField
+              error={isNameError}
+              helperText={nameHelperText}
               id="plan-name"
               label="Name"
               variant="outlined"
@@ -229,6 +297,8 @@ function Plans(props) {
             <br />
 
             <TextField
+              error={isPriceError}
+              helperText={priceHelperText}
               id="plan-price"
               label="Price"
               variant="outlined"
@@ -243,6 +313,8 @@ function Plans(props) {
             <br />
 
             <TextField
+              error={isDiscountError}
+              helperText={discountHelperText}
               id="plan-discount"
               label="Discount"
               variant="outlined"
