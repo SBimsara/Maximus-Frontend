@@ -1,38 +1,37 @@
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import CssBaseline from "@mui/material/CssBaseline";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
-import SubjectIcon from '@mui/icons-material/Subject';
-import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
-import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import { Dashboard } from '@mui/icons-material';
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import SubjectIcon from "@mui/icons-material/Subject";
+import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
+import PeopleIcon from "@mui/icons-material/People";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import { Dashboard } from "@mui/icons-material";
 
-import { useState } from 'react';
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import Avatar from '@mui/material/Avatar';
-import { Stack } from '@mui/material';
+import Avatar from "@mui/material/Avatar";
+import { Stack } from "@mui/material";
+import Nav from "../routes/Statistics/navBar/Nav";
 
 const drawerWidth = 220;
 
 const listItem = {
-
   "&.Mui-selected": {
-    backgroundColor: "#ff0000"
-  }
-}
-
+    backgroundColor: "#ff0000",
+  },
+};
 
 export default function Sidebar() {
   const location = useLocation();
@@ -45,13 +44,15 @@ export default function Sidebar() {
 
   return (
     <>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: "flex" }}>
         <CssBaseline />
 
         <AppBar
-
           position="fixed"
-          sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`}}
+          sx={{
+            width: `calc(100% - ${drawerWidth}px)`,
+            ml: `${drawerWidth}px`,
+          }}
           elevation={0}
         >
           <Stack direction="row">
@@ -60,15 +61,14 @@ export default function Sidebar() {
                 {location.pathname === '/'
                    ?"Dashboard"
                     :(location.pathname === '/addPlans')
-                      ?"Add Plans"
-                      :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
+                      ?"Plans"
+                      :(location.pathname === '/planDe')
+                        ?"Edit Plans"
+                        :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
               </Typography>
-
             </Toolbar>
             <Toolbar sx={{ marginLeft: "auto" }}>
-              <Avatar>
-
-              </Avatar>
+              <Avatar></Avatar>
             </Toolbar>
           </Stack>
         </AppBar>
@@ -77,15 +77,14 @@ export default function Sidebar() {
             sx: {
               // backgroundColor: "#0091ea",
               color: "#000",
-
-            }
+            },
           }}
           sx={{
             width: drawerWidth,
             flexShrink: 0,
-            '& .MuiDrawer-paper': {
+            "& .MuiDrawer-paper": {
               width: drawerWidth,
-              boxSizing: 'border-box',
+              boxSizing: "border-box",
             },
           }}
           variant="permanent"
@@ -94,9 +93,11 @@ export default function Sidebar() {
           <Toolbar />
           {/* <Divider /> */}
           <List>
-
-            <ListItem disablePadding  >
-              <ListItemButton href='/' selected={location.pathname === '/' ? true : false}>
+            <ListItem disablePadding>
+              <ListItemButton
+                href="/"
+                selected={location.pathname === "/" ? true : false}
+              >
                 <ListItemIcon>
                   <DashboardIcon />
                 </ListItemIcon>
@@ -105,7 +106,7 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton href='/addPlans' selected={location.pathname === '/addPlans' ? true : false}>
+              <ListItemButton href='/addPlans' selected={(location.pathname === '/addPlans')||(location.pathname === '/planDe') ? true : false}>
                 <ListItemIcon>
                   <SubscriptionsIcon />
                 </ListItemIcon>
@@ -114,7 +115,10 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton href='/questions' selected={location.pathname === '/questions' ? true : false}>
+              <ListItemButton
+                href="/questions"
+                selected={location.pathname === "/questions" ? true : false}
+              >
                 <ListItemIcon>
                   <UploadFileIcon />
                 </ListItemIcon>
@@ -123,7 +127,10 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton href='/subjects' selected={location.pathname === '/subjects' ? true : false}>
+              <ListItemButton
+                href="/subjects"
+                selected={location.pathname === "/subjects" ? true : false}
+              >
                 <ListItemIcon>
                   <SubjectIcon />
                 </ListItemIcon>
@@ -132,6 +139,7 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
+
               <ListItemButton href='/lessons' selected={location.pathname === '/lessons' ? true : false}>
                 <ListItemIcon>
                   <SubjectIcon />
@@ -142,6 +150,14 @@ export default function Sidebar() {
 
             <ListItem disablePadding>
               <ListItemButton href='/authentication' selected={location.pathname === '/authentication' ? true : false}>
+
+              <ListItemButton
+                href="/authentication"
+                selected={
+                  location.pathname === "/authentication" ? true : false
+                }
+              >
+
                 <ListItemIcon>
                   <PeopleIcon />
                 </ListItemIcon>
@@ -150,7 +166,10 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton href='/statistics' selected={location.pathname === '/statistics' ? true : false}>
+              <ListItemButton
+                href="/statistics"
+                selected={location.pathname === "/statistics" ? true : false}
+              >
                 <ListItemIcon>
                   <BarChartIcon />
                 </ListItemIcon>
@@ -159,10 +178,8 @@ export default function Sidebar() {
             </ListItem>
           </List>
           {/* <Divider /> */}
-
         </Drawer>
       </Box>
-
     </>
   );
 }
