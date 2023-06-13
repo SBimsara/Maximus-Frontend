@@ -1,0 +1,86 @@
+
+
+
+
+.Contain {
+   
+    margin-left: 230px;
+    /* margin-top: 10px; */
+    display:flex;
+    justify-content: space-around;
+ 
+    }
+
+    .profile{
+        width: 550px;
+        padding: 10px;
+        -webkit-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 30px;
+        height: 470px;
+
+       
+    }
+    
+
+    .stat{
+        width: 510px;
+        padding: 10px;
+        -webkit-box-shadow: 10px 10px 25px -10px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 30px;
+        height: 470px;
+    }
+
+   .ProfilePic{
+    height: 110px;
+    width:auto;
+    object-fit:cover;
+    border-radius: 30%;
+    margin-top: 10px;
+
+   }
+
+/* 
+   .inputs{
+   margin-top: 10px;
+   } */
+
+   .gaps{
+    margin-top: 20px;
+    text-align: start;
+    margin-left: 20px;
+
+   }
+
+   .column{
+    margin-top: 13px;
+    width: 100px;
+    
+   }
+
+.column input[type="text"]{
+    width: 330px;
+}
+
+.form {
+    margin-top: 30px;
+  }
+
+  .activity{
+    margin-top: 25px;
+    
+  }
+
+.massageBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    }

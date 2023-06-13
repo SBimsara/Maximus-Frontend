@@ -21,17 +21,21 @@ import { Dashboard } from "@mui/icons-material";
 
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import { Stack } from "@mui/material";
+
+import Avatar from '@mui/material/Avatar';
+import { Stack } from '@mui/material';
+
 import Nav from "../routes/Statistics/navBar/Nav";
 
 const drawerWidth = 220;
 
 const listItem = {
   "&.Mui-selected": {
-    backgroundColor: "#ff0000",
-  },
-};
+
+    backgroundColor: "#ff0000"
+  }
+}
+
 
 export default function Sidebar() {
   const location = useLocation();
@@ -47,9 +51,10 @@ export default function Sidebar() {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
 
-        // <AppBar
+        //  <AppBar
         //   position="fixed"
-        //   sx={{width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`}}
+        //   sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`}}
+
         //   elevation={0}
         // >
         //   <Stack direction="row">
@@ -87,12 +92,15 @@ export default function Sidebar() {
           variant="permanent"
           anchor="left"
         >
-            <div className="logo">
+
+          <div className="logo">
+
                 <img src="./all-image/logo.jpg" alt="" className="logo" width="200px" height="200px"/>
             </div>
           <Toolbar />
           {/* <Divider /> */}
           <List>
+
             <ListItem disablePadding>
               <ListItemButton
                 href="/dashboard"
@@ -151,6 +159,7 @@ export default function Sidebar() {
             // </ListItem>
 
             <ListItem disablePadding>
+
               <ListItemButton
                 href="/statistics"
                 selected={location.pathname === "/statistics" ? true : false}

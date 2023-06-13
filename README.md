@@ -17,3 +17,13 @@ npm install @mui/icons-material
 
 ## MUI Data Grid
 npm install @mui/x-data-grid
+
+## React Project Build
+npm install
+
+npm install -g react-devtools
+
+npm install axios@0.24.0
+
+
+npm install antd
