@@ -11,7 +11,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
-
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import SubjectIcon from '@mui/icons-material/Subject';
@@ -24,17 +23,15 @@ import { useState } from 'react';
 import { useLocation } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import { Stack } from '@mui/material';
-
+import Nav from "../routes/Statistics/navBar/Nav";
 
 const drawerWidth = 220;
 
 const listItem = {
-
   "&.Mui-selected": {
     backgroundColor: "#ff0000"
   }
 }
-
 
 export default function Sidebar() {
   const location = useLocation();
@@ -47,41 +44,37 @@ export default function Sidebar() {
 
   return (
     <>
-
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
 
-        {/* <AppBar
-
-          position="fixed"
-          sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`}}
-          elevation={0}
-        >
-          <Stack direction="row">
-            <Toolbar>
-              <Typography variant="h6" noWrap component="div">
-                {location.pathname === '/'
-                   ?"Dashboard"
-                    :(location.pathname === '/addPlans')
-                      ?"Add Plans"
-                      :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
-              </Typography>
-
-            </Toolbar>
-            <Toolbar sx={{ marginLeft: "auto" }}>
-              <Avatar>
-
-              </Avatar>
-            </Toolbar>
-          </Stack>
-        </AppBar> */}
+        //  <AppBar
+        //   position="fixed"
+        //   sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`}}
+        //   elevation={0}
+        // >
+        //   <Stack direction="row">
+        //     <Toolbar>
+        //       <Typography variant="h6" noWrap component="div">
+        //         {location.pathname === '/'
+        //            ?"Dashboard"
+        //             :(location.pathname === '/addPlans')
+        //               ?"Plans"
+        //               :(location.pathname === '/planDe')
+        //                 ?"Edit Plans"
+        //                 :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
+        //       </Typography>
+        //     </Toolbar>
+        //     <Toolbar sx={{ marginLeft: "auto" }}>
+        //       <Avatar></Avatar>
+        //     </Toolbar>
+        //   </Stack>
+        // </AppBar>
         <Drawer
           PaperProps={{
             sx: {
               // backgroundColor: "#0091ea",
               color: "#000",
-
-            }
+            },
           }}
           sx={{
             width: drawerWidth,
@@ -99,17 +92,12 @@ export default function Sidebar() {
             </div>
           <Toolbar />
           {/* <Divider /> */}
-
-          
           <List>
-          
-          
-          
-
             <ListItem disablePadding  >
-            
-              <ListItemButton href='/dashboard' selected={location.pathname === '/dashboard' ? true : false}>
-             
+              <ListItemButton 
+                href='/dashboard' 
+                selected={location.pathname === '/dashboard' ? true : false}
+              >
                 <ListItemIcon>
                   <DashboardIcon />
                 </ListItemIcon>
@@ -145,16 +133,28 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton href='/authentication' selected={location.pathname === '/authentication' ? true : false}>
+              <ListItemButton href='/lessons' selected={location.pathname === '/lessons' ? true : false}>
                 <ListItemIcon>
-                  <PeopleIcon />
+                  <SubjectIcon />
                 </ListItemIcon>
-                <ListItemText primary="Authentication" />
+                <ListItemText primary="Lessons" />
               </ListItemButton>
             </ListItem>
 
+            // <ListItem disablePadding>
+            //   <ListItemButton href='/authentication' selected={location.pathname === '/authentication' ? true : false}>
+            //     <ListItemIcon>
+            //       <PeopleIcon />
+            //     </ListItemIcon>
+            //     <ListItemText primary="Authentication" />
+            //   </ListItemButton>
+            // </ListItem>
+
             <ListItem disablePadding>
-              <ListItemButton href='/statistics' selected={location.pathname === '/statistics' ? true : false}>
+              <ListItemButton 
+                href='/statistics' 
+                  selected={location.pathname === '/statistics' ? true : false}
+              >
                 <ListItemIcon>
                   <BarChartIcon />
                 </ListItemIcon>
@@ -163,10 +163,8 @@ export default function Sidebar() {
             </ListItem>
           </List>
           {/* <Divider /> */}
-
         </Drawer>
       </Box>
-
     </>
   );
 }
