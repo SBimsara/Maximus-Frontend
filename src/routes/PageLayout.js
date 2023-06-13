@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Grid from '@mui/material/Grid';
-import Plans from './Plans/Plans';
+import Plans from './Plans/PlanDetails';
 
 export default function PageLayout() {
   return (

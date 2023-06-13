@@ -58,10 +58,13 @@ export default function Sidebar() {
           <Stack direction="row">
             <Toolbar>
               <Typography variant="h6" noWrap component="div">
-                {location.pathname === "/"
-                  ? "Dashboard"
-                  : location.pathname.substring(1, 2).toUpperCase() +
-                    location.pathname.substring(2)}
+                {location.pathname === '/'
+                   ?"Dashboard"
+                    :(location.pathname === '/addPlans')
+                      ?"Plans"
+                      :(location.pathname === '/planDe')
+                        ?"Edit Plans"
+                        :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
               </Typography>
             </Toolbar>
             <Toolbar sx={{ marginLeft: "auto" }}>
@@ -103,14 +106,11 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton
-                href="/plans"
-                selected={location.pathname === "/plans" ? true : false}
-              >
+              <ListItemButton href='/addPlans' selected={(location.pathname === '/addPlans')||(location.pathname === '/planDe') ? true : false}>
                 <ListItemIcon>
                   <SubscriptionsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Plans" />
+                <ListItemText primary="Add Plans" />
               </ListItemButton>
             </ListItem>
 
