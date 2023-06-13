@@ -96,7 +96,6 @@ function ResetPassword() {
       setErrors({ ...errors, confirmNewPassword: '' });
     }
   };
-
   const handleResetPassword = () => {
      // Perform validations
   let usernameError = '';
@@ -144,10 +143,12 @@ function ResetPassword() {
             throw new Error('Failed to reset password');
           }
         })
+       
         .then(data => {
+          console.log('Data:', data);
           if (data == 'success') {
             console.log('Password reset successful!');
-
+            console.log('Redirecting to login...');
           } else {
             setErrorMessage(data);
           }
@@ -309,6 +310,6 @@ function ResetPassword() {
       </Grid>
       </div>
   );
-}
+            }
 
 export default ResetPassword;

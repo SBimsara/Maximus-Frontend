@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import './Styles/LoginStyles.css';
 import Dashboard from "../Dashboard";
 import { useState } from 'react';
+import logo from "../../assets/images/logo.jpeg"
 
 
 function Login() {
@@ -63,11 +64,9 @@ const handleLogin = () => {
         <Grid container spacing={3}>
           {/* Typography and Picture */}
           <Grid item xs={12} md={6} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-          <Typography variant="h4" align="center" gutterBottom style={{ fontWeight: 'bold', fontSize: '2.5rem', color: '#000000' }}>
-  Quizzer
-</Typography>
 
-<img src="\assets\images" alt="Quizzer Logo" style={{ width: '200px', height: '200px', marginTop: '20px' }} />
+
+<img src={logo}alt="Quizzer Logo" style={{ width: '500px', height: '400px', marginTop: '20px' }} />
 
           </Grid>
             {/* Login form container. */}
