@@ -51,29 +51,29 @@ export default function Sidebar() {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
 
-        //  <AppBar
-        //   position="fixed"
-        //   sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`}}
+          {/* <AppBar
+           position="fixed"
+           sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`}}
 
-        //   elevation={0}
-        // >
-        //   <Stack direction="row">
-        //     <Toolbar>
-        //       <Typography variant="h6" noWrap component="div">
-        //         {location.pathname === '/'
-        //            ?"Dashboard"
-        //             :(location.pathname === '/addPlans')
-        //               ?"Plans"
-        //               :(location.pathname === '/planDe')
-        //                 ?"Edit Plans"
-        //                 :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
-        //       </Typography>
-        //     </Toolbar>
-        //     <Toolbar sx={{ marginLeft: "auto" }}>
-        //       <Avatar></Avatar>
-        //     </Toolbar>
-        //   </Stack>
-        // </AppBar>
+           elevation={0}
+         >
+           <Stack direction="row">
+             <Toolbar>
+               <Typography variant="h6" noWrap component="div">
+                 {location.pathname === '/'
+                    ?"Dashboard"
+                     :(location.pathname === '/addPlans')
+                       ?"Plans"
+                       :(location.pathname === '/planDe')
+                         ?"Edit Plans"
+                         :location.pathname.substring(1, 2).toUpperCase() + location.pathname.substring(2)}
+               </Typography>
+             </Toolbar>
+             <Toolbar sx={{ marginLeft: "auto" }}>
+              <Avatar></Avatar>
+             </Toolbar>
+           </Stack>
+         </AppBar> */}
         <Drawer
           PaperProps={{
             sx: {
@@ -91,8 +91,8 @@ export default function Sidebar() {
           }}
           variant="permanent"
           anchor="left"
-        >
-
+        
+>
           <div className="logo">
 
                 <img src="./all-image/logo.jpg" alt="" className="logo" width="200px" height="200px"/>
@@ -149,14 +149,14 @@ export default function Sidebar() {
               </ListItemButton>
             </ListItem>
 
-            // <ListItem disablePadding>
-            //   <ListItemButton href='/authentication' selected={location.pathname === '/authentication' ? true : false}>
-            //     <ListItemIcon>
-            //       <PeopleIcon />
-            //     </ListItemIcon>
-            //     <ListItemText primary="Authentication" />
-            //   </ListItemButton>
-            // </ListItem>
+             {/* <ListItem disablePadding>
+              <ListItemButton href='/authentication' selected={location.pathname === '/authentication' ? true : false}>
+                 <ListItemIcon>
+                   <PeopleIcon />
+                 </ListItemIcon>
+                 <ListItemText primary="Authentication" />
+             </ListItemButton>
+             </ListItem> */}
 
             <ListItem disablePadding>
 

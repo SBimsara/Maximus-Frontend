@@ -2,7 +2,7 @@
 import Dashboard from "./routes/Dashboard/Dashboard";
 
 import Questions from "./routes/Questions/Questions";
-import Dashboard from "./routes/Dashboard";
+
 import Subjects from "./routes/Subjects/Subjects";
 import Lessons from "./routes/Lessons/Lessons";
 
@@ -12,7 +12,7 @@ import Statistics from "./routes/Statistics/Statistics";
 import Stat1 from "./routes/Statistics/Stat1/Stat1";
 import Stat0 from "./routes/Statistics/Stat0/Stat0";
 import Nav from "./routes/Statistics/navBar/Nav";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+
 
 import AddPlans from "./routes/Plans/AddPlans";
 import PlanDetails from "./routes/Plans/PlanDetails";
@@ -50,29 +50,13 @@ function App() {
     <>
       {/* <DropdownMenu/> */}
 
-      <Sidebar />
-    
-      <Navigation />
-
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/questions" element={<Questions />} />
-        <Route path="/subjects" element={<Subjects />} />
-
-        <Route path="/lessons" element={<Lessons />} />
-      
-        <Route path="/addPlans" element={<AddPlans />} />
-        <Route path="/planDe" element={<PlanDetails />} />
   
-
-  return (
-   <>
-       <Sidebar />
+       
      
        
         <Navigation /> 
-{/*       
-        <Navbar1 /> */}
+       <Sidebar />
+        {/*<Navbar1 /> */}
         <Routes>
 
         <Route path="/login" element={<Login/>}/>
@@ -80,7 +64,7 @@ function App() {
           <Route path="/questions" element={<Questions/>}/>
           <Route path="/subjects" element={<Subjects/>}/>
           <Route path="/addPlans" element={<AddPlans/>}/>
-          
+          <Route path="/lessons" element={<Lessons />} />
           
           <Route path="/planDe" element={<PlanDetails/>}/>
 
@@ -108,7 +92,7 @@ function App() {
 
        
      
-    </>
+  
 
   );
 }
