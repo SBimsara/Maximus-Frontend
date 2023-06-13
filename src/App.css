@@ -9,8 +9,10 @@
 
 .home,
 .Subjects, 
+
+.Lessons,
 .Questions,
-.Plans
+.Plans 
 .Settings {
   display: flex;
   height: 90vh;
@@ -37,8 +39,9 @@
 @media screen and (max-width: 960px) {
   .home,
   .Subjects,
+  .Lessons,
   .Questions,
-  .Plans
+  .Plans 
   .Settings {
     font-size: 2.5rem;
   }

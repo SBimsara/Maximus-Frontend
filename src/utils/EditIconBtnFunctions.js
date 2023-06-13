@@ -5,5 +5,9 @@ export const handleEditClick1 = () => {
 export const handleEditClick2 = () => {
     window.location.href="./planDe";
     //window.open("./planDe");
+};
+
+export const handleOpenEditPopup = () =>{
+    
 }
   

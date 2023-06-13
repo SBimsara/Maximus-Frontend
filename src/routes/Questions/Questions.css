@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.tableStyle {
+  border-collapse: separate;
+  border-spacing: 10px 20px;
+  border-style: hidden;
+}
+
+.space {
+  margin-right: 30px;
+}
+
+.spaceRadio {
+  margin-right: 10px;
+}
+
+.spaceLink {
+  margin-left: 60px;
+  text-decoration: none;
+}

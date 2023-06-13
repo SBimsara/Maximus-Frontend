@@ -1,0 +1,63 @@
+[
+    {
+      "id":1,
+      "grade":"10",
+      "subject": "buddism",
+      "lesson":"animal love",
+      "question": "which animal is beautiful",
+      "answer_1": "frog",
+      "answer_2": "rat",
+      "answer_3": "cat",
+      "answer_4": "dog",
+      "correct_answer_number":"3"
+    
+    },
+    {
+      "id":2,
+      "grade":"10",
+      "subject": "buddism",
+      "lesson":"animal love",
+      "question": "which animal is beautiful",
+      "answer_1": "frog",
+      "answer_2": "rat",
+      "answer_3": "cat",
+      "answer_4": "dog",
+      "correct_answer_number":"3"
+    },
+    {
+      "id":3,
+      "grade":"10",
+      "subject": "buddism",
+      "lesson":"animal love",
+      "question": "which animal is beautiful",
+      "answer_1": "frog",
+      "answer_2": "rat",
+      "answer_3": "cat",
+      "answer_4": "dog",
+      "correct_answer_number":"3"
+    },
+    {
+      "id":4,
+      "grade":"10",
+      "subject": "buddism",
+      "lesson":"animal love",
+      "question": "which animal is beautiful",
+      "answer_1": "frog",
+      "answer_2": "rat",
+      "answer_3": "cat",
+      "answer_4": "dog",
+      "correct_answer_number":"3"
+    },
+    {
+      "id":5,
+      "grade":"10",
+      "subject": "buddism",
+      "lesson":"animal love",
+      "question": "which animal is beautiful",
+      "answer_1": "frog",
+      "answer_2": "rat",
+      "answer_3": "cat",
+      "answer_4": "dog",
+      "correct_answer_number":"3"
+    }
+  ]
