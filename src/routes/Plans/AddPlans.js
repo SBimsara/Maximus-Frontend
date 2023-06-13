@@ -21,6 +21,8 @@ import { PageContainer } from './styles/AddPlans.styles';
 import Plans from './PlanDetails';
 import ActionAlerts from '../../components/ui/actionAlerts';
 
+import Navbar1 from '../../components/Navbar1';
+
 
 //url for the deleteDataById service
 const delURL = "http://localhost:8080/api/v1/plan/deletePlan/";
@@ -89,6 +91,7 @@ export async function deletePlans(subId) {
 
 export default function AddPlans() {
 
+
     const [rows, setRows] = useState([]);
     const [openPopup,setOpenPopup] = useState(false);
 
@@ -111,7 +114,15 @@ export default function AddPlans() {
 
 
     return (
+   
         <>
+
+             
+    <div className="AddPlans">
+    <Navbar1 text="AddPlans" />
+    </div>
+  
+
         <PageContainer>
             <Box sx={{mb:2}}>
             <Button variant='outlined' startIcon={<AddCircleIcon /> } onClick={handleAddPlanClick}>Add Plan</Button>

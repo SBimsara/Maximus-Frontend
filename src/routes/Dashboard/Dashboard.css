@@ -1,0 +1,38 @@
+
+/* .Fulldashboard{
+    background-color: rgb(231, 128, 11);
+    
+} */
+
+
+.dashboard {
+   
+    margin-left: 230px;
+    margin-top: 10px;
+    display:flex;
+    justify-content: space-around;
+    
+    }
+
+    .left{
+        width: 300px;
+        padding: 10px;
+        -webkit-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        border-radius: 10px;
+        text-align: center;
+        
+    }
+
+    .right{
+        width: 300px;
+        padding: 10px;
+        -webkit-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 25px -10px rgba(0,0,0,0.75);
+        border-radius: 10px;
+        text-align: center;
+    }
+
+   

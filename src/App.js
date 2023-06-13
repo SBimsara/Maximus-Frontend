@@ -1,14 +1,16 @@
 import Questions from "./routes/Questions";
-import Dashboard from "./routes/Dashboard";
+import Dashboard from "./routes/Dashboard/Dashboard";
 import Subjects from "./routes/Subjects";
+// import Plans from "./routes/Plans/Plans";   
 //import PlanDetails from "./routes/Plans/PlanDetails";
 import ErrorPage from "./routes/ErrorPage";
 import AddPlans from "./routes/Plans/AddPlans";
 import PlanDetails from "./routes/Plans/PlanDetails";
 
 import './App.css';
+import Navbar1 from "./components/Navbar1";
 import Sidebar  from "./components/Sidebar";
-import Navbar  from "./components/Navbar";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Popup from "./routes/Plans/Popup";
 
@@ -32,11 +34,14 @@ function App() {
   
   return (
    <>
-        {/* <DropdownMenu/> */}
-        <Sidebar/>
-        {/* <Navbar/> */}
+       
+        
+         <Sidebar />
+     
+{/*       
+        <Navbar1 /> */}
         <Routes>
-          <Route path="/" element={<Dashboard/>} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/questions" element={<Questions/>}/>
           <Route path="/subjects" element={<Subjects/>}/>
           <Route path="/addPlans" element={<AddPlans/>}/>
@@ -47,6 +52,7 @@ function App() {
         </Routes>
         {/* <Popup/> */}
         {/* <PageLayout/> */}
+        
         {/* <CustomDropdown/> */}
 
         {/* <CustomDropdown/> */}

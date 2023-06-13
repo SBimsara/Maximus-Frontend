@@ -1,0 +1,39 @@
+.box{
+    height: 50px;
+    width: 100%;
+    background-color: #c992bb;
+    display: flex;
+    align-items: center;
+    color:black;
+    
+}
+/* .logo{
+    flex: 8;
+    margin-right: 250px;
+    color:white;
+    text-size-adjust: 30px;
+    
+
+}
+
+/* .NavBarcenter{
+    flex:6;
+} */
+/* 
+.navbarlinks{
+    flex: 2;
+    color:white;
+    text-size-adjust: 50px;
+    margin-left: 200px;
+   
+    
+} */ 
+
+.title{
+   margin-left: 670px;
+   font-size: 35px;
+   align-items: center;
+   display: flex;
+   justify-content: center;
+   
+}
