@@ -9,16 +9,23 @@ import { updateData } from '../../../services/updateData';
 import "antd/dist/antd"
 import {  message } from 'antd';
 
- const getURL = "http://localhost:8082/api/v1/admin/getAdminByAdminId/"
+ const getURL = "http://localhost:8080/api/v1/admin/getAdminByAdminId/"
  const id = "1";
 
 export default function Contain() {
 
-  const [name,setName]=useState('')
-  const [address,setAddress]=useState('')
-  const [mobilenum,setPhonenum]=useState('')
+  const [firstName,setfName]=useState('')
+  const [lastName,setlName]=useState('')
+  const [contactNumber,setPhonenum]=useState('')
   const [email,setEmail]=useState('')
-  const [age,setAge]=useState('')
+  const [gender,setGender]=useState('')
+  const[dateOfBirth,setDate]=useState('')
+  const[nic,setNIC]=useState('')
+  const[username,setUser]=useState('')
+  const[password,setPassword]=useState('')
+  const[isMainAdmin,setMain]=useState('')
+
+  // const [nic,setID]=useState('')
   //const [age,setAge]=useState('')
  
  
@@ -26,7 +33,120 @@ export default function Contain() {
   const [isDisabled, setisDisabled] = useState(true);
  
  
- 
+
+  
+const [firstNameError, setFirstNameError] = useState(false);
+const [lastNameError, setLastNameError] = useState(false);
+const [contactNumberError, setContactNumberError] = useState(false);
+const [emailError, setEmailError] = useState(false);
+// const [nicError, setNICError] = useState(false);
+
+const [firstNameErrorHelperText ,setFirstNameErrorHelperText] = useState("")
+const [lastNameErrorHelperText ,setLastNameErrorHelperText] = useState("")
+
+
+const validateFirstName = () => {
+  const alphabetic = /^[A-Za-z]+$/;
+
+  if (firstName.trim() === '') {
+    setFirstNameError(true);
+    message.error("First name is required");
+    return false;
+  } else if (firstName.length < 2 || firstName.length > 50) {
+    setFirstNameError(true);
+    message.error("First name must be between 2 and 50 characters");
+    return false;
+  } else if (!alphabetic.test(firstName)) {
+    setFirstNameError(true);
+    message.error("First name should contain only alphabetic letters");
+    return false;
+  } else {
+    setFirstNameError(false);
+    return true;
+  }
+};
+
+
+const validateLastName = () => {
+  const alphabetic = /^[A-Za-z]+$/;
+
+  if (lastName.trim() === '') {
+    setLastNameError(true);
+    message.error("Last name is required");
+    return false;
+  } else if (lastName.length < 2 || lastName.length > 50) {
+    setLastNameError(true);
+    message.error("Last name must be between 2 and 50 characters");
+    return false;
+  } else if (!alphabetic.test(lastName)) {
+    setLastNameError(true);
+    message.error("Last name should contain only alphabetic letters");
+    return false;
+  } else {
+    setLastNameError(false);
+    return true;
+  }
+};
+
+
+const validateContactNumber = () => {
+  const phoneNumber = /^\d{10}$/;
+
+  if (contactNumber === '') {
+    setContactNumberError(true);
+    message.error("Phone number is required");
+    return false;
+  } else if (!phoneNumber.test(contactNumber)) {
+    setContactNumberError(true);
+    message.error("Please enter a valid phone number");
+    return false;
+  } else {
+    setContactNumberError(false);
+    return true;
+  }
+};
+
+
+// const validateNIC = () => {
+//   const nicFormat = /^[0-9]{9}[vVxX]$/;
+//   const nicLength = /^\d{9}[Vv]|\d{12}$/;
+
+//   if (nic === '') {
+//     setNICError(true);
+//     message.error("NIC is required");
+//     return false;
+//   } else if (!nicFormat.test(nic)) {
+//     setNICError(true);
+//     message.error("NIC format is invalid");
+//     return false;
+//   } else if (!nicLength.test(nic)) {
+//     setNICError(true);
+//     message.error("NIC should contain 9 digits and a 'v' or 'V' or 12 digits");
+//     return false;
+//   } else {
+//     setNICError(false);
+//     return true;
+//   }
+// };
+
+
+const validateEmail = () => {
+  const valemail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (email === '') {
+    setEmailError(true);
+    message.error("Email is required");
+    return false;
+  } else if (!valemail.test(email)) {
+    setEmailError(true);
+    message.error("Please enter a valid email address");
+    return false;
+  } else {
+    setEmailError(false);
+    return true;
+  }
+};
+
 
   const handleClick = () =>{
     setTimeout(() =>{
@@ -46,11 +166,18 @@ useEffect(()=>{
 async function loadUsers() {
   const result = await getDataById(getURL,id);
   console.log(result)
-  setName(result.name);
-  setAddress(result.address);
+  setfName(result.firstName);
+  setlName(result.lastName);
   setEmail(result.email);
-  setPhonenum(result.mobilenum);
-  setAge(result.age);
+  setPhonenum(result.contactNumber);
+  setGender(result.gender);
+  setDate(result.dateOfBirth);
+  setNIC(result.nic);
+  setUser(result.username);
+  setPassword(result.password);
+  setMain(result.isMainAdmin);
+
+  // setID(result.nic);
   // setAge(result.content.age);
 
 }
@@ -58,28 +185,46 @@ async function loadUsers() {
 
 
 const handleSubmit = async () => {
+  const a = validateFirstName();
+  const b = validateLastName();
+  const c = validateContactNumber();
+  const d = validateEmail();
+  // const e = validateNIC();
 
-  setTimeout(() =>{
-   message.success("admin profile edited")
-  },1000); 
-  
-  setisDisabled(true);
+  if (a&&b&&c&&d) {
+    
+    setTimeout(() => {
+      message.success('admin profile edited');
+    }, 1000);
 
-  const data = {
-    "id":id,
-    "name": name,
-    "address": address,
-    "mobilenum": mobilenum,
-    "email": email,
-    "age": age,
-    // "age":age
-  };
-  const result = await updateData("http://localhost:8082/api/v1/admin/updateAdmin",data);
-  console.log(result);
+    setisDisabled(true);
+
+    const data = {
+      id: id,
+      firstName: firstName,
+      lastName: lastName,
+      contactNumber: contactNumber,
+      email: email,
+      gender:gender,
+      dateOfBirth:dateOfBirth,
+      nic:nic,
+      username:username,
+      password:password,
+      isMainAdmin:isMainAdmin,
+
+
+      // nic: nic,
+    };
+    try{
+    const result = await updateData('http://localhost:8080/api/v1/admin/updateAdmin',data);
+    console.log(result);
+    } 
+    catch(error) {
+      message.error(error);
+    };
+
+  }
 }
-
-
-
 
 
 
@@ -118,13 +263,13 @@ const handleSubmit = async () => {
       
                     <div className="labels">
                       <div className="gaps">
-                      <label>Admin name</label>
-                      </div>
-                           
-                         
+                        <label htmlFor="firstName">First Name</label>
+                        
+                      </div>              
+                                            
                           
                       <div className="gaps">   
-                      <label>Home Town</label>
+                      <label>lastname</label>
                       </div> 
 
                       <div className="gaps">   
@@ -135,9 +280,9 @@ const handleSubmit = async () => {
                            <label>e-mail address</label>
                            </div> 
                           
-                           <div className="gaps">  
-                           <label>age</label>
-                           </div>   
+                           {/* <div className="gaps">  
+                           <label>id</label>
+                           </div>    */}
 
                          
 
@@ -157,19 +302,28 @@ const handleSubmit = async () => {
                         
                                       <div className="column">
                                       <TextField id='standard-basic'
-                                      value={name}
+                                      error={firstNameError}
+                              
+                                      value={firstName}
                                       disabled = {isDisabled}
-                                      onChange={(e)=>setName(e.target.value)}
+                                      onChange={(e) => {
+                                        setfName(e.target.value);
+                                        validateFirstName();
+                                        
+                                      }}
+                                   
                                       variant='standard'  />
                                       </div>
                              
-                                
+
 
                                      <div className="column">
-                                      <TextField id='standard-basic'                                                                      
-                                      value={address}
+                                      <TextField id='standard-basic'  
+                                      error={lastNameError}
+                                                                                                         
+                                      value={lastName}
                                       disabled = {isDisabled}
-                                      onChange={(e)=>setAddress(e.target.value)}
+                                      onChange={(e)=>setlName(e.target.value)}
                                       variant='standard'  />
                                       </div>
                                      
@@ -177,7 +331,9 @@ const handleSubmit = async () => {
                                      
                                       <div className="column">
                                       <TextField id='standard-basic'
-                                     value={mobilenum}
+                                      error={contactNumberError}
+
+                                     value={contactNumber}
                                      disabled = {isDisabled}
                                      onChange={(e)=>setPhonenum(e.target.value)}
                                      variant='standard'  />
@@ -188,6 +344,8 @@ const handleSubmit = async () => {
                                     
                                       <div className="column">
                                       <TextField id='standard-basic'
+                                       error={emailError}
+
                                       value={email}
                                       disabled = {isDisabled}
                                       onChange={(e)=>setEmail(e.target.value)}
@@ -197,12 +355,14 @@ const handleSubmit = async () => {
                                     
                                       
                                      
-                                      <div className="column">
+                                      {/* <div className="column">
                                       <TextField id='standard-basic'
-                                     value={age}
+                                      error={nicError}
+
+                                     value={nic}
                                      disabled = {isDisabled}
-                                     onChange={(e)=>setAge(e.target.value)}
-                                     variant='standard'  />
+                                     onChange={(e)=>setID(e.target.value)}
+                                     variant='standard'  /> */}
 
                                       {/* <div className="column">
                                       <TextField id='standard-basic'
@@ -221,7 +381,7 @@ const handleSubmit = async () => {
                                   </div>
                            
                             </div>
-                          </div>
+                          {/* </div> */}
 
                 </form>
               
@@ -254,12 +414,7 @@ const handleSubmit = async () => {
                     textAlign:'center',fontSize:'11px',fontWeight:'bolder',marginTop:'40px',marginRight:'50px'}} 
                    
                     onClick={handleSubmit} 
-                     
-                   
                     >Save changes
-                    
-                        
-                    
                     </Button>
                    
                     </div>
