@@ -43,8 +43,8 @@ export default function Dashboard() {
                 </>
               </div>
               <div className="dashboard">
-                <div className="left"><b>Active users : {adminCount}</b></div>
-                <div className="right"><b>Active admins : 3</b></div>
+                <div className="left"><b>Registered Admins : {adminCount}</b></div>
+                <div className="right"><b>Registered Users: 30</b></div>
                 
               </div>
 

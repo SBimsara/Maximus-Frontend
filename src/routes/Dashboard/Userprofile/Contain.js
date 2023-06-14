@@ -3,17 +3,19 @@ import "./Contain.css"
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Graph } from './Graph';
+import { stat0 } from '../../Statistics/Stat0/Stat0'
 import {getDataById} from '../../../services/getDataById';
 import { updateData } from '../../../services/updateData';
 
 import "antd/dist/antd"
 import {  message } from 'antd';
+import Stat1 from '../../Statistics/Stat1/Stat1';
 
  const getURL = "http://localhost:8080/api/v1/admin/getAdminByAdminId/"
  const id = "1";
 
 export default function Contain() {
-
+  
   const [firstName,setfName]=useState('')
   const [lastName,setlName]=useState('')
   const [contactNumber,setPhonenum]=useState('')
@@ -238,12 +240,12 @@ const handleSubmit = async () => {
     <div className="Contain">
         <div className="stat">    
 
-        <b>Activity History</b>  
-    
-    <div className="graph">
-    <Graph/>
-    <div className="activity" ><b>your activity for last five days = 12 .34 hours</b></div>
-    </div>
+          {/* <b>Activity History</b>   */}
+      
+            <div className="graph">
+              <Stat1></Stat1>
+              {/* <div className="activity" ><b>your activity for last five days = 12 .34 hours</b></div> */}
+            </div>
 
         </div>
 

@@ -104,7 +104,7 @@ export default function Sidebar() {
             <ListItem disablePadding>
               <ListItemButton
                 href="/dashboard"
-                selected={location.pathname === "/" ? true : false}
+                selected={location.pathname === "/dashboard" ? true : false}
               >
                 <ListItemIcon>
                   <DashboardIcon />
