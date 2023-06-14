@@ -22,42 +22,6 @@ function Statistics() {
         provides insights into the percentage of users subscribed to different
         plans, allowing us to understand the popularity of each plan.
       </p>
-      <h2>User Plan Distribution</h2>
-      <p>
-        {" "}
-        This chart visualizes the distribution of user plans on our website. It
-        provides insights into the percentage of users subscribed to different
-        plans, allowing us to understand the popularity of each plan.
-      </p>
-      <h2>User Plan Distribution</h2>
-      <p>
-        {" "}
-        This chart visualizes the distribution of user plans on our website. It
-        provides insights into the percentage of users subscribed to different
-        plans, allowing us to understand the popularity of each plan.
-      </p>
-      <h2>User Plan Distribution</h2>
-      <p>
-        {" "}
-        This chart visualizes the distribution of user plans on our website. It
-        provides insights into the percentage of users subscribed to different
-        plans, allowing us to understand the popularity of each plan.
-      </p>
-      <h2>User Plan Distribution</h2>
-      <p>
-        {" "}
-        This chart visualizes the distribution of user plans on our website. It
-        provides insights into the percentage of users subscribed to different
-        plans, allowing us to understand the popularity of each plan.
-      </p>
-      <h2>User Plan Distribution</h2>
-      <p>
-        {" "}
-        This chart visualizes the distribution of user plans on our website. It
-        provides insights into the percentage of users subscribed to different
-        plans, allowing us to understand the popularity of each plan.
-      </p>
-      <h3></h3>
     </div>
   );
 }
