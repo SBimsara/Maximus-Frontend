@@ -10,3 +10,4 @@ Our project addresses the challenges faced by secondary students in Sri Lanka, p
  - [Piyumanthi Nisansala](https://github.com/Piyumanthi)
  - [Alanki Madara](https://github.com/AlankiMadara)
 
+Technologies: ReactJS
