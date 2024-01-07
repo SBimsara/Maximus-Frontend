@@ -119,27 +119,7 @@ export default function Contain({ setAdmins, adminCount, userCount }) {
     }
   };
 
-  // const validateNIC = () => {
-  //   const nicFormat = /^[0-9]{9}[vVxX]$/;
-  //   const nicLength = /^\d{9}[Vv]|\d{12}$/;
-
-  //   if (nic === '') {
-  //     setNICError(true);
-  //     message.error("NIC is required");
-  //     return false;
-  //   } else if (!nicFormat.test(nic)) {
-  //     setNICError(true);
-  //     message.error("NIC format is invalid");
-  //     return false;
-  //   } else if (!nicLength.test(nic)) {
-  //     setNICError(true);
-  //     message.error("NIC should contain 9 digits and a 'v' or 'V' or 12 digits");
-  //     return false;
-  //   } else {
-  //     setNICError(false);
-  //     return true;
-  //   }
-  // };
+  
 
   const validateEmail = () => {
     const valemail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -171,21 +151,7 @@ export default function Contain({ setAdmins, adminCount, userCount }) {
   }, []);
 
   async function loadUsers() {
-    // const result = await getDataById(getURL, id);
-    // console.log(result);
-    // setfName(result.firstName);
-    // setlName(result.lastName);
-    // setEmail(result.email);
-    // setPhonenum(result.contactNumber);
-    // setGender(result.gender);
-    // setDate(result.dateOfBirth);
-    // setNIC(result.nic);
-    // setUser(result.username);
-    // setPassword(result.password);
-    // setMain(result.isMainAdmin);
-    // setID(result.nic);
-    // setAge(result.content.age);
-
+    
     axios
       .get(getURL)
       .then(function (response) {
@@ -213,8 +179,7 @@ export default function Contain({ setAdmins, adminCount, userCount }) {
       ],
     });
 
-    // Update the state variable for the user table
-    // setUserTableData(existingUserData);
+   
   }
 
   const handleSubmit = async () => {
@@ -222,7 +187,7 @@ export default function Contain({ setAdmins, adminCount, userCount }) {
     const b = validateLastName();
     const c = validateContactNumber();
     const d = validateEmail();
-    // const e = validateNIC();
+   
 
     if (a && b && c && d) {
       const userData = {
@@ -250,13 +215,7 @@ export default function Contain({ setAdmins, adminCount, userCount }) {
   return (
     <>
       <div className="Contain">
-        {/* <div className="stat"> */}
-        {/* <b>Activity History</b>   */}
-        {/* <div className="graph"> */}
-        {/* <Stat1></Stat1> */}
-        {/* <div className="activity" ><b>your activity for last five days = 12 .34 hours</b></div> */}
-        {/* </div>
-        </div> */}
+       
 
         <div
           style={{
@@ -271,7 +230,7 @@ export default function Contain({ setAdmins, adminCount, userCount }) {
         </div>
 
         <div className="profile">
-          {/* <b style={{ fontSize: "30px" }}>Admin profile</b> */}
+         
           <div className="ProfilePic">
             <img src="./all-image/admins.png" alt="" className="ProfilePic" />
           </div>
@@ -352,27 +311,11 @@ export default function Contain({ setAdmins, adminCount, userCount }) {
                       />
                     </div>
 
-                    {/* <div className="column">
-                                      <TextField id='standard-basic'
-                                      error={nicError}
-
-                                     value={nic}
-                                     disabled = {isDisabled}
-                                     onChange={(e)=>setID(e.target.value)}
-                                     variant='standard'  /> */}
-
-                    {/* <div className="column">
-                                      <TextField id='standard-basic'
-                                    //  value={age}
-                                     disabled = {isDisabled}
-                                     onChange={(e)=>setLevel(e.target.value)}
-                                     variant='standard'  />
-                                     
-                                      </div> */}
+                    
                   </div>
                 </div>
               </div>
-              {/* </div> */}
+              
             </form>
           </div>
 
@@ -431,68 +374,6 @@ export default function Contain({ setAdmins, adminCount, userCount }) {
           </div>
         </div>
 
-        {/* <TableContainer
-          component={Paper}
-          style={{
-            marginTop: "100px",
-            marginBottom: "100px",
-            marginLeft: "30px",
-            marginRight: "30px",
-          }}
-        >
-          <Table aria-label="user table">
-            <TableHead style={{ backgroundColor: "#18a19a" }}>
-              <TableRow>
-                <TableCell
-                  style={{
-                    fontWeight: "600",
-                    fontSize: "20px",
-                    color: "white",
-                  }}
-                >
-                  First Name
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontWeight: "600",
-                    fontSize: "20px",
-                    color: "white",
-                  }}
-                >
-                  Last Name
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontWeight: "600",
-                    fontSize: "20px",
-                    color: "white",
-                  }}
-                >
-                  Contact Number
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontWeight: "600",
-                    fontSize: "20px",
-                    color: "white",
-                  }}
-                >
-                  Email
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {userTableData.map((user, index) => (
-                <TableRow key={index}>
-                  <TableCell>{user.firstName}</TableCell>
-                  <TableCell>{user.lastName}</TableCell>
-                  <TableCell>{user.contactNumber}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer> */}
       </div>
     </>
   );
