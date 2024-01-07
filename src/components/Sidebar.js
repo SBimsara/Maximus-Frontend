@@ -22,8 +22,8 @@ import { Dashboard } from "@mui/icons-material";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import Avatar from '@mui/material/Avatar';
-import { Stack } from '@mui/material';
+import Avatar from "@mui/material/Avatar";
+import { Stack } from "@mui/material";
 
 import Nav from "../routes/Statistics/navBar/Nav";
 
@@ -31,11 +31,9 @@ const drawerWidth = 220;
 
 const listItem = {
   "&.Mui-selected": {
-
-    backgroundColor: "#ff0000"
-  }
-}
-
+    backgroundColor: "#ff0000",
+  },
+};
 
 export default function Sidebar() {
   const location = useLocation();
@@ -51,7 +49,7 @@ export default function Sidebar() {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
 
-          {/* <AppBar
+        {/* <AppBar
            position="fixed"
            sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`}}
 
@@ -91,17 +89,24 @@ export default function Sidebar() {
           }}
           variant="permanent"
           anchor="left"
-        
->
-          <div className="logo">
-
-                <img src="./all-image/logo.jpg" alt="" className="logo" width="200px" height="200px"/>
-            </div>
+        >
+          <div
+            className="logo"
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+            <img
+              src="./all-image/logo.jpg"
+              alt=""
+              className="logo"
+              width="150px"
+              height="150px"
+              style={{ alignSelf: "center" }}
+            />
+          </div>
           <Toolbar />
           {/* <Divider /> */}
           <List>
-
-            <ListItem disablePadding>
+            <ListItem disablePadding style={{ marginBottom: "15px" }}>
               <ListItemButton
                 href="/dashboard"
                 selected={location.pathname === "/dashboard" ? true : false}
@@ -113,8 +118,16 @@ export default function Sidebar() {
               </ListItemButton>
             </ListItem>
 
-            <ListItem disablePadding>
-              <ListItemButton href='/addPlans' selected={(location.pathname === '/addPlans')||(location.pathname === '/planDe') ? true : false}>
+            <ListItem disablePadding style={{ marginBottom: "15px" }}>
+              <ListItemButton
+                href="/addPlans"
+                selected={
+                  location.pathname === "/addPlans" ||
+                  location.pathname === "/planDe"
+                    ? true
+                    : false
+                }
+              >
                 <ListItemIcon>
                   <SubscriptionsIcon />
                 </ListItemIcon>
@@ -122,8 +135,11 @@ export default function Sidebar() {
               </ListItemButton>
             </ListItem>
 
-            <ListItem disablePadding>
-              <ListItemButton href="/questions"selected={location.pathname === "/questions" ? true : false}>
+            <ListItem disablePadding style={{ marginBottom: "15px" }}>
+              <ListItemButton
+                href="/questions"
+                selected={location.pathname === "/questions" ? true : false}
+              >
                 <ListItemIcon>
                   <UploadFileIcon />
                 </ListItemIcon>
@@ -131,8 +147,11 @@ export default function Sidebar() {
               </ListItemButton>
             </ListItem>
 
-            <ListItem disablePadding>
-              <ListItemButton href="/subjects" selected={location.pathname === "/subjects" ? true : false}>
+            <ListItem disablePadding style={{ marginBottom: "15px" }}>
+              <ListItemButton
+                href="/subjects"
+                selected={location.pathname === "/subjects" ? true : false}
+              >
                 <ListItemIcon>
                   <SubjectIcon />
                 </ListItemIcon>
@@ -140,8 +159,11 @@ export default function Sidebar() {
               </ListItemButton>
             </ListItem>
 
-            <ListItem disablePadding>
-              <ListItemButton href='/lessons' selected={location.pathname === '/lessons' ? true : false}>
+            <ListItem disablePadding style={{ marginBottom: "15px" }}>
+              <ListItemButton
+                href="/lessons"
+                selected={location.pathname === "/lessons" ? true : false}
+              >
                 <ListItemIcon>
                   <SubjectIcon />
                 </ListItemIcon>
@@ -149,7 +171,7 @@ export default function Sidebar() {
               </ListItemButton>
             </ListItem>
 
-             {/* <ListItem disablePadding>
+            {/* <ListItem disablePadding>
               <ListItemButton href='/authentication' selected={location.pathname === '/authentication' ? true : false}>
                  <ListItemIcon>
                    <PeopleIcon />
@@ -159,7 +181,6 @@ export default function Sidebar() {
              </ListItem> */}
 
             <ListItem disablePadding>
-
               <ListItemButton
                 href="/statistics"
                 selected={location.pathname === "/statistics" ? true : false}
