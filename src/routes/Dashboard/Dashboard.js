@@ -24,7 +24,7 @@ export default function Dashboard() {
     <>
       <div className="contaner">
         <>
-          <Navbar1 text="DASHBOARD" />
+          <Navbar1 text="DASHBOARD" style={{marginLeft:"640px"}} />
         </>
       </div>
       <div className="dashboard">

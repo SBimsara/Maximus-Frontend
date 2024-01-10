@@ -3,12 +3,33 @@
     
 } */
 
+.title {
+  margin-left: 330px;
+  margin-top: 25px;
+  font-size: 45px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  }
+
 .dashboard {
-    margin-left: 230px;
-    margin-top: 10px;
+    margin-left: 200px;
+   
     display: flex;
     justify-content: space-around;
   }
+
+
+
+  /* .box {
+    height: 120px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    background-color: #95e0fd;
+    margin-bottom: 50px;
+    } */
   
   .left {
     width: 300px;
@@ -32,5 +53,6 @@
     text-align: center;
     background-color: #f7941d;
     color: white;
+    margin-right: 40px;
   }
   

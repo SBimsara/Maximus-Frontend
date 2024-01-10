@@ -225,10 +225,12 @@ export default function Contain({ setAdmins, adminCount, userCount }) {
             marginBottom: "50px",
           }}
         >
+        <div style={{boxSizing:"border-box",display: "block",height: "400px",width: "400px",
+}}>
           <h2>Admins vs Users</h2>
           <Doughnut data={chartData} />
         </div>
-
+</div>
         <div className="profile">
          
           <div className="ProfilePic">
