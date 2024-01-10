@@ -115,8 +115,15 @@ export default function AddPlans() {
 
   if (clicked == false) {
     return (
+      
       <>
+       <div className="contaner">
+        <>
+          <Navbar1 text="ADD PLANS"/>
+        </>
+      </div>
         <PageContainer>
+       
           <Box sx={{ mb: 2 }}>
             <Button
               variant="outlined"

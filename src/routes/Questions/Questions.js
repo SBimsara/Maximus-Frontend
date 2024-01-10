@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import "./Questions.css";
+import Navbar1 from '../../components/Navbar1';
 
 export default function QuestionPage() {
   const [grade, setGrade] = useState([]);
@@ -158,6 +159,9 @@ export default function QuestionPage() {
   };
 
   return (
+
+   
+    
     <form onSubmit={handleSubmit}>
       {successMessage && (
         <div className="alert alert-success mt-3 width container" role="alert">
@@ -169,7 +173,14 @@ export default function QuestionPage() {
           {errorMessage}
         </div>
       )}
+
+      <div className="contaner">
+      <>
+        <Navbar1 text="QUESTIONS"/>
+      </>
+    </div>
       <div className="container center">
+    
         <table className="tableStyle">
           <tbody>
             <tr>

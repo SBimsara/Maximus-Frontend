@@ -29,6 +29,7 @@ import { viewLessons } from "../../utils/ViewIconBtnFunctions";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import axios from "axios";
+import Navbar1 from '../../components/Navbar1';
 
 //url for the saveData
 const getAllURL = "http://localhost:8090/subjects";
@@ -133,6 +134,11 @@ function Subjects() {
 
   return (
     <>
+     <div className="contaner">
+      <>
+        <Navbar1 text="SUBJECTS"/>
+      </>
+    </div>
       <PageContainer>
         <Box sx={{ mb: 2 }}>
           <Button

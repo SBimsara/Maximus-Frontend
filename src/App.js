@@ -78,7 +78,7 @@ function App() {
         
           
         <Route path="/settings" element={<Settings/>}/>
-        <Route path="/*" element={<ErrorPage/>}/>
+        <Route path="/*" element={<Dashboard />}/>
          <Route path="/statistics" element={<Statistics />} />
         <Route path="/statistics/Stat1" element={<Stat1 />} exact />
         <Route path="/statistics/Stat0" element={<Stat0 />} />

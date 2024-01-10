@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { DataGrid } from "@mui/x-data-grid";
+import Navbar1 from '../../components/Navbar1';
+
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -113,6 +115,11 @@ function Lessons() {
 
   return (
     <>
+     <div className="contaner">
+        <>
+          <Navbar1 text="LESSONS"/>
+        </>
+      </div>
       <PageContainer>
         <Box sx={{ mb: 2 }}>
           <Button

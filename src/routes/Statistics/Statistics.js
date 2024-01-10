@@ -4,10 +4,15 @@ import Nav from "./navBar/Nav";
 import Navigation from "./navBar/Navigation";
 import Stat0 from "./Stat0/Stat0";
 import StatisticsStyles from "./StatisticsStyles.css";
+import Navbar1 from '../../components/Navbar1';
+
 
 function Statistics() {
   return (
+   
     <div className="overview-container">
+     
+   
       <h1>Overview</h1>
       <h2>Total Registered User Count Over Time</h2>
       <p>
@@ -59,6 +64,7 @@ function Statistics() {
       </p>
       <h3></h3>
     </div>
+   
   );
 }
 

@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import Navbar1 from "./../../../components/Navbar1"
+
 import { Chart, Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -104,7 +106,10 @@ function Stat0() {
   }
 
   return (
+    
     <div>
+       
+    
       <select
         //className="selectButton"
         class="form-select"

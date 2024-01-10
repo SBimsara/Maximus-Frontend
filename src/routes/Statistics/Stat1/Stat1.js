@@ -4,6 +4,7 @@ import { Chart as chartjs, ArcElement, Tooltip, Legend, Title } from "chart.js";
 import Nav from "../navBar/Nav";
 import axios from "axios";
 import { getData } from "../../../services/getData";
+import Navbar1 from "./../../../components/Navbar1"
 
 chartjs.register(ArcElement, Tooltip, Legend, Title);
 
@@ -56,9 +57,14 @@ function Stat1() {
     },
   };
   return (
+    
+ 
     <div style={{ width: "38%", margin: " 0px auto", padding: "50px 50px" }}>
+     
+   
       <Pie style={{}} data={data} options={options}></Pie>
     </div>
+   
   );
 }
 

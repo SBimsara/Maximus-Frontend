@@ -223,6 +223,7 @@ export default function Contain({ setAdmins, adminCount, userCount }) {
             textAlign: "center",
             maxHeight: "300px",
             marginBottom: "50px",
+         
           }}
         >
         <div style={{boxSizing:"border-box",display: "block",height: "400px",width: "400px",
