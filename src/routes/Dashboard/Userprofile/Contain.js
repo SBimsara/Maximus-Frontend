@@ -2,23 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./Contain.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { Graph } from "./Graph";
 import { Doughnut } from "react-chartjs-2";
-import { stat0 } from "../../Statistics/Stat0/Stat0";
-import { getDataById } from "../../../services/getDataById";
-import { updateData } from "../../../services/updateData";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
-import { TableHead } from "@mui/material";
-import Paper from "@mui/material/Paper";
 import axios from "axios";
 
 import "antd/dist/antd";
 import { message } from "antd";
-import Stat1 from "../../Statistics/Stat1/Stat1";
+
 
 const getURL = "http://localhost:8082/api/v1/admin/getAdminByAdminId/1";
 const id = "1";
@@ -28,16 +17,7 @@ export default function Contain({ setAdmins, adminCount, userCount }) {
   const [lastName, setlName] = useState("");
   const [contactNumber, setPhonenum] = useState("");
   const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("");
-  const [dateOfBirth, setDate] = useState("");
-  const [nic, setNIC] = useState("");
-  const [username, setUser] = useState("");
-  const [password, setPassword] = useState("");
-  const [isMainAdmin, setMain] = useState("");
-  const [userTableData, setUserTableData] = useState([]);
-
-  // const [nic,setID]=useState('')
-  //const [age,setAge]=useState('')
+ 
 
   const [isDisabled, setisDisabled] = useState(true);
 
@@ -45,10 +25,7 @@ export default function Contain({ setAdmins, adminCount, userCount }) {
   const [lastNameError, setLastNameError] = useState(false);
   const [contactNumberError, setContactNumberError] = useState(false);
   const [emailError, setEmailError] = useState(false);
-  // const [nicError, setNICError] = useState(false);
-
-  const [firstNameErrorHelperText, setFirstNameErrorHelperText] = useState("");
-  const [lastNameErrorHelperText, setLastNameErrorHelperText] = useState("");
+ 
 
   const [chartData, setChartData] = useState({
     labels: ["Admins", "Users"],
